@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
             {/*로고 이미지*/}
             <Link legacyBehavior href="/">
               <a>
-                <Image src={logoBlue} alt="로고" width={200} height={100} />
+                <Image src={logoBlue} alt="로고" className='w-auto h-auto' />
               </a>
             </Link>
             {/*메뉴 바*/}
