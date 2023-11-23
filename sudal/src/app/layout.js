@@ -3,6 +3,9 @@ import './globals.css'
 import Image from 'next/image'
 import logoBlue from '../../public/images/logoBlue.png'
 import logoWhite from '../../public/images/logoWhite.png'
+import kakao from '../../public/images/footerKakao.png'
+import cafe from '../../public/images/footerCafe.png'
+import insta from '../../public/images/footerInstagram.png'
 import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -43,8 +46,34 @@ export default function RootLayout({ children }) {
         </div>
       </div>
       {/*하단 바*/}
-      <div className='w-full h-216 absolute bottom-0 bg-grey'>
-        <Image src={logoWhite} alt='logo'></Image> 
+      <div className='w-full h-216 absolute bottom-0 bg-grey flex flex-nowrap gap-54 justify-center items-center'>
+          {/*로고 이미지 */}
+          <Image src={logoWhite} alt='logo' className='w-auto h-auto'></Image>
+          <div className='w-1000 h-138 flex flex-row'>
+            {/*하단 설명 */}
+            <div className="font-['Gsans'] text-17, text-white flex flex-col gap-y-22">
+              <div className='flex'>
+                <p>SOODAL</p>
+                <p className='ml-auto'>개인정보처리방침</p>
+                <p className='ml-auto'>이용약관</p>
+                <p className='ml-auto'>고객센터</p>
+                <p className='ml-auto'>광고/제휴문의</p>
+              </div>
+              <div className='flex flex-col'>
+                <p>양말벗은 대학생들 I 대표자 전소영 I 사업자등록번호 000-00-00000 I 대표전화 010-7210-1430</p>
+                <p>전북 전주시 덕진구 백제대로 567 뉴실크로드센터(1-33동) 303호 I 이메일 soodal1430@naver.com</p>
+              </div>
+              <div>
+                <p className='text-14'>Copyright © SOODAL All rights reserved.</p>
+              </div>
+            </div>
+            {/*하단 SNS 아이콘 */}
+            <div className='flex w-105 h-26 mt-auto ml-auto'>
+              <Image src={kakao} alt='kakao'></Image>
+              <Image src={cafe} alt='cafe' className='ml-auto'></Image>
+              <Image src={insta} alt='insta' className='ml-auto'></Image>
+            </div>
+          </div>
       </div>
     </div>
   )
