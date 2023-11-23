@@ -21,7 +21,11 @@ export default function RootLayout({ children }) {
         {/*네비게이션 바 */}
         <div id='header' className='flex flex-nowrap h-100 gap-108 place-items-center ml-10'>
           {/*로고 이미지*/}
-          <Image src={logo} alt='logo' className='h-58'></Image>
+          <Link legacyBehavior href="/">
+            <a>
+              <Image src={logo} alt="로고" width={200} height={100} />
+            </a>
+          </Link>
           {/*메뉴 바*/}
           <div id='nav' className='w-1000 h-30px'>
             {/*카테고리들 */}
