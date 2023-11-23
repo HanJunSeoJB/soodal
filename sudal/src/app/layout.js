@@ -2,6 +2,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Image from 'next/image'
 import logo from '../../public/images/logoBlue.png'
+import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -12,8 +13,29 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <div id='logo' className='relative'>
-      <Image src={logo} alt='logo' className='translate-x-360 translate-y-60'></Image>
+    <div>
+      {/*헤더 전체 */}
+      <div className='h-140'>
+        {/*로그인 바 */}
+        <div className='h-40'></div>
+        {/*네비게이션 바 */}
+        <div id='header' className='flex flex-nowrap h-100 gap-108 place-items-center ml-10'>
+          {/*로고 이미지*/}
+          <Image src={logo} alt='logo' className='h-58'></Image>
+          {/*메뉴 바*/}
+          <div id='nav' className='w-1000 h-30px'>
+            {/*카테고리들 */}
+            <ul className="flex flex-nowrap gap-127 font-['Gsans'] text-19">
+              <li> <Link href='/materials'>학습자료</Link> </li>
+              <li> <Link href='/freeboard'>자유게시판</Link> </li>
+              <li> <Link href='/infoboard'>정보게시판</Link> </li>
+              <li> <Link href='/qna'>Q&A</Link> </li>
+              <li> <Link href='/mypage'>마이페이지</Link> </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
     </div>
   )
 }
