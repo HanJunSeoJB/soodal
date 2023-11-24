@@ -2,7 +2,7 @@
 import { connectDB } from "../../../util/database"
 
 export default async function handler(req, res) {
-    if(req.method != 'POST') { res.status(500).json({message: '잘못된 접근입니다.'}) }
+    if(req.method != 'POST') { return res.status(400).json({message: '잘못된 접근입니다.'}) }
     
     // 유저기능 구현 후 추가
     // let session = await getServerSession(req, res, authOptions)
@@ -12,8 +12,15 @@ export default async function handler(req, res) {
 
     let data = JSON.parse(req.body)
 
-    if(data.title == '') { res.status(500).json({message: '제목을 입력해주세요.'}) }
-    else if(data.content == '') { res.status(500).json({message: '내용을 입력해주세요.'}) }
+    // 제목 및 내용 빈칸확인
+    if(data.title == '') { 
+        // console.log('제목없음');
+        return res.status(400).json('제목을 입력해주세요.')
+    }
+    else if(data.content == '') {
+        // console.log('내용없음');
+        return res.status(400).json( '내용을 입력해주세요.')
+    }
 
     // 유저기능 및 게시판 구현 후 추가
     data.boardId = 'SampleBoard'
@@ -26,28 +33,8 @@ export default async function handler(req, res) {
     data.isAnswerd = false
     data.createdAt = new Date()
     data.updatedAt = new Date()
+
+    await db.collection('post').insertOne(data)
     
-    return res.status(200).json({message: '글이 작성되었습니다.'})
+    return res.status(200).json('게시글이 작성되었습니다.')
 }
-
-// export default async function handler(req, res){
-//     let session = await getServerSession(req, res, authOptions)
-//     if(session){
-//         req.body.author = session.user.email
-//     }else{
-//         return res.status(500).json('로그인이 필요합니다.')
-//     }
-//     const client = await connectDB
-//     const db = client.db('forum')
-
-//     if(req.method === 'POST'){
-//         if(req.title == ''){
-//             return res.status(500).json('제목없음')
-//         }
-//         else if(req.content == ''){
-//             return res.status(500).json('내용없음')
-//         }
-//         await db.collection('post').insertOne(req.body)
-//         return res.status(200).json(req.body)
-//     }
-// }
