@@ -34,6 +34,7 @@ module.exports = {
         '138': '138px',
         '92': '92px',
         '26': '26px',
+        '270': '270px',
       },
       gap: {
         '127': '127px',
@@ -52,6 +53,7 @@ module.exports = {
       },
       colors: {
         'grey': '#707070',
+        'skyblue': '#A4D0FD',
       }
     },
   },

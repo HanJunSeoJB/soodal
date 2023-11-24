@@ -1,4 +1,3 @@
-import { Inter } from 'next/font/google'
 import './globals.css'
 import Image from 'next/image'
 import logoBlue from '../../public/images/logoBlue.png'
@@ -7,8 +6,6 @@ import kakao from '../../public/images/footerKakao.png'
 import cafe from '../../public/images/footerCafe.png'
 import insta from '../../public/images/footerInstagram.png'
 import Link from 'next/link'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Create Next App',
@@ -20,31 +17,38 @@ export default function RootLayout({ children }) {
     <div className='h-3436 relative'>
       <div className=' overflow-y-auto min-h-screen'>
         {/*헤더 전체 */}
-        <div className='h-140'>
+        <div className='w-auto h-140'>
           {/*로그인 바 */}
           <div className='h-40'></div>
           {/*네비게이션 바 */}
-          <div id='header' className='flex flex-nowrap h-100 gap-108 place-items-center ml-10'>
-            {/*로고 이미지*/}
-            <Link legacyBehavior href="/">
-              <a>
-                <Image src={logoBlue} alt="로고" className='w-auto h-auto' />
-              </a>
-            </Link>
-            {/*메뉴 바*/}
-            <div id='nav' className='w-1000 h-30px'>
-              {/*카테고리들 */}
-              <ul className="flex flex-nowrap gap-127 font-['Gsans'] text-19">
-                <li> <Link href='/materials'>학습자료</Link> </li>
-                <li> <Link href='/freeboard'>자유게시판</Link> </li>
-                <li> <Link href='/infoboard'>정보게시판</Link> </li>
-                <li> <Link href='/qna'>Q&A</Link> </li>
-                <li> <Link href='/mypage'>마이페이지</Link> </li>
-              </ul>
+          <div id='header' className='group w-full h-auto flex items-center flex-col'>
+            <div className='w-4/6 flex flex-row items-center'>
+              {/*로고 이미지*/}
+              <Link legacyBehavior href="/">
+                <a className='mr-10'>
+                  <Image src={logoBlue} alt="로고" className='w-auto h-auto' />
+                </a>
+              </Link>
+              {/*메뉴 바*/}
+              <div id='nav' className='w-auto h-30px'>
+                {/*카테고리들 */}
+                <ul className="flex flex-row font-['Gsans'] text-19">
+                  <li className='mr-32'> <Link href='/materials'>학습자료</Link> </li>
+                  <li className='mr-32'> <Link href='/freeboard'>자유게시판</Link> </li>
+                  <li className='mr-32'> <Link href='/infoboard'>정보게시판</Link> </li>
+                  <li className='mr-32'> <Link href='/qna'>Q&A</Link> </li>
+                  <li className='ml-5'> <Link href='/mypage'>마이페이지</Link> </li>
+                </ul>
+              </div>
+            </div>
+            {/*펼쳐진 메뉴 */}
+            <div className='w-full h-80 flex justify-center bg-skyblue'>
+              <div className='w-4/6 h-270 rounded-b-lg bg-white shadow-inner'></div>
             </div>
           </div>
         </div>
       </div>
+      {children}
       {/*하단 바*/}
       <div className='w-full h-216 absolute bottom-0 bg-grey flex flex-nowrap gap-54 justify-center items-center'>
           {/*로고 이미지 */}
