@@ -56,6 +56,8 @@ module.exports = {
       colors: {
         'grey': '#707070',
         'skyblue': '#A4D0FD',
+        'lightgrey': '#F6F6F6',
+        'blue': '#306EB3',
       }
     },
   },
