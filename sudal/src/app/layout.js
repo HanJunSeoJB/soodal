@@ -7,6 +7,7 @@ import cafe from '../../public/images/footerCafe.png'
 import insta from '../../public/images/footerInstagram.png'
 import Link from 'next/link'
 import DropdownMenu from './layouts/dropdown'
+import FloatingButton from './layouts/floatingbutton'
 
 export const metadata = {
   title: 'Create Next App',
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
     <html lang="ko">
       <body>
         <div className='h-3436 relative'>
+          <FloatingButton/>
           <div className=' overflow-y-auto min-h-screen'>
             {/*헤더 전체 */}
             <div className='w-auto h-140'>
