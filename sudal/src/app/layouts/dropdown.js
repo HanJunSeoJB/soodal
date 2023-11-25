@@ -13,10 +13,10 @@ const DropdownMenu = () => {
 
   return (
     <div className='w-auto'>
-      <li className='group mr-32 relative'>
-        <Link href="/materials" onMouseOver={handleMouseEnter}>학습자료</Link>
+      <li onMouseOver={handleMouseEnter} className='group mr-32 relative'>
+        <Link href="/materials">학습자료</Link>
       </li>
-      <div className='w-full h-80 absolute flex justify-center bg-skyblue left-0'>
+      <div className='mt-7 w-full h-80 absolute flex justify-center bg-skyblue left-0 shadow-little'>
           <div onMouseLeave={handleMouseLeave} className={`w-4/6 h-270 rounded-b-lg bg-white shadow-inner flex flex-row ${isOpen ? 'block' : 'hidden'}`}>
             {/* 드롭다운 메뉴 내용 */}
 

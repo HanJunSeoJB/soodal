@@ -58,6 +58,15 @@ module.exports = {
         'skyblue': '#A4D0FD',
         'lightgrey': '#F6F6F6',
         'blue': '#306EB3',
+        'darkblue': '#005CA6',
+      },
+      boxShadow: {
+        'little': 'inset 0 8px 4px 0 rgb(0 0 0 / 0.05)',
+        'hi': '0 0 0 -16px rgb(0 0 0 / 0.05)'
+      },
+      borderWidth: {
+        '0.5': '0.5px',
+        '0.25': '0.25px',
       }
     },
   },
