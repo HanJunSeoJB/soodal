@@ -23,9 +23,14 @@ export default function RootLayout({ children }) {
             {/*헤더 전체 */}
             <div className='w-auto h-140'>
               {/*로그인 바 */}
-              <div className='h-40'></div>
+              <div className='h-40 bg-lightgrey flex row justify-center'>
+                <div className='w-4/6'>
+                  <p className="text-blue font-['Gsans'] text-sm pt-3">NOTICE</p>
+                  {/*여기에 공지사항 세부내용 입력 */}
+                  </div>
+              </div>
               {/*네비게이션 바 */}
-              <div id='header' className='group w-full h-auto flex items-center flex-col'>
+              <div id='header' className='w-full h-auto flex items-center flex-col'>
                 <div className='w-4/6 flex flex-row items-center'>
                   {/*로고 이미지*/}
                   <Link legacyBehavior href="/">
