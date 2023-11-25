@@ -11,7 +11,6 @@ export default async function handler(req, res) {
     const db = (await connectDB).db('posts')
 
     let data = JSON.parse(req.body)
-
     // 제목 및 내용 빈칸확인
     if(data.title == '') { 
         // console.log('제목없음');
@@ -22,10 +21,15 @@ export default async function handler(req, res) {
         return res.status(400).json( '내용을 입력해주세요.')
     }
 
-    // 유저기능 및 게시판 구현 후 추가
-    data.boardId = 'SampleBoard'
+    // 유저기능 구현 후 설정
     data.author = 'SampleAuthor'
 
+    // 게시판 설정
+    // 각 게시판에 맞는 id값을 가져옴
+    let board = await db.collection('board').findOne({boardName: data.boardName})
+    delete data.boardName
+    data.boardId = board._id.toString()
+    
     // 기본값 설정
     data.like = 0
     data.view = 0
