@@ -53,6 +53,7 @@ export default async function handler(req, res) {
                 image: url,
             })
         } catch(err) {
+            // 이미지 업로드 실패 시 게시글 삭제
             await db.collection('post').deleteOne({_id: post.insertedId})
             return res.status(500).json('이미지 업로드에 실패했습니다.')
         }
