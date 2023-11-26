@@ -61,7 +61,8 @@ export default function Posting(){
                     })
                 }
 
-                // 글 업로드 POST요청, 이미지 업로드 성공시 실행
+                // 글 업로드 POST요청
+                // 이미지 업로드 성공 시 이미지 url도 함께 전송
                 if(!result || uploadImg.ok){
                     await fetch('/api/posts/post',{
                         method: 'POST',

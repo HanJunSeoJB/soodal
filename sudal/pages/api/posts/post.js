@@ -42,8 +42,10 @@ export default async function handler(req, res) {
     data.createdAt = new Date()
     data.updatedAt = new Date()
     
+    // 게시글 작성
     let post = await db.collection('post').insertOne(data)
 
+    // 이미지 업로드(이미지가 있을 경우에만)
     if(url){
         try{
             await db.collection('postImg').insertOne({
