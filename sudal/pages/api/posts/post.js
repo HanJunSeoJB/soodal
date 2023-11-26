@@ -18,11 +18,9 @@ export default async function handler(req, res) {
     
     // 제목 및 내용 빈칸확인
     if(data.title == '') { 
-        // console.log('제목없음');
         return res.status(400).json('제목을 입력해주세요.')
     }
     else if(data.content == '') {
-        // console.log('내용없음');
         return res.status(400).json( '내용을 입력해주세요.')
     }
     // 유저기능 구현 후 설정
