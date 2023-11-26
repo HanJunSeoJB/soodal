@@ -31,8 +31,8 @@ export default function Posting(){
     return(
         <div>
             <h1>Posting</h1>
-
-            <select onChange={(e)=>{setBoardName(e.target.value)}}> {/* 게시판 종류 선택 드롭다운 메뉴 */}
+            {/* 게시판 종류 선택 */}
+            <select onChange={(e)=>{setBoardName(e.target.value)}}>
                 <option value="free">자유게시판</option>
                 <option value="qna">qna게시판</option>
                 <option value="information">정보게시판</option>
