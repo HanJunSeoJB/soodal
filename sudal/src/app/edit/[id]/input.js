@@ -3,7 +3,6 @@
 import { useState } from "react"
 
 export default function Input(props){
-    console.log(props.post.title);
     let [title, setTitle] = useState(props.post.title)
     let [content, setContent] = useState(props.post.content)
     return(
@@ -24,7 +23,6 @@ export default function Input(props){
                     }
                     return alert('게시글이 수정되었습니다.')
                 }).catch((err)=>{
-                    console.log(err.message);
                     alert(err.message)
                 })
             }}>
