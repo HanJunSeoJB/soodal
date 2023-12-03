@@ -4,9 +4,7 @@ import Input from "./input"
 
 export default async function Edit(props){
     const db = (await connectDB).db('posts')
-    let post = await db.collection('post').findOne({ _id : new ObjectId(props.params.id)})
-
-    post = JSON.parse(JSON.stringify(post))
+    let post = JSON.stringify(await db.collection('post').findOne({ _id : new ObjectId(props.params.id)}))
 
     return(
         <div>
