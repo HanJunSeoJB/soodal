@@ -17,7 +17,6 @@ export default function Posting(){
     useEffect(() => {
         if (file) {
             const objectURL = URL.createObjectURL(file);
-            console.log(objectURL);
             const filename = encodeURIComponent(file.name);
             fetch('api/posts/image?file=' + filename)
             .then(r => r.json())
@@ -43,7 +42,6 @@ export default function Posting(){
             <input type="file" accept="image/*"
                 onChange={async(e)=>{
                     setFile(e.target.files[0])
-                    console.log(e.target.files[0].name);
                 }}
             /><br/>
             
