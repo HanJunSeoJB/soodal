@@ -62,8 +62,8 @@ export default function RootLayout({ children }) {
                 </div>
               </div>
             </div>
+            {children}
           </div>
-          {children}
           {/*하단 바*/}
           <div className='w-full h-216 absolute bottom-0 bg-grey flex flex-nowrap gap-54 justify-center items-center'>
               {/*로고 이미지 */}
