@@ -6,6 +6,8 @@ export default async function Edit(props){
     const db = (await connectDB).db('posts')
     let post = await db.collection('post').findOne({ _id : new ObjectId(props.params.id)})
 
+    post = JSON.parse(JSON.stringify(post))
+
     return(
         <div>
             <h1>Edit</h1>
