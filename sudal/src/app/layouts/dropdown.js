@@ -16,8 +16,7 @@ const DropdownMenu = () => {
       <li onMouseOver={handleMouseEnter} className='group mr-32 relative'>
         <Link href="/materials">학습자료</Link>
       </li>
-      <div className='mt-7 w-full h-80 absolute flex justify-center bg-skyblue left-0 shadow-little'>
-          <div onMouseLeave={handleMouseLeave} className={`w-4/6 h-270 rounded-b-lg bg-white shadow-inner flex flex-row ${isOpen ? 'block' : 'hidden'}`}>
+          <div onMouseLeave={handleMouseLeave} className={`mt-7 w-4/6 absolute left-0 right-0 mx-auto h-270 rounded-b-lg bg-white shadow-inner flex flex-row ${isOpen ? 'block' : 'hidden'}`}>
             {/* 드롭다운 메뉴 내용 */}
 
             {/*고등 자료*/}
@@ -45,7 +44,6 @@ const DropdownMenu = () => {
           </div>
         </div>
       </div>
-  </div>
   );
 };
 
