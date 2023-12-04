@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ko">
       <body>
-        <div className='h-3436 relative'>
+        <div className='w-full h-3436 relative'>
           <FloatingButton/>
           <div className=' overflow-y-auto min-h-screen'>
             {/*헤더 전체 */}
@@ -41,7 +41,7 @@ export default function RootLayout({ children }) {
               </div>
               {/*네비게이션 바 */}
               <div id='header' className='w-full h-auto flex items-center flex-col'>
-                <div className='w-full flex flex-row items-center justify-center'>
+                <div className='w-5/6 flex flex-row items-center justify-center'>
                   {/*로고 이미지*/}
                   <Link legacyBehavior href="/">
                     <a className='mr-10'>
