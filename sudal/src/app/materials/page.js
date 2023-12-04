@@ -1,7 +1,11 @@
+import DataList from "./dataList";
+import ReviewTagButtons from "./reviewTagButtons";
+
 export default function Materials() {
     return (
       <div>
-        <h1>Hello World</h1>
+        <ReviewTagButtons />
+        <DataList />
       </div>
     )
   }
