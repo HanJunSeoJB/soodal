@@ -1,11 +1,14 @@
 import DataList from "./dataList";
 import ReviewTagButtons from "./reviewTagButtons";
+import Search from "./search";
 
-export default function Materials() {
-    return (
+export default function highschool(){
+  return(
       <div>
-        <ReviewTagButtons />
-        <DataList />
+          <Search/>
+          <ReviewTagButtons/>
+          <DataList/>
+
       </div>
-    )
-  }
+  )
+}
