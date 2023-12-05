@@ -5,12 +5,11 @@ import Table from "./table";
 
 export default function highschool(){
   return(
-      <div>
+      <div className="">
           <Search/>
           <Table/>
           <ReviewTagButtons/>
           <DataList/>
-
       </div>
   )
 }

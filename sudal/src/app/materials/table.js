@@ -53,6 +53,20 @@ export default function Table() {
             </thead>
           </table>
 
+      <div className="font-['Gsans'] flex ml-[601px] text-[17px] mt-[16px]">
+        <button className="text-gray-700 bg-white px-[19px] py-[5px] ml-[11px]
+        border rounded-full shadow 
+        hover:bg-gray-700 hover:text-white">목록으로</button>
+        <button className="text-gray-700 bg-white px-[19px] py-[5px] ml-[11px]
+        border rounded-full shadow 
+        hover:bg-gray-700 hover:text-white
+        flex items-center">
+          <img src="/searchReset.png" className="w-[19.61px] h-[18.49px] mr-[9.9px]"/>선택 초기화</button>
+        <button className="text-white bg-gray-700 px-[19px] py-[5px] ml-[11px]
+        border rounded-full shadow 
+        hover:bg-blue">자료검색</button>
+      </div>
+
       </div>
 
     )
