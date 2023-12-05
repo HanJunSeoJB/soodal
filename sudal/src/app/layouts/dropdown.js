@@ -16,7 +16,19 @@ const DropdownMenu = () => {
       <li onMouseOver={handleMouseEnter} className='group mr-32 relative'>
         <Link href="/materials">학습자료</Link>
       </li>
-          <div onMouseLeave={handleMouseLeave} className={`mt-7 w-4/6 absolute left-0 right-0 mx-auto h-270 rounded-b-lg bg-white shadow-inner flex flex-row ${isOpen ? 'block' : 'hidden'}`}>
+          <div onMouseLeave={handleMouseLeave} className={
+            `mt-7
+            w-4/6
+            absolute
+            left-0 right-0 mx-auto
+            h-270
+            rounded-b-lg
+            bg-white
+            shadow-inner
+            flex flex-row
+            ${isOpen ? 'block' : 'hidden'}
+            z-10`
+            }>
             {/* 드롭다운 메뉴 내용 */}
 
             {/*고등 자료*/}

@@ -11,3 +11,8 @@
   font-family: 'Gsanslight';
   src: url('/fonts/GmarketSansTTFLight.ttf') format("truetype");
 }
+
+@font-face {
+  font-family: 'PretendardMedium';
+  src: url('/fonts/Pretendard-Medium.ttf') format("truetype");
+}
