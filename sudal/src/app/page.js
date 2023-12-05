@@ -1,5 +1,6 @@
 import Banner from '../../public/images/banner.png'
 import Image from 'next/image'
+import DataTab from './layouts/dataTab'
 export default function Home() {
   return (
     <div>
@@ -9,6 +10,8 @@ export default function Home() {
       <div>
 
       </div>
+      {/*최신자료 탭 */}
+      <DataTab/>
     </div>
   )
 }
