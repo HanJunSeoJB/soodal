@@ -13,7 +13,7 @@ export default function Search() {
               <button className="absolute w-6 h-6 ml-[655.5px] mt-[85px] transition-all duration-500 ease-in-out transform group-hover:translate-x-[-63px]">
                 <img src="search.png" alt="Search" />
               </button>
-          </div>
+          </div> 
       </div>
 
     )
