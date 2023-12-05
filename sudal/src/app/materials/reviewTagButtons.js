@@ -15,7 +15,7 @@ export default function ReviewTagButtons() {
           <button className="w-[230px] h-26 text-14 mx-[5px] border-[1px] rounded-full shadow">창의성을 자극하는 내용이에요</button>
           <button className="w-[230px] h-26 text-14 mx-[5px] border-[1px] rounded-full shadow">학생 수준별 학습이 가능해요</button>
         </div>
-
+        
         <div className="my-[5.5px]">
           <button className="w-[312px] h-26 text-14 mx-[5px] border-[1px] rounded-full shadow">학생 혼자서도 이해하기 쉽게 구성되어 있어요</button>
           <button className="w-[154px] h-26 text-14 mx-[5px] border-[1px] rounded-full shadow">숙제로 내주기 좋아요</button>
