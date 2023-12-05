@@ -1,3 +1,4 @@
+
 export default function Search() {
   return (
     <div>
@@ -22,5 +23,5 @@ export default function Search() {
         </button>
       </div>
     </div>
-  );
+  )
 }
