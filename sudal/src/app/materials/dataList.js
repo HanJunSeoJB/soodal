@@ -27,13 +27,26 @@ export default function DataList() {
                         <p className="border rounded-full px-[7px] py-[3px] inline-flex text-center ml-[5px]">변형문제</p>
                         <p className="border rounded-full px-[7px] py-[3px] inline-flex text-center ml-[5px]">단계별학습</p>
                     </div>
-                    <hr className="my-[8px]"/>
-                    <div className="w-auto items-center border rounded-full text-[14px] py-[3px] px-[12px] inline-flex">
-                        <p className="text-center">가격이 저렴해요</p>
-                        <div className="border-r h-full ml-[4px] mr-[7.5px] inline-flex"></div>
-                        <p className="text-center">10</p>
+                    <hr className="my-[8px] w-[843px]"/>
+                    <div className="flex-col">
+                        <div className="w-fit items-center border rounded-full text-[14px] py-[3px] px-[12px] mr-[10px] inline-flex">
+                            <p className="text-center">개념 및 이론이 정확해요</p>
+                            <div className="border-l h-[20px] ml-[4px] mr-[7.5px] inline-flex"></div>
+                            <p style={{color: 'red'}} className="text-center">5</p>
+                        </div>
+                        <div className="w-fit items-center border rounded-full text-[14px] py-[3px] px-[12px] mr-[10px] inline-flex">
+                            <p className="text-center">가격이 저렴해요</p>
+                            <div className="border-l h-[20px] ml-[4px] mr-[7.5px]"></div>
+                            <p style={{color: 'red'}} className="text-center">10</p>
+                        </div>
+                        <div className="w-fit items-center border rounded-full text-[14px] py-[3px] px-[12px] mr-[10px] inline-flex">
+                            <p className="text-center">믿을만한 자료에요</p>
+                            <div className="border-l h-[20px] ml-[4px] mr-[7.5px]"></div>
+                            <p style={{color: 'red'}} className="text-center">10</p>
+                        </div>
                     </div>
                 </div>
+                <button className="border rounded-full px-[15px] py-[6px] h-[30px] w-fit text-[15px]">방문하기</button>
             </div>
         </div>
     )
