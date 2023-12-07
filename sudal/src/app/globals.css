@@ -16,3 +16,8 @@
   font-family: 'PretendardMedium';
   src: url('/fonts/Pretendard-Medium.ttf') format("truetype");
 }
+
+@font-face {
+  font-family: 'GsansBold';
+  src: url('/fonts/GmarketSansTTFBold.ttf') format("truetype");
+}
