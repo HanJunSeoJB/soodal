@@ -1,6 +1,14 @@
+'use client'
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function DataList() {
+  const router = useRouter();
+
+  const handleVisit = () => {
+    // Redirects to the specified URL
+    router.push('https://solvook.com/');
+  };
   return (
       <div className="relative flex row border-black border-b border-dashed w-[1050px] pb-[41.5px] mt-[20.5px] ml-[35.5px] font-['Gsans']">
         {/* 임시 이미지 */}
@@ -54,7 +62,9 @@ export default function DataList() {
               </div>
 
             </div>
-            <button className=
+            <button
+            onClick={handleVisit}
+            className=
             "ml-[1px] rounded-full bg-blue h-fit w-fit px-3.5 py-1 text-white font-['PretendardMedium'] mt-9">방문하기</button>
           </div>
     )
