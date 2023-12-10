@@ -27,7 +27,7 @@ const DropdownMenu = () => {
             shadow-inner
             flex flex-row
             ${isOpen ? 'block' : 'hidden'}
-            z-10`
+            z-20`
             }>
             {/* 드롭다운 메뉴 내용 */}
 
