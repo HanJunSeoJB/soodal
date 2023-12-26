@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
-export default function Posting(){
+export default function Posting(board){
     const router = useRouter()
 
     let [title, setTitle] = useState('')
@@ -29,7 +29,16 @@ export default function Posting(){
     }, [file]);
     return(
         <div>
-            <h1>Posting</h1>
+            <div className="flex flex-col">
+                {/*상단 카테고리 */}
+                <div className="flex flex-row justify-between w-5/6">
+                    <h1 className="font-['GsansBold'] text-2xl">자유게시판</h1>
+                    <p className="font-['Gsanslight text-xs']">Home {">"} {board.title}자유게시판</p>
+                </div>
+                <p className="mt-1 font-['Gsans'] text-base">우리의 생각을 자유롭게 이야기하는 게시판입니다.</p>
+                <div className="border border-gray w-5/6 mt-5"/>
+            </div>
+            
             {/* 게시판 종류 선택 */}
             <select onChange={(e)=>{setBoardName(e.target.value)}}>
                 <option value="free">자유게시판</option>
