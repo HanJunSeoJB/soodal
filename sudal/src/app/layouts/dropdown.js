@@ -29,7 +29,6 @@ const DropdownMenu = () => {
             ${isOpen ? 'block' : 'hidden'}
             z-20`
             }>
-            {/* 드롭다운 메뉴 내용 */}
 
             {/*고등 자료*/}
             <div className='w-auto h-40 flex flex-col mt-9 ml-14 items-center'>

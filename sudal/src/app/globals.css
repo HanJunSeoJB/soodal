@@ -21,3 +21,17 @@
   font-family: 'GsansBold';
   src: url('/fonts/GmarketSansTTFBold.ttf') format("truetype");
 }
+
+@font-face {
+  font-family: '맑은글꼴';
+  src: url('/fonts/MALGUN.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: 'HY견고딕';
+  src: url('/fonts/H2GTRE.ttf') format("truetype");
+}
+@font-face {
+  font-family: 'HY견명조';
+  src: url('/fonts/H2MJRE.ttf') format("truetype");
+}
