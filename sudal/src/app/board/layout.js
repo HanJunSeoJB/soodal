@@ -1,30 +1,34 @@
-'use client'
+import LayoutText from "./layoutText";
 
-import { useSearchParams } from 'next/navigation';
-import { FreeLayout, QnALayout, InfoLayout } from './boardLayout';
-
-export default function BoardLayout(){
-  const params = useSearchParams();
-  const title = params.get('title');
-
-  const layoutComponents = {
-    'free': FreeLayout,
-    'info': InfoLayout,
-    'qna': QnALayout
-  };
-
-  // 선택된 타이틀에 해당하는 컴포넌트를 가져옴
-  const SelectedLayout = layoutComponents[title];
-
-  // 선택된 페이지가 없는 경우를 처리
-  if (!SelectedLayout) {
-    return <div>페이지를 찾을 수 없습니다.</div>;
-  }
-
-  // 선택된 페이지 렌더링
+export default function BoardLayout({children}){
   return (
-    <div>
-      <SelectedLayout />
+    <div className="flex flex-row">
+    <div className="flex flex-col font-['Gsans'] ml-[360px] pr-[29px] w-fit min-h-screen border-r border-gray-200">
+      <div className="mt-[36px]">
+        <LayoutText/>
+      </div>
+
+      <div className="mt-[172px]">
+        <button className="border flex items-center
+        rounded-full bg-blue text-white 
+        px-[20px] py-[10.1px]">
+          FAQ
+          <img src="/qnaIcon.png"  className="w-[25.04px] h-[20.81px] ml-[78px]"/>
+          </button>
+      </div>
+
+      <div className="flex items-center
+      border-t border-b border-gray 
+      mt-[36.5px]
+      pt-[24.5px] pb-[27.5px]">
+        <img src="/kakaoTalk.png" className="w-[32.62px] h-[32.8px]"/>
+        <button className="pl-[6.5px] text-left">
+          <p className="text-[13px]">카톡상담</p>
+          <p className="text-[12px] font-bold">@sudalSample</p>
+        </button>
+      </div>
     </div>
-  );
+    {children}
+    </div>
+  )
 }
