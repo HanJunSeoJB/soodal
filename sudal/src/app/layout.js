@@ -40,7 +40,7 @@ export default function RootLayout({ children }) {
                   </div>
               </div>
               {/*네비게이션 바 */}
-              <div id='header' className='w-full h-auto flex items-center flex-col'>
+              <div id='header' className='w-full h-auto flex items-center flex-col shadow-md pb-4'>
                 <div className='w-5/6 flex flex-row items-center justify-center'>
                   {/*로고 이미지*/}
                   <Link legacyBehavior href="/">

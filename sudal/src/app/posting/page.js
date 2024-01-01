@@ -15,10 +15,19 @@ import {  Dropdown,  DropdownTrigger,  DropdownMenu,  DropdownSection,  Dropdown
 export default function Posting(board){
     const router = useRouter()
 
+    {/*폰트 크기 조절 함수 */}
+    const fontSizeMap = {
+        '16': 'text-base',
+        '18': 'text-lg',
+        '20': 'text-xl',
+        '24': 'text-2xl',
+    }
+
     let [title, setTitle] = useState('')
     let [content, setContent] = useState('')
     let [boardName, setBoardName] = useState('free')
     let [currentFont, setCurrentFont] = useState('맑은고딕')
+    let [currentFontSize, setCurrentFontSize] = useState('16')
     let [currentTextAlign, setCurrentTextAlign] = useState('left')
 
     let [filename, setFilename] = useState()
@@ -44,7 +53,7 @@ export default function Posting(board){
             {/*가운데 부분 */}
             <div className="flex flex-col w-5/6 h-screen">
                 {/*상단 카테고리 */}
-                <div className="flex flex-row justify-between">
+                <div className="flex flex-row justify-between mt-10">
                     <h1 className="font-['GsansBold'] text-2xl">자유게시판</h1>
                     <p className="font-['Gsanslight text-xs']">Home {">"} {board.title}자유게시판</p>
                 </div>
@@ -72,6 +81,7 @@ export default function Posting(board){
                     </div>
                     {/*설정 컨테이너 */}
                     <div className="mt-3.5 h-1/6 border border-grey flex flex-row items-center">
+                        {/*글꼴 설정 */}
                         <Dropdown>
                             <DropdownTrigger>
                                 <button className={`w-fit h-fit flex flex-row items-center font-['${currentFont}'] border border-black`}>
@@ -79,7 +89,7 @@ export default function Posting(board){
                                     <FaChevronDown className="ml-3.5"/>
                                 </button>
                             </DropdownTrigger>
-                            <DropdownMenu aria-label="Static Actions" className="border border-black cursor-pointer"
+                            <DropdownMenu aria-label="Static Actions" className="border border-black cursor-pointer bg-white"
                             onAction={(key) => setCurrentFont(key)}
                             >
                                 <DropdownItem key="맑은고딕" className="font-['맑은 고딕'] border-b border-black">맑은고딕</DropdownItem>
@@ -87,6 +97,25 @@ export default function Posting(board){
                                 <DropdownItem key="HY견명조" className="font-['HY견명조'] border-b border-black">HY견명조</DropdownItem>
                                 <DropdownItem key="Gsans" className="font-['Gsans'] ">
                                 G마켓산스
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
+                        {/*폰트 크기 */}
+                        <Dropdown>
+                            <DropdownTrigger>
+                                <button className={`w-fit h-fit flex flex-row items-center font-['맑은고딕'] border border-black ml-6`}>
+                                    {currentFontSize}
+                                    <FaChevronDown className="ml-3.5"/>
+                                </button>
+                            </DropdownTrigger>
+                            <DropdownMenu aria-label="Static Actions" className="border border-black cursor-pointer bg-white"
+                            onAction={(key) => setCurrentFontSize(key)}
+                            >
+                                <DropdownItem key="16" className="text-base border-b border-black">16</DropdownItem>
+                                <DropdownItem key="18" className="text-lg border-b border-black">18</DropdownItem>
+                                <DropdownItem key="20" className="text-xl border-b border-black">20</DropdownItem>
+                                <DropdownItem key="24" className="text-2xl">
+                                24
                                 </DropdownItem>
                             </DropdownMenu>
                         </Dropdown>
@@ -103,16 +132,63 @@ export default function Posting(board){
                             <Image src={양쪽정렬} className='w-auto h-auto' onClick={() => setCurrentTextAlign('justify')}/>
                         </button>
                     </div>
+                    {/*내용 입력창 */}
                     <form className="h-full">
                         <textarea 
-                            className={`w-full h-full resize-none font-['${currentFont}'] text-${currentTextAlign}`} 
-                            style={{ fontFamily: currentFont }}
+                            className={`w-full min-h-full font-['${currentFont}'] text-${currentTextAlign} ${fontSizeMap[currentFontSize]} border-none outline-none resize-none}`} 
+                            style={{textAlign: currentTextAlign}}
+                            placeholder="내용을 입력해주세요"
                         ></textarea>
                     </form>
                 </div>
+                {/*등록 버튼 */}
+                <div className="flex justify-end">
+                <button
+                        className="w-fit h-fit border-2 border-gray rounded-full px-9 mt-7"
+                        onClick={async()=>{
+                    // 이미지 업로드 시도
+                    let uploadImg
+                    if(result){
+                        const formData = new FormData()
+                        Object.entries({ ...result.fields, file }).forEach(([key, value]) => {
+                            formData.append(key, value)
+                        })
+                        uploadImg = await fetch(result.url, {
+                            method: 'POST',
+                            body: formData,
+                        })
+                    }
+
+                    // 글 업로드 POST요청
+                    // 이미지 업로드 성공 시 이미지 url도 함께 전송
+                    if(!result || uploadImg.ok){
+                        await fetch('/api/posts/post',{
+                            method: 'POST',
+                            body: JSON.stringify({
+                                title: title,
+                                content: content,
+                                boardName: boardName,
+                                url: result ? (result.url+'/'+filename) : null
+                            })
+                        }).then((r)=>{
+                            if(!r.ok){
+                                return r.json().then((err)=>{
+                                    throw new Error(err)
+                                })
+                            }
+                            return alert('게시글이 등록되었습니다.')
+                        }).catch((err)=>{
+                            alert(err.message)
+                        })
+                    }
+                    
+                }}>
+                    등록
+                </button>
+                </div>
             </div>
             
-            {/* 게시판 종류 선택 */}
+            {/* 게시판 종류 선택 
             <select onChange={(e)=>{setBoardName(e.target.value)}}>
                 <option value="free">자유게시판</option>
                 <option value="qna">qna게시판</option>
@@ -126,47 +202,8 @@ export default function Posting(board){
                     setFile(e.target.files[0])
                 }}
             /><br/>
+            */}
             
-            <button onClick={async()=>{
-                // 이미지 업로드 시도
-                let uploadImg
-                if(result){
-                    const formData = new FormData()
-                    Object.entries({ ...result.fields, file }).forEach(([key, value]) => {
-                        formData.append(key, value)
-                    })
-                    uploadImg = await fetch(result.url, {
-                        method: 'POST',
-                        body: formData,
-                    })
-                }
-
-                // 글 업로드 POST요청
-                // 이미지 업로드 성공 시 이미지 url도 함께 전송
-                if(!result || uploadImg.ok){
-                    await fetch('/api/posts/post',{
-                        method: 'POST',
-                        body: JSON.stringify({
-                            title: title,
-                            content: content,
-                            boardName: boardName,
-                            url: result ? (result.url+'/'+filename) : null
-                        })
-                    }).then((r)=>{
-                        if(!r.ok){
-                            return r.json().then((err)=>{
-                                throw new Error(err)
-                            })
-                        }
-                        return alert('게시글이 등록되었습니다.')
-                    }).catch((err)=>{
-                        alert(err.message)
-                    })
-                }
-                
-            }}>
-                작성
-            </button><br/>
             <img src={objectURL}/>
         </div>
     )
