@@ -60,6 +60,7 @@ module.exports = {
         'lightgrey': '#F6F6F6',
         'blue': '#306EB3',
         'darkblue': '#005CA6',
+        'lightblue': '#5290C2',
       },
       boxShadow: {
         'little': 'inset 0 8px 4px 0 rgb(0 0 0 / 0.05)',
