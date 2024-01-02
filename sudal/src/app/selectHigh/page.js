@@ -40,7 +40,7 @@ export default function SelectHigh() {
                 {/*심화 영어I*/}
                 <AdvEng/>
                 {/*진로 영어*/}
-                <cultureEng/>
+                <CareerEng/>
                 {/*심화 영어 독해 I*/}
                 <AdvReadEng/>
               </div>
