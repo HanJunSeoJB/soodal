@@ -11,7 +11,6 @@ import 양쪽정렬 from '../../../public/images/all.png'
 import { FaChevronDown } from "react-icons/fa";
 import Image from 'next/image'
 import {  Dropdown,  DropdownTrigger,  DropdownMenu,  DropdownSection,  DropdownItem} from "@nextui-org/react";
-import MaterialsLayout from "../materials/layout"
 
 export default function Posting(board){
     const router = useRouter()
@@ -24,8 +23,8 @@ export default function Posting(board){
         '24': 'text-2xl',
     }
 
-    let [title, setTitle] = useState('')
-    let [content, setContent] = useState('')
+    let [title, setTitle] = useState('안녕하세요')
+    let [content, setContent] = useState('11')
     let [boardName, setBoardName] = useState('free')
     let [currentFont, setCurrentFont] = useState('맑은고딕')
     let [currentFontSize, setCurrentFontSize] = useState('16')
@@ -147,20 +146,6 @@ export default function Posting(board){
                 <button
                         className="w-fit h-fit border-2 border-gray rounded-full px-9 mt-7"
                         onClick={async()=>{
-                    // 이미지 업로드 시도
-                    let uploadImg
-                    if(result){
-                        const formData = new FormData()
-                        Object.entries({ ...result.fields, file }).forEach(([key, value]) => {
-                            formData.append(key, value)
-                        })
-                        uploadImg = await fetch(result.url, {
-                            method: 'POST',
-                            body: formData,
-                        })
-                    }
-
-                    // 글 업로드 POST요청
                     // 이미지 업로드 성공 시 이미지 url도 함께 전송
                     if(!result || uploadImg.ok){
                         await fetch('/api/posts/post',{
@@ -169,7 +154,6 @@ export default function Posting(board){
                                 title: title,
                                 content: content,
                                 boardName: boardName,
-                                url: result ? (result.url+'/'+filename) : null
                             })
                         }).then((r)=>{
                             if(!r.ok){
@@ -192,7 +176,6 @@ export default function Posting(board){
            
            
             
-            <img src={objectURL}/>
         </div>
     )
 }
