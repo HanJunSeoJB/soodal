@@ -14,7 +14,7 @@ const DropdownMenu = () => {
   return (
     <div className='w-auto'>
       <li onMouseOver={handleMouseEnter} className='group mr-32 relative hover:text-[#005CA6]'>
-        <Link href="/materials">학습자료</Link>
+        <Link href="/selectHigh">학습자료</Link>
       </li>
           <div onMouseLeave={handleMouseLeave} className={
             `mt-7
@@ -34,7 +34,7 @@ const DropdownMenu = () => {
             {/*고등 자료*/}
             <div className='w-auto h-40 flex flex-col mt-9 ml-14 items-center'>
               <p className='text-xl font-bold mb-6'>고등자료</p>
-              <Link href='/materials' className='text-base mb-6 hover:text-[#005CA6]'>내신자료</Link>
+              <Link href='/selectHigh' className='text-base mb-6 hover:text-[#005CA6]'>내신자료</Link>
               <Link href='/materials' className='text-base mb-6 hover:text-[#005CA6]'>수능자료</Link>
               <Link href='/materials' className='text-base hover:text-[#005CA6]'>참고서 답지</Link>
             </div>
