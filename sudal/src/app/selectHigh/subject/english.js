@@ -7,7 +7,7 @@ export default function English() {
               <p>영어</p>
             </div>
               <div className="flex flex-col h-[314px] items-center text-[15px] text-[#555555] font-['GsansMedium'] gap-y-[10px]">
-                <a href="#">NE능률(김성곤)</a>
+                <a href="/materials">NE능률(김성곤)</a>
                 <a href="#">NE능률(양현권)</a>
                 <a href="#">YBM(박준언)</a>
                 <a href="#">YBM(한상호)</a>
