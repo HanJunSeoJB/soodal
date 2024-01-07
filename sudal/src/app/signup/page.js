@@ -4,7 +4,7 @@ export default function Register(){
 
     return(
         <div className='flex flex-col items-center w-auto h-[121px] gap-y-[8px]'>
-            <form method="POST" action="/api/auth/signup.js">
+            <form method="POST" action="/api/auth/signup">
                 <p className="mb-4 text-center">회원가입</p>
                 <input 
                     type='text' name='username'
