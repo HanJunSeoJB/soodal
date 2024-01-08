@@ -52,7 +52,10 @@ module.exports = {
       fontSize: {
         '19': '19px',
         '17': '17px',
+        '16': '16px',
         '14': '14px',
+        '15': '15px',
+        '13': '13px',
       },
       colors: {
         'grey': '#707070',
@@ -60,6 +63,7 @@ module.exports = {
         'lightgrey': '#F6F6F6',
         'blue': '#306EB3',
         'darkblue': '#005CA6',
+        'lightblue': '#5290C2',
         'fontblue': '#109FFF',
         'star_blue': '#1E4F85',
         'lightgrey': '#E8EDF3',

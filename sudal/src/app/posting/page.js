@@ -23,8 +23,8 @@ export default function Posting(board){
         '24': 'text-2xl',
     }
 
-    let [title, setTitle] = useState('')
-    let [content, setContent] = useState('')
+    let [title, setTitle] = useState('안녕하세요')
+    let [content, setContent] = useState('11')
     let [boardName, setBoardName] = useState('free')
     let [currentFont, setCurrentFont] = useState('맑은고딕')
     let [currentFontSize, setCurrentFontSize] = useState('16')
@@ -49,7 +49,7 @@ export default function Posting(board){
         }
     }, [file]);
     return(
-        <div>
+        <div className="w-full h-full ml-9">
             {/*가운데 부분 */}
             <div className="flex flex-col w-5/6 h-screen">
                 {/*상단 카테고리 */}
@@ -63,7 +63,7 @@ export default function Posting(board){
                 {/*제목 바 */}
                 <input className="mt-5 bg-[#E9E9E9] border border-grey h-11 pl-6" placeholder="제목을 입력해주세요"></input>
                 {/* 내용 컨테이너 */}
-                <div className="flex flex-col h-4/5 w-full border border-grey mt-4">
+                <div className="flex flex-col h-4/5 w-full border-2 border-grey mt-4">
                     {/* 버튼 컨테이너 */}
                     <div className="ml-5 mt-3 w-full flex flex-row">
                         <button className="flex flex-col justify-center items-center">
@@ -80,11 +80,11 @@ export default function Posting(board){
                         </button>
                     </div>
                     {/*설정 컨테이너 */}
-                    <div className="mt-3.5 h-1/6 border border-grey flex flex-row items-center">
+                    <div className="mt-3.5 h-1/6 border-y border-grey flex flex-row items-center">
                         {/*글꼴 설정 */}
                         <Dropdown>
                             <DropdownTrigger>
-                                <button className={`w-fit h-fit flex flex-row items-center font-['${currentFont}'] border border-black`}>
+                                <button className={`w-fit h-fit flex flex-row items-center font-['${currentFont}'] border border-black ml-5`}>
                                     {currentFont}
                                     <FaChevronDown className="ml-3.5"/>
                                 </button>
@@ -146,20 +146,6 @@ export default function Posting(board){
                 <button
                         className="w-fit h-fit border-2 border-gray rounded-full px-9 mt-7"
                         onClick={async()=>{
-                    // 이미지 업로드 시도
-                    let uploadImg
-                    if(result){
-                        const formData = new FormData()
-                        Object.entries({ ...result.fields, file }).forEach(([key, value]) => {
-                            formData.append(key, value)
-                        })
-                        uploadImg = await fetch(result.url, {
-                            method: 'POST',
-                            body: formData,
-                        })
-                    }
-
-                    // 글 업로드 POST요청
                     // 이미지 업로드 성공 시 이미지 url도 함께 전송
                     if(!result || uploadImg.ok){
                         await fetch('/api/posts/post',{
@@ -168,7 +154,6 @@ export default function Posting(board){
                                 title: title,
                                 content: content,
                                 boardName: boardName,
-                                url: result ? (result.url+'/'+filename) : null
                             })
                         }).then((r)=>{
                             if(!r.ok){
@@ -188,23 +173,9 @@ export default function Posting(board){
                 </div>
             </div>
             
-            {/* 게시판 종류 선택 
-            <select onChange={(e)=>{setBoardName(e.target.value)}}>
-                <option value="free">자유게시판</option>
-                <option value="qna">qna게시판</option>
-                <option value="information">정보게시판</option>
-            </select><br/><br/>
-
-            <input onChange={(e)=>{setTitle(e.target.value)}}/><br/>
-            <input onChange={(e)=>{setContent(e.target.value)}}/><br/>
-            <input type="file" accept="image/*"
-                onChange={async(e)=>{
-                    setFile(e.target.files[0])
-                }}
-            /><br/>
-            */}
+           
+           
             
-            <img src={objectURL}/>
         </div>
     )
 }
