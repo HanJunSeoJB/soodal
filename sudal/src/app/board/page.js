@@ -1,4 +1,5 @@
 import { SortAt, Title, Post } from "./pageComponent";
+import Link from 'next/link';
 
 export default function BoardPage(){
   return(
@@ -16,11 +17,9 @@ export default function BoardPage(){
 
       <div className="flex flex-row mt-[13px]">
         <SortAt/>
-        <button className="border rounded-full
+        <Link className="border rounded-full
           text-gray-500 text-[17px] font-['Gsans']
-          h-[23px] ml-[644px] px-[28px]">
-          글쓰기
-        </button>
+          h-[23px] ml-[644px] px-[28px]" href='/posting'>글쓰기</Link>
       </div>
 
       <div className="flex flex-row items-center bg-gray-300 font-['PretendardMedium'] mt-[13px] text-gray-600 h-[41px]">
