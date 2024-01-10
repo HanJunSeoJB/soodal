@@ -2,12 +2,11 @@
 
 import { useSearchParams } from 'next/navigation';
 
-
 function Title(){
   const params = useSearchParams();
-  const title = params.get('title');
+  const board = params.get('board');
   const pageTitle = (() => {
-    switch (title) {
+    switch (board) {
       case 'qna':
         return 'Q&A';
       case 'free':
@@ -17,7 +16,7 @@ function Title(){
     }
   })();
   const pageText = (() => {
-    switch (title) {
+    switch (board) {
       case 'qna':
         return '과외하며 궁금했던 점들을 묻고 답하는 게시판입니다.';
       case 'free':
@@ -28,9 +27,9 @@ function Title(){
   })();
   return(
     <div className="font-['Gsans']">
-      <div className="flex flex-row mb-[4px]">
-        <p className="mt-[41px] text-[23px]">{pageTitle}</p>
-        <p className="ml-[732px] mt-[41px] text-[13px] text-gray-500">Home &gt; {pageTitle}</p>
+      <div className="flex flex-row justify-between mt-10 h-auto">
+        <p className="text-2xl h-auto">{pageTitle}</p>
+        <p className="text-sm text-gray-500">Home &gt; {pageTitle}</p>
       </div>
       <p>{pageText}</p>
     </div>
@@ -39,9 +38,9 @@ function Title(){
 
 function SortAt(){
   const params = useSearchParams();
-  const title = params.get('title');
+  const board = params.get('board');
   const sortOptions = (()=>{
-    switch(title){
+    switch(board){
       case 'qna':
         return ['조회수', '나도 궁금 순', '답변 많은 순', '답변 적은 순'];
       default:
@@ -49,41 +48,120 @@ function SortAt(){
     }
   })();
   return(
-    <div className="flex flex-row text-[15px]">
+    <div className="flex flex-row text-base">
       {sortOptions.map((option, index) => (
         <span key={index} className="flex flex-row font-['Gsans']">
           <button className="">
             {option}
           </button>
-          <p className="mx-[4px] text-gray-400">{index < sortOptions.length - 1 ? '|' : ''}</p>
+          <p className="mx-1 text-gray-400">{index < sortOptions.length - 1 ? '|' : ''}</p>
         </span>
       ))}
     </div>
   )
 }
 
-function Post() {
-  return (
-    <div className="flex flex-row items-center justify-between font-['PretendardMedium'] border-b ml-[13px] py-[10px]">
-      <div className="flex items-center w-[450px]">
-        <Popular />
-        <button className="text-left text-black text-[18px] truncate mr-[3px]">
-          글 제목123456789123457891234654589451324895689562189562
-        </button>
-        <Comment comment="4" />
+function Label(){
+  const params = useSearchParams();
+  const board = params.get('board');
+  
+  if(board === 'qna'){
+    return(
+      <div className="flex flex-row items-center bg-gray-300 font-['PretendardMedium'] mt-3 text-gray-600 h-10 w-auto">
+        <p className="text-center w-1/2">제목</p>
+        <p className="text-center w-28">작성자</p>
+        <p className="text-center w-32">작성일</p>
+        <p className="text-center w-24">나도</p>
+        <p className="text-center w-24">조회</p>
       </div>
+    )
+  }
+  else{
+    return(
+      <div className="flex flex-row items-center bg-gray-300 font-['PretendardMedium'] mt-3 text-gray-600 h-10 w-auto">
+        <p className="text-center w-1/2">제목</p>
+        <p className="text-center w-28">작성자</p>
+        <p className="text-center w-32">작성일</p>
+        <p className="text-center w-20">추천</p>
+        <p className="text-center w-20">스크랩</p>
+        <p className="text-center w-20">조회</p>
+      </div>
+    )
+  }
+}
 
-      <div className="flex flexitems-center justify-end">
-        <button className="w-20 text-center text-[16px] truncate mr-[13px]">작성자</button>
-        <p className="w-32 text-center text-[16px] truncate mr-[12px]">2023-12-31</p>
-        <p className="w-16 text-center text-[16px] truncate mr-[21px]">10</p>
-        <p className="w-16 text-center text-[16px] truncate mr-[20px]">10</p>
-        <p className="w-16 text-center text-[16px] truncate mr-[19px]">10</p>
+function List({board, posts}) {
+  if(board === 'qna'){
+    return (
+      <div>
+        {posts.map((post) => (
+          <Question
+            key={post.id}
+            title={post.title}
+            author={post.author}
+            date={post.date}
+            nado={post.nado}
+            view={post.view}
+            comment={post.comment}
+          />
+        ))}
       </div>
+    );
+  }
+  return (
+    <div>
+      {posts.map((post) => (
+        <Post
+          key={post.id}
+          title={post.title}
+          author={post.author}
+          date={post.date}
+          recommend={post.recommend}
+          scrap={post.scrap}
+          view={post.view}
+          comment={post.comment}
+        />
+      ))}
     </div>
   );
 }
 
+function Question({title, author, date, nado, view, comment}) {
+  return(
+    <div className="flex flex-row items-center font-['PretendardMedium'] h-10 border-b">
+      <div className="flex flex-row items-start w-1/2">
+        <Popular />
+        <button className="text-[18px] truncate mr-[3px]">
+          {title}
+        </button>
+        <Comment comment={comment} />
+      </div>
+      <button className="text-center w-28">{author}</button>
+      <p className="text-center w-32">{date}</p>
+      <p className="text-center w-24">{nado}</p>
+      <p className="text-center w-24">{view}</p>
+    </div>
+  )
+}
+
+function Post({title, author, date, recommend, scrap, view, comment}) {
+  return (
+    <div className="flex flex-row items-center font-['PretendardMedium'] h-10 border-b">
+      <div className="flex flex-row items-start w-1/2">
+        <Popular />
+        <button className="text-[18px] truncate mr-[3px]">
+          {title}
+        </button>
+        <Comment comment={comment} />
+      </div>
+      <button className="text-center w-28 text-center text-[16px] truncate">{author}</button>
+      <p className="text-center w-32 text-center text-[16px] truncate">{date}</p>
+      <p className="text-center w-20 text-center text-[16px] truncate">{recommend}</p>
+      <p className="text-center w-20 text-center text-[16px] truncate">{scrap}</p>
+      <p className="text-center w-20 text-center text-[16px] truncate">{view}</p>
+    </div>
+  );
+}
 
 function Popular() {
   return (
@@ -99,5 +177,4 @@ function Comment({ comment }) {
   );
 }
 
-
-export {Title, SortAt, Post}
+export {Title, SortAt, Label, List}

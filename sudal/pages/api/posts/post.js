@@ -28,17 +28,16 @@ export default async function handler(req, res) {
 
     // 게시판 설정
     // 각 게시판에 맞는 id값을 가져옴
+    // 프론트단에서 free / qna / information 중 하나를 선택하면 해당 게시판의 id값을 가져옴
     let board = await db.collection('board').findOne({boardName: data.boardName})
     delete data.boardName
     data.boardId = board._id
     
     // 기본값 설정
-    data.like = 0
     data.view = 0
-    data.isPopular = false
-    data.isAnswerd = false
     data.createdAt = new Date()
     data.updatedAt = new Date()
+    data.isAnswerd = false
     
     // 게시글 작성
     let post = await db.collection('post').insertOne(data)

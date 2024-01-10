@@ -1,37 +1,42 @@
-import { SortAt, Title, Post } from "./pageComponent";
+import { SortAt, Title,  Label, List } from "./pageComponent";
 
-export default function BoardPage(){
+export default async function BoardPage(props){
+
+  const query = props.searchParams
+
+  const board = query.board
+  delete query.board
+
+  const queryString = Object.entries(query)
+    .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+    .join('&');
+
+  const posts = await fetch(`http://localhost:3000/api/posts/get`).then((res) => res.json());
+  console.log(posts);
+
   return(
-    <div className="ml-[35.5px]">
+    <div className="ml-9">
       <Title/>
-      <div className="flex flex-row mt-[29px] font=['Gsans'] h-[29.96px] text-[15px]">
-        <select className="border pl-[17px] pr-[37.5px]">
+      <div className="flex flex-row mt-7 font-['Gsans'] h-7 text-sm">
+        <select className="border pl-4 pr-9 w-auto">
           <option>제목</option>
           <option>내용</option>
           <option>작성자</option>
         </select>
-        <input className="border ml-[5.5px] w-[350.5px] px-[5px]"></input>
-        <button className="border bg-gray-700 text-white w-[71.5px] ml-[5.8px]">검색</button>
+        <input className="border ml-1.5 w-1/3 px-1.5"></input>
+        <button className="border bg-gray-700 text-white w-1/12 ml-1.5">검색</button>
       </div>
 
-      <div className="flex flex-row mt-[13px]">
+      <div className="flex justify-between mt-[13px] w-[964px]">
         <SortAt/>
-        <button className="border rounded-full
-          text-gray-500 text-[17px] font-['Gsans']
-          h-[23px] ml-[644px] px-[28px]">
+        <button className="border rounded-full text-gray-500 text-[17px] font-['Gsans'] h-[23px] px-[28px]">
           글쓰기
         </button>
       </div>
 
-      <div className="flex flex-row items-center bg-gray-300 font-['PretendardMedium'] mt-[13px] text-gray-600 h-[41px]">
-        <p className="pl-[245px]">제목</p>
-        <p className="pl-[244px]">작성자</p>
-        <p className="pl-[74px]">작성일</p>
-        <p className="pl-[74px]">추천</p>
-        <p className="pl-[50px]">스크랩</p>
-        <p className="pl-[50px]">조회</p>
-      </div>
-      <Post/>
+      <Label/>
+      {/* <PostList/> */}
+      {/* <List board={board} posts={posts}/> */}
       <div className="flex justify-end mt-[56.3px]">
         <select className="border font-['PretendardMedium'] font-[15px]">
           <option>10개씩 보기</option>

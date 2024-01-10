@@ -34,7 +34,7 @@ export default function Posting(){
             <select onChange={(e)=>{setBoardName(e.target.value)}}>
                 <option value="free">자유게시판</option>
                 <option value="qna">qna게시판</option>
-                <option value="information">정보게시판</option>
+                <option value="info">정보게시판</option>
             </select><br/><br/>
 
             <input onChange={(e)=>{setTitle(e.target.value)}}/><br/>

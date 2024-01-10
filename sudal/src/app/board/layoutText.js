@@ -4,12 +4,12 @@ import { useSearchParams } from 'next/navigation';
 
 export default function LayoutText(){
   const params = useSearchParams();
-  const title = params.get('title');
+  const board = params.get('board');
   return(
     <div>
       <p className="text-[20px]">
       {(() => {
-            switch (title) {
+            switch (board) {
               case 'qna':
                 return 'Q&A';
               case 'free':
@@ -22,7 +22,7 @@ export default function LayoutText(){
       <div className="border-b border-black w-[171px] mt-[11.5px] mb-[17.5px]"/>
       <button>
       {(() => {
-            switch (title) {
+            switch (board) {
               case 'qna':
                 return '· Q&A';
               case 'free':
