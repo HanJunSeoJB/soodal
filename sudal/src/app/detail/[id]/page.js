@@ -15,7 +15,8 @@ export default async function Detail(props) {
     const day = dateObj.getDate();
 
     return (
-        <div className="w-full h-full">
+        <div className="w-full h-full ml-9">
+
             {/*가운데 부분 */}
             <div className="flex flex-col w-5/6 h-full">
                 {/*상단 카테고리 */}

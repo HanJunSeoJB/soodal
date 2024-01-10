@@ -11,6 +11,7 @@ export default async function handler(req, res) {
     }
     // 유저기능 구현 후 설정
     data.author = 'SampleAuthor'
+    data.createdAt = new Date()
     
     // 기본값 설정
     data.like = 0

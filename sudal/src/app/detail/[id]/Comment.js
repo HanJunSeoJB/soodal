@@ -32,9 +32,16 @@ export default function Comment(props) {
             {/* 댓글 리스트 */}
             <div className='w-full flex flex-col'>
                 {data.length > 0 ? data.map((commentData, i) => (
-                    <CommentList key={i} data={commentData} />
+                    <CommentList
+                    key={i}
+                    isLike = {commentData.isLike}
+                    comment = {commentData.comment}
+                    author = {commentData.author}
+                    createdAt = {commentData.createdAt}
+                    like = {commentData.like} />
                 )) : '댓글 없음'}
             </div>
         </div>
     )
 }
+
