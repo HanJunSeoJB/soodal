@@ -1,6 +1,7 @@
 import { ObjectId } from "mongodb"
 import { connectDB } from "../../../../util/database"
 import Comment from "./Comment"
+import CommentList from './CommentList';
 import CardLayoutLike from "@/app/layouts/cardLayout_like"
 import Link from "next/link"
 
@@ -54,12 +55,7 @@ export default async function Detail(props) {
                 {/* 댓글 */}
                 <p className="text-xl font-['Gsans'] mt-7">댓글</p>
                 {/* 댓글 입력창 */}
-                <div className="w-full h-32 border border-grey mt-3 flex flex-col justify-center shadow-lg">
-                    <div className="flex flex-row items-center justify-center">
-                        <textarea className="w-full min-h-20 max-h-20 border border-grey ml-2.5" placeholder="댓글을 입력해주세요."></textarea>
-                        <button className="w-fit h-fit border-2 border-gray px-4 py-8 mx-2.5">등록</button>
-                    </div>
-                </div>
+                <Comment _id={ result._id.toString()} />
             </div>
         </div>
     )
