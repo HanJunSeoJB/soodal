@@ -65,6 +65,9 @@ module.exports = {
         'darkblue': '#005CA6',
         'lightblue': '#5290C2',
         'darkgrey': '#909090',
+        'fontblue': '#109FFF',
+        'star_blue': '#1E4F85',
+        'lightgrey': '#E8EDF3',
       },
       boxShadow: {
         'little': 'inset 0 8px 4px 0 rgb(0 0 0 / 0.05)',

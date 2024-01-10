@@ -1,5 +1,4 @@
 'use client'
-import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import 사진아이콘 from '../../../public/images/pictureIcon.png'
 import SNS아이콘 from '../../../public/images/cloud.png'
@@ -13,7 +12,6 @@ import Image from 'next/image'
 import {  Dropdown,  DropdownTrigger,  DropdownMenu,  DropdownSection,  DropdownItem} from "@nextui-org/react";
 
 export default function Posting(board){
-    const router = useRouter()
 
     {/*폰트 크기 조절 함수 */}
     const fontSizeMap = {

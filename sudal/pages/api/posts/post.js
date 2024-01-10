@@ -57,6 +57,6 @@ export default async function handler(req, res) {
         }
     }
 
-    return res.status(200).json('게시글이 작성되었습니다.')
+    return res.status(200)
     
 }
