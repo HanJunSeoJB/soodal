@@ -5,6 +5,7 @@ import logoBlue from '../../../public/images/logoBlue.png'
 import logoGoogle from '../../../public/images/logoGoogle.png'
 import logoKakao from '../../../public/images/logoKakao.png'
 import logoNaver from '../../../public/images/logoNaver.png'
+import { signIn } from 'next-auth/react'
 
 
 export default function Login() {
@@ -49,11 +50,11 @@ export default function Login() {
 
                 {/*소셜로그인 버튼*/}
                 <div className='flex flex-col items-center justify-center w-auto h-[130px]'>
-                    <button className="flex items-center justify-center w-[378px] h-[38px] rounded-md text-15 text-[#371C1D] font-['PretendardMedium'] bg-[#F9E000]">
+                <button className="flex items-center justify-center w-[378px] h-[38px] rounded-md text-15 text-[#371C1D] font-['PretendardMedium'] bg-[#F9E000]" onClick={() => { console.log('Signing in with Kakao'); signIn('kakao'); }}>
                         <Image src={logoKakao} className='w-auto h-auto mr-[8px]'/>
                         카카오톡으로 로그인
                     </button>
-                    <button className="flex items-center justify-center w-[378px] h-[38px] mt-auto rounded-md text-15 text-[#FFFFFF] font-['PretendardMedium'] bg-[#03CF5D]">
+                    <button className="flex items-center justify-center w-[378px] h-[38px] mt-auto rounded-md text-15 text-[#FFFFFF] font-['PretendardMedium'] bg-[#03CF5D]" onClick={() => { console.log('Signing in with Naver'); signIn('naver');}}>
                         <Image src={logoNaver} className='w-auto h-auto mr-[8px]'/>
                         네이버로 로그인
                     </button>
