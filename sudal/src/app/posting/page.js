@@ -55,7 +55,7 @@ export default function Posting(board){
                 {/*상단 카테고리 */}
                 <div className="flex flex-row justify-between mt-10">
                     <h1 className="font-['GsansBold'] text-2xl">자유게시판</h1>
-                    <p className="font-['Gsanslight text-xs']">Home {">"} {board.title}자유게시판</p>
+                    <p className="font-['Gsanslight text-xs']">Home {">"} {board.content}자유게시판</p>
                 </div>
                 <p className="mt-1 font-['Gsans'] text-base">우리의 생각을 자유롭게 이야기하는 게시판입니다.</p>
                 {/*막대 바 */}
