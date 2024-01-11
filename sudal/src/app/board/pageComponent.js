@@ -1,6 +1,7 @@
 'use client'
 
 import { useSearchParams } from 'next/navigation';
+import { useState } from 'react';
 
 function Title(){
   const params = useSearchParams();
@@ -90,13 +91,16 @@ function Label(){
   }
 }
 
-function List({board, posts}) {
+function List({posts}) {
+  const params = useSearchParams();
+  const board = params.get('board');
+
   if(board === 'qna'){
     return (
       <div>
-        {posts.map((post) => (
+        {posts.map((post, key) => (
           <Question
-            key={post.id}
+            key={key}
             title={post.title}
             author={post.author}
             date={post.date}
@@ -110,9 +114,9 @@ function List({board, posts}) {
   }
   return (
     <div>
-      {posts.map((post) => (
+      {posts.map((post, key) => (
         <Post
-          key={post.id}
+          key={key}
           title={post.title}
           author={post.author}
           date={post.date}

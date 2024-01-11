@@ -1,18 +1,15 @@
 import { SortAt, Title,  Label, List } from "./pageComponent";
 
 export default async function BoardPage(props){
-
   const query = props.searchParams
 
   const board = query.board
-  delete query.board
 
   const queryString = Object.entries(query)
     .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
     .join('&');
 
-  const posts = await fetch(`http://localhost:3000/api/posts/get`).then((res) => res.json());
-  console.log(posts);
+  const posts = await fetch(`http://localhost:3000/api/posts/get?${queryString}`).then((res) => res.json());
 
   return(
     <div className="ml-9">
@@ -35,8 +32,7 @@ export default async function BoardPage(props){
       </div>
 
       <Label/>
-      {/* <PostList/> */}
-      {/* <List board={board} posts={posts}/> */}
+      <List posts={posts}/>
       <div className="flex justify-end mt-[56.3px]">
         <select className="border font-['PretendardMedium'] font-[15px]">
           <option>10개씩 보기</option>
