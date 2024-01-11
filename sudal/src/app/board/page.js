@@ -1,6 +1,5 @@
 import { SortAt, Title, Post } from "./pageComponent";
-import Link from 'next/link';
-import Link from 'next/link';
+import Link from 'next/link'
 
 export default function BoardPage(){
   return(
