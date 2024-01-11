@@ -15,7 +15,7 @@ export default function Comment(props) {
         <div>
             <div className="w-full h-32 border-2 border-grey mt-3 flex flex-col justify-center shadow-lg">
                 <div className="w-full flex flex-row items-center justify-between">
-                        <input value={comment} className="w-11/12 min-h-20 max-h-20 border border-grey ml-2.5" placeholder="  댓글을 입력해주세요." onChange={(e)=>{ setComment(e.target.value) }} />
+                        <input value={comment} className="w-11/12 min-h-20 max-h-20 border border-grey ml-2.5 pl-6" placeholder="댓글을 입력해주세요." onChange={(e)=>{ setComment(e.target.value) }} />
                         <button className="w-1/12 h-fit border-2 border-gray py-8 mx-6" onClick={()=>{ fetch('/api/posts/comment',
                         { 
                             method : 'POST',
