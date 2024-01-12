@@ -1,6 +1,6 @@
 'use client'
-import Buttons from "./buttons";
-import Carousel from "./carousel";
+import Buttons from "./components/buttons";
+import Carousel from "./components/carousel";
 
 export default function DetailPage() {
   return (
