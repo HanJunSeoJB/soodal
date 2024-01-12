@@ -18,9 +18,8 @@ export default function StarRating() {
   }, [maskSize]);
 
   return (
-    //rating-wrap
-    <div className='flex mt-[6px]'>
-      {/*rating*/}
+    <div className='flex flex-row mt-[6px]'>
+      {/*별점*/}
       <div className='flex relative items-center'>
         {/*overlay*/}
         <div id='mask' className='absolute mix-blend-color top-0 right-0 bottom-0 bg-white opacity-100 z-10 opacity: unset'>
@@ -51,6 +50,10 @@ export default function StarRating() {
             <path id="패스_937" data-name="패스 937" d="M8.179,0,5.651,5.122,0,5.943,4.089,9.93l-.965,5.629L8.179,12.9l5.055,2.658L12.269,9.93l4.09-3.987-5.652-.821L8.179,0Z" transform="translate(0 0)" fill="#fc0"/>
           </svg>
         </div>
+      </div>
+      {/*평점*/}
+      <div className="flex ml-[4px] text-[13px] text-[#B2B2B2] font-['PretendardLight']">
+        <p>({rating})</p>
       </div>
     </div>
   )

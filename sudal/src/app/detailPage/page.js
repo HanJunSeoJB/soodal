@@ -1,10 +1,12 @@
 'use client'
-import StarRating from "./starRating";
+import Buttons from "./buttons";
+import Carousel from "./carousel";
 
 export default function DetailPage() {
   return (
       //children페이지 전체 크기 설정
       <div className='flex flex-col w-[1000px]'>
+
         {/*네비게이션 바*/}
         <div className='flex flex-row justify-between ml-[36px] mt-[41px]'>
           <div className='flex flex-row'>
@@ -17,28 +19,10 @@ export default function DetailPage() {
           </div>
         </div>
 
-        {/*자료 세부사항 및 방문버튼*/}
-        <div className='flex flex-row justify-between ml-[70px] mt-[39px]'>
-          {/*별점*/}
-          <div className='flex flex-col'>
-            <p className="text-[20px] text-[#444444] font-['PretendardMedium']">지이다 영어교실</p>
-            <div className='flex flex-row'>
-              {/*별*/}
-              <div>
-                <StarRating/>
-              </div>
-              {/*평점*/}
-              <div>
-
-              </div>
-            </div>
-          </div>
-
-          {/*버튼들*/}
-          <div>
-
-          </div>
-        </div>
+        {/*별점 및 방문버튼*/}
+        <Buttons/>
+        {/*학습자료 캐러셀*/}
+        <Carousel/>
       </div>
   )
 }
