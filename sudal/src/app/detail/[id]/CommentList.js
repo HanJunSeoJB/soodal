@@ -13,6 +13,8 @@ export default function CommentList({isLike, comment, author, createdAt, like, _
     const [showReplyInput, setShowReplyInput] = useState(false);
     const [reply, setReply] = useState('');
     let [replyDatas, setDatas] = useState([])
+    let [likeData, setLikeData] = useState(like)
+
     useEffect(()=>{
         fetch('/api/posts/getReply?id=' + _id).then(r=>r.json()).then((result)=>{
             setDatas(result)
@@ -30,15 +32,27 @@ export default function CommentList({isLike, comment, author, createdAt, like, _
                     {isLike && <Image src={best} alt="Best" width={50} height={50}  className='mx-2'/>}
                     <p>{author}</p>
                     <p className='ml-3.5'>{timeSince(createdAt)}</p>
-                    <BiLike className="w-fit h-fit ml-3.5" color="#005CA6"/>
-                    <p className='ml-1'>{like}</p>
+                    <button onClick={()=>{ fetch('/api/posts/like',
+                        { 
+                            method : 'POST',
+                            body : JSON.stringify({like: like+1, commentId: _id}) 
+                        }).then((r)=>{
+                            if(r.ok){
+                                fetch('/api/posts/getComment?id=' + _id).then(r=>r.json()).then((result)=>{
+                                    setLikeData(result.like)
+                                })
+                            }
+                        })
+                    
+                    }}>
+                        <BiLike className="w-fit h-fit ml-3.5" color="#005CA6"/>
+                    </button>
+
+                    <p className='ml-1'>{likeData}</p>
                 </div>
                 <div className='flex flex-row'>
                     <button onClick={toggleReplyInput}>답글달기</button>
                     
-                    <button>
-                        <BiLike className="w-6 h-6y ml-7" />
-                    </button>
                     <button>
                         <BiLike className="w-6 h-6y mx-7" />
                     </button>

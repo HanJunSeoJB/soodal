@@ -22,9 +22,6 @@ export default function CommentList({isLike, comment, author, createdAt, like}) 
                     </div>
                     <div className='flex flex-row'>
                         <button>
-                            <BiLike className="w-6 h-6y ml-7" />
-                        </button>
-                        <button>
                             <BiLike className="w-6 h-6y mx-7" />
                         </button>
                         <Dropdown>
