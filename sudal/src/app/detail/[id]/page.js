@@ -43,8 +43,9 @@ export default async function Detail(props) {
                 <p className="mt-10 font-['PretendardMedium'] text-base mb-24">{result.content}</p>
                 {/* 추천  및 스크랩*/}
                 <div className="flex flex-row gap-2.5 justify-center">
-                    <CardLayoutLike/>
-                    <CardLayoutLike/>
+                    <CardLayoutLike _id={ result._id.toString()}/>
+                    <CardLayoutLike _id={ result._id.toString()}
+                    author = {result.author.toString()}/>
                 </div>
                 {/* 목록 */}
                 <div className="mt-10 flex justify-center">

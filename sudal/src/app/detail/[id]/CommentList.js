@@ -9,13 +9,17 @@ import {  Dropdown,  DropdownTrigger,  DropdownMenu,  DropdownSection,  Dropdown
 import { useState, useEffect } from 'react';
 import ReplyList from './ReplyList';
 
-export default function CommentList({isLike, comment, author, createdAt, like, _id}) {
+export default function CommentList({isLike, comment, author, createdAt, _id}) {
     const [showReplyInput, setShowReplyInput] = useState(false);
     const [reply, setReply] = useState('');
-    let [replyDatas, setDatas] = useState([])
+    let [replyDatas, setDatas] = useState([]);
+    let [currentLike, setLike] = useState('0');
     useEffect(()=>{
         fetch('/api/posts/getReply?id=' + _id).then(r=>r.json()).then((result)=>{
             setDatas(result)
+        }),
+        fetch('/api/posts/getLike?id=' + _id).then(r=>r.json()).then((result)=>{
+            setLike(result.length.toString())
         })
     },[])
 
@@ -31,15 +35,24 @@ export default function CommentList({isLike, comment, author, createdAt, like, _
                     <p>{author}</p>
                     <p className='ml-3.5'>{timeSince(createdAt)}</p>
                     <BiLike className="w-fit h-fit ml-3.5" color="#005CA6"/>
-                    <p className='ml-1'>{like}</p>
+                    <p className='ml-1'>{currentLike}</p>
                 </div>
                 <div className='flex flex-row'>
                     <button onClick={toggleReplyInput}>답글달기</button>
                     
-                    <button>
-                        <BiLike className="w-6 h-6y ml-7" />
-                    </button>
-                    <button>
+                    <button onClick={()=>{ fetch('/api/posts/like',
+                        { 
+                            method : 'POST',
+                            body : JSON.stringify({parent: _id, author: author}) 
+                        }).then((r)=>{
+                            if(r.ok){
+                                fetch('/api/posts/getLike?id=' + _id).then(r=>r.json()).then((result)=>{
+                                    setLike(result.length.toString())
+                                    })
+                            }
+                        })
+                    
+                    }}>
                         <BiLike className="w-6 h-6y mx-7" />
                     </button>
                     <Dropdown>
@@ -95,7 +108,8 @@ export default function CommentList({isLike, comment, author, createdAt, like, _
                     comment = {replyData.comment}
                     author = {replyData.author}
                     createdAt = {replyData.createdAt}
-                    like = {replyData.like} />
+                    like = {replyData.like}
+                    _id = {replyData._id} />
                 ))}
             </div>
         </div>

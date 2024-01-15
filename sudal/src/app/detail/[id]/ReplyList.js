@@ -1,12 +1,20 @@
-
+'use client'
 import Image from 'next/image' 
 import best from '../../../../public/images/best.png'
 import tag from '../../../../public/images/tag.png'
 import { BiLike } from "react-icons/bi";
 import { RiMore2Line } from "react-icons/ri";
+import { useState, useEffect } from 'react';
 import {  Dropdown,  DropdownTrigger,  DropdownMenu,  DropdownSection,  DropdownItem} from "@nextui-org/react";
 
-export default function CommentList({isLike, comment, author, createdAt, like}) {
+export default function CommentList({isLike, comment, author, createdAt, _id}) {
+    let [currentReplyLike, setReplyLike] = useState('0');
+
+    useEffect(()=>{
+        fetch('/api/posts/getLike?id=' + _id).then(r=>r.json()).then((result)=>{
+            setReplyLike(result.length.toString())
+        })
+    },[])
 
     return (
         <div className='w-full flex flex-row items-center'>
@@ -18,15 +26,24 @@ export default function CommentList({isLike, comment, author, createdAt, like}) 
                         <p>{author}</p>
                         <p className='ml-3.5'>{timeSince(createdAt)}</p>
                         <BiLike className="w-fit h-fit ml-3.5" color="#005CA6"/>
-                        <p className='ml-1'>{like}</p>
+                        <p className='ml-1'>{currentReplyLike}</p>
                     </div>
                     <div className='flex flex-row'>
-                        <button>
-                            <BiLike className="w-6 h-6y ml-7" />
-                        </button>
-                        <button>
-                            <BiLike className="w-6 h-6y mx-7" />
-                        </button>
+                    <button onClick={()=>{ fetch('/api/posts/like',
+                        { 
+                            method : 'POST',
+                            body : JSON.stringify({parent: _id, author: author}) 
+                        }).then((r)=>{
+                            if(r.ok){
+                                fetch('/api/posts/getLike?id=' + _id).then(r=>r.json()).then((result)=>{
+                                    setReplyLike(result.length.toString())
+                                    })
+                            }
+                        })
+                    
+                    }}>
+                        <BiLike className="w-6 h-6y mx-7" />
+                    </button>
                         <Dropdown>
                                 <DropdownTrigger>
                                 <button>
