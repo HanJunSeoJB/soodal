@@ -1,4 +1,5 @@
 import {List, SortAt} from "./pageComponent";
+import Link from 'next/link';
 
 async function getPosts({queryString}) {
   const res = await fetch(`http://localhost:3000/api/posts/get?${queryString}`,{
@@ -31,11 +32,11 @@ export default async function BoardPage(props){
         <button className="border bg-gray-700 text-white w-1/12 ml-1.5">검색</button>
       </div>
 
-      <div className="flex justify-between mt-[13px] w-[964px]">
+      <div className="flex flex-row mt-[13px]">
         <SortAt board={board}/>
-        <button className="border rounded-full text-gray-500 text-[17px] font-['Gsans'] h-[23px] px-[28px]">
-          글쓰기
-        </button>
+          <Link href='/posting' className="border rounded-full
+            text-gray-500 text-[17px] font-['Gsans']
+            h-[23px] px-[28px]">글쓰기</Link>
       </div>
 
       <Label board={board}/>

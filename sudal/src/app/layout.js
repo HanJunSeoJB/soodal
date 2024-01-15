@@ -40,7 +40,7 @@ export default function RootLayout({ children }) {
                   </div>
               </div>
               {/*네비게이션 바 */}
-              <div id='header' className='w-full h-auto flex items-center flex-col'>
+              <div id='header' className='w-full h-auto flex items-center flex-col shadow-md pb-4'>
                 <div className='w-5/6 flex flex-row items-center justify-center'>
                   {/*로고 이미지*/}
                   <Link legacyBehavior href="/">
@@ -53,7 +53,7 @@ export default function RootLayout({ children }) {
                     {/*카테고리들 */}
                     <ul className="w-auto flex flex-row font-['Gsans'] text-19">
                       <DropdownMenu/>
-                      <li className='w-auto mr-32 hover:text-[#005CA6]'> <Link href='/freeboard'>자유게시판</Link> </li>
+                      <li className='w-auto mr-32 hover:text-[#005CA6]'> <Link href='/board'>자유게시판</Link> </li>
                       <li className='w-auto mr-32 hover:text-[#005CA6]'> <Link href='/infoboard'>정보게시판</Link> </li>
                       <li className='w-auto mr-32 hover:text-[#005CA6]'> <Link href='/qna'>Q&A</Link> </li>
                       <li className='w-auto ml-5 hover:text-[#005CA6]'> <Link href='/mypage'>마이페이지</Link> </li>
