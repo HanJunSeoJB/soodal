@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb"
 import { connectDB } from "../../../../util/database"
 import Comment from "./Comment"
-import CardLayoutLike from "@/app/layouts/cardLayout_like"
+import CardLayoutLike from "../../layouts/cardLayout_like"
 import Link from "next/link"
 
 export default async function Detail(props) {
