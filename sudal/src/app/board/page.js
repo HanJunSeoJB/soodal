@@ -32,7 +32,7 @@ export default async function BoardPage(props){
         <button className="border bg-gray-700 text-white w-1/12 ml-1.5">검색</button>
       </div>
 
-      <div className="flex flex-row mt-[13px]">
+      <div className="flex justify-between mt-[13px] w-[964px]">
         <SortAt board={board}/>
           <Link href='/posting' className="border rounded-full
             text-gray-500 text-[17px] font-['Gsans']

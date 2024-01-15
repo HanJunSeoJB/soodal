@@ -24,6 +24,7 @@
     "react-icons": "^4.12.0"
   },
   "devDependencies": {
+    "@types/node": "20.11.2",
     "@types/react": "18.2.47",
     "autoprefixer": "^10.4.16",
     "postcss": "^8",
