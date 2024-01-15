@@ -43,7 +43,6 @@ export default function Comment(props) {
                     comment = {commentData.comment}
                     author = {commentData.author}
                     createdAt = {commentData.createdAt}
-                    like = {commentData.like}
                     _id = {commentData._id} />
                 ))}
             </div>
