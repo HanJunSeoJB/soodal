@@ -1,4 +1,4 @@
-import { SortAt, Title,  Label, List } from "./pageComponent";
+import {List, SortAt} from "./pageComponent";
 
 async function getPosts({queryString}) {
   const res = await fetch(`http://localhost:3000/api/posts/get?${queryString}`,{
@@ -10,6 +10,7 @@ async function getPosts({queryString}) {
 
 export default async function BoardPage(props){
   const query = props.searchParams
+  const board = query['board'];
 
   const queryString = Object.entries(query)
     .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
@@ -19,7 +20,7 @@ export default async function BoardPage(props){
 
   return(
     <div className="ml-9">
-      <Title/>
+      <Title board={board}/>
       <div className="flex flex-row mt-7 font-['Gsans'] h-7 text-sm">
         <select className="border pl-4 pr-9 w-auto">
           <option>제목</option>
@@ -31,14 +32,14 @@ export default async function BoardPage(props){
       </div>
 
       <div className="flex justify-between mt-[13px] w-[964px]">
-        <SortAt/>
+        <SortAt board={board}/>
         <button className="border rounded-full text-gray-500 text-[17px] font-['Gsans'] h-[23px] px-[28px]">
           글쓰기
         </button>
       </div>
 
-      <Label/>
-      <List posts={posts}/>
+      <Label board={board}/>
+      <List posts={posts} board={board}/>
       <div className="flex justify-end mt-[56.3px]">
         <select className="border font-['PretendardMedium'] font-[15px]">
           <option>10개씩 보기</option>
@@ -57,4 +58,62 @@ export default async function BoardPage(props){
       </div>
     </div>
   )
+}
+
+function Title({board}){
+  const pageTitle = (() => {
+    switch (board) {
+      case 'qna':
+        return 'Q&A';
+      case 'free':
+        return '자유게시판';
+      case 'info':
+        return '정보게시판';
+    }
+  })();
+  const pageText = (() => {
+    switch (board) {
+      case 'qna':
+        return '과외하며 궁금했던 점들을 묻고 답하는 게시판입니다.';
+      case 'free':
+        return '우리의 생각을 자유롭게 이야기하는 게시판입니다.';
+      case 'info':
+        return '과외에 대한 정보를 공유하는 게시판입니다.'; {/*임시*/}
+    }
+  })();
+  return(
+    <div className="font-['Gsans']">
+      <div className="flex flex-row justify-between mt-10 h-auto">
+        <p className="text-2xl h-auto">{pageTitle}</p>
+        <p className="text-sm text-gray-500">Home &gt; {pageTitle}</p>
+      </div>
+      <p>{pageText}</p>
+    </div>
+  )
+}
+
+function Label({board}){
+  if(board === 'qna'){
+    return(
+      <div className="flex flex-row items-center bg-gray-300 font-['PretendardMedium'] mt-3 text-gray-600 h-10 w-auto">
+        <p className="text-center w-1/2">제목</p>
+        <p className="text-center w-28">작성자</p>
+        <p className="text-center w-32">작성일</p>
+        <p className="text-center w-24">나도</p>
+        <p className="text-center w-24">조회</p>
+      </div>
+    )
+  }
+  else{
+    return(
+      <div className="flex flex-row items-center bg-gray-300 font-['PretendardMedium'] mt-3 text-gray-600 h-10 w-auto">
+        <p className="text-center w-1/2">제목</p>
+        <p className="text-center w-28">작성자</p>
+        <p className="text-center w-32">작성일</p>
+        <p className="text-center w-20">추천</p>
+        <p className="text-center w-20">스크랩</p>
+        <p className="text-center w-20">조회</p>
+      </div>
+    )
+  }
 }
