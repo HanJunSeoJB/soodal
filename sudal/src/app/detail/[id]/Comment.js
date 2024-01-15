@@ -19,7 +19,7 @@ export default function Comment(props) {
                         <button className="w-1/12 h-fit border-2 border-gray py-8 mx-6" onClick={()=>{ fetch('/api/posts/comment',
                         { 
                             method : 'POST',
-                            body : JSON.stringify({postId: props._id}) 
+                            body : JSON.stringify({comment: comment, postId: props._id}) 
                         }).then((r)=>{
                             if(r.ok){
                                 fetch('/api/posts/getComment?id=' + props._id).then(r=>r.json()).then((result)=>{
