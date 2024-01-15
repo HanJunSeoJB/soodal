@@ -1,47 +1,8 @@
 'use client'
 
-import { useSearchParams } from 'next/navigation';
-
-
-function Title(){
-  const params = useSearchParams();
-  const title = params.get('title');
-  const pageTitle = (() => {
-    switch (title) {
-      case 'qna':
-        return 'Q&A';
-      case 'free':
-        return '자유게시판';
-      case 'info':
-        return '정보게시판';
-    }
-  })();
-  const pageText = (() => {
-    switch (title) {
-      case 'qna':
-        return '과외하며 궁금했던 점들을 묻고 답하는 게시판입니다.';
-      case 'free':
-        return '우리의 생각을 자유롭게 이야기하는 게시판입니다.';
-      case 'info':
-        return '과외에 대한 정보를 공유하는 게시판입니다.'; {/*임시*/}
-    }
-  })();
-  return(
-    <div className="font-['Gsans']">
-      <div className="flex flex-row mb-[4px]">
-        <p className="mt-[41px] text-[23px]">{pageTitle}</p>
-        <p className="ml-[732px] mt-[41px] text-[13px] text-gray-500">Home &gt; {pageTitle}</p>
-      </div>
-      <p>{pageText}</p>
-    </div>
-  )
-}
-
-function SortAt(){
-  const params = useSearchParams();
-  const title = params.get('title');
+function SortAt({board}){
   const sortOptions = (()=>{
-    switch(title){
+    switch(board){
       case 'qna':
         return ['조회수', '나도 궁금 순', '답변 많은 순', '답변 적은 순'];
       default:
@@ -49,41 +10,91 @@ function SortAt(){
     }
   })();
   return(
-    <div className="flex flex-row text-[15px]">
+    <div className="flex flex-row text-base">
       {sortOptions.map((option, index) => (
         <span key={index} className="flex flex-row font-['Gsans']">
           <button className="">
             {option}
           </button>
-          <p className="mx-[4px] text-gray-400">{index < sortOptions.length - 1 ? '|' : ''}</p>
+          <p className="mx-1 text-gray-400">{index < sortOptions.length - 1 ? '|' : ''}</p>
         </span>
       ))}
     </div>
   )
 }
 
-function Post() {
+function List({posts, board}) {
+  if(board === 'qna'){
+    return (
+      <div>
+        {posts.map((post, key) => (
+          <Question
+            key={key}
+            title={post.title}
+            author={post.author}
+            date={post.date}
+            nado={post.nado}
+            view={post.view}
+            comment={post.comment}
+          />
+        ))}
+      </div>
+    );
+  }
   return (
-    <div className="flex flex-row items-center justify-between font-['PretendardMedium'] border-b ml-[13px] py-[10px]">
-      <div className="flex items-center w-[450px]">
-        <Popular />
-        <button className="text-left text-black text-[18px] truncate mr-[3px]">
-          글 제목123456789123457891234654589451324895689562189562
-        </button>
-        <Comment comment="4" />
-      </div>
-
-      <div className="flex flexitems-center justify-end">
-        <button className="w-20 text-center text-[16px] truncate mr-[13px]">작성자</button>
-        <p className="w-32 text-center text-[16px] truncate mr-[12px]">2023-12-31</p>
-        <p className="w-16 text-center text-[16px] truncate mr-[21px]">10</p>
-        <p className="w-16 text-center text-[16px] truncate mr-[20px]">10</p>
-        <p className="w-16 text-center text-[16px] truncate mr-[19px]">10</p>
-      </div>
+    <div>
+      {posts.map((post, key) => (
+        <Post
+          key={key}
+          title={post.title}
+          author={post.author}
+          date={post.date}
+          recommend={post.recommend}
+          scrap={post.scrap}
+          view={post.view}
+          comment={post.comment}
+        />
+      ))}
     </div>
   );
 }
 
+function Question({title, author, date, nado, view, comment}) {
+  return(
+    <div className="flex flex-row items-center font-['PretendardMedium'] h-10 border-b">
+      <div className="flex flex-row items-start w-1/2">
+        <Popular />
+        <button className="text-[18px] truncate mr-[3px]">
+          {title}
+        </button>
+        <Comment comment={comment} />
+      </div>
+      <button className="text-center w-28">{author}</button>
+      <p className="text-center w-32">{date}</p>
+      <p className="text-center w-24">{nado}</p>
+      <p className="text-center w-24">{view}</p>
+    </div>
+  )
+}
+
+function Post({title, author, date, recommend, scrap, view, comment}) {
+  return (
+    <div className="flex flex-row items-center font-['PretendardMedium'] h-10 border-b">
+      <div className="flex flex-row items-start w-1/2">
+        <Popular />
+        <button className="text-[18px] truncate mr-[3px]">
+          {title}
+        </button>
+        <Comment comment={comment} />
+      </div>
+      <button className="text-center w-28 text-center text-[16px] truncate">{author}</button>
+      <p className="text-center w-32 text-center text-[16px] truncate">{date}</p>
+      <p className="text-center w-20 text-center text-[16px] truncate">{recommend}</p>
+      <p className="text-center w-20 text-center text-[16px] truncate">{scrap}</p>
+      <p className="text-center w-20 text-center text-[16px] truncate">{view}</p>
+    </div>
+  );
+}
 
 function Popular() {
   return (
@@ -99,5 +110,4 @@ function Comment({ comment }) {
   );
 }
 
-
-export {Title, SortAt, Post}
+export { List, SortAt }
