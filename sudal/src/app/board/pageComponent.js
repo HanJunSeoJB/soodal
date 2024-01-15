@@ -1,44 +1,6 @@
 'use client'
 
-import { useSearchParams } from 'next/navigation';
-
-function Title(){
-  const params = useSearchParams();
-  const board = params.get('board');
-  const pageTitle = (() => {
-    switch (board) {
-      case 'qna':
-        return 'Q&A';
-      case 'free':
-        return '자유게시판';
-      case 'info':
-        return '정보게시판';
-    }
-  })();
-  const pageText = (() => {
-    switch (board) {
-      case 'qna':
-        return '과외하며 궁금했던 점들을 묻고 답하는 게시판입니다.';
-      case 'free':
-        return '우리의 생각을 자유롭게 이야기하는 게시판입니다.';
-      case 'info':
-        return '과외에 대한 정보를 공유하는 게시판입니다.'; {/*임시*/}
-    }
-  })();
-  return(
-    <div className="font-['Gsans']">
-      <div className="flex flex-row justify-between mt-10 h-auto">
-        <p className="text-2xl h-auto">{pageTitle}</p>
-        <p className="text-sm text-gray-500">Home &gt; {pageTitle}</p>
-      </div>
-      <p>{pageText}</p>
-    </div>
-  )
-}
-
-function SortAt(){
-  const params = useSearchParams();
-  const board = params.get('board');
+function SortAt({board}){
   const sortOptions = (()=>{
     switch(board){
       case 'qna':
@@ -61,42 +23,13 @@ function SortAt(){
   )
 }
 
-function Label(){
-  const params = useSearchParams();
-  const board = params.get('board');
-  
-  if(board === 'qna'){
-    return(
-      <div className="flex flex-row items-center bg-gray-300 font-['PretendardMedium'] mt-3 text-gray-600 h-10 w-auto">
-        <p className="text-center w-1/2">제목</p>
-        <p className="text-center w-28">작성자</p>
-        <p className="text-center w-32">작성일</p>
-        <p className="text-center w-24">나도</p>
-        <p className="text-center w-24">조회</p>
-      </div>
-    )
-  }
-  else{
-    return(
-      <div className="flex flex-row items-center bg-gray-300 font-['PretendardMedium'] mt-3 text-gray-600 h-10 w-auto">
-        <p className="text-center w-1/2">제목</p>
-        <p className="text-center w-28">작성자</p>
-        <p className="text-center w-32">작성일</p>
-        <p className="text-center w-20">추천</p>
-        <p className="text-center w-20">스크랩</p>
-        <p className="text-center w-20">조회</p>
-      </div>
-    )
-  }
-}
-
-function List({board, posts}) {
+function List({posts, board}) {
   if(board === 'qna'){
     return (
       <div>
-        {posts.map((post) => (
+        {posts.map((post, key) => (
           <Question
-            key={post.id}
+            key={key}
             title={post.title}
             author={post.author}
             date={post.date}
@@ -110,9 +43,9 @@ function List({board, posts}) {
   }
   return (
     <div>
-      {posts.map((post) => (
+      {posts.map((post, key) => (
         <Post
-          key={post.id}
+          key={key}
           title={post.title}
           author={post.author}
           date={post.date}
@@ -177,4 +110,4 @@ function Comment({ comment }) {
   );
 }
 
-export {Title, SortAt, Label, List}
+export { List, SortAt }
