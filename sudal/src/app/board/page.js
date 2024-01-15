@@ -1,15 +1,21 @@
 import { SortAt, Title,  Label, List } from "./pageComponent";
 
+async function getPosts({queryString}) {
+  const res = await fetch(`http://localhost:3000/api/posts/get?${queryString}`,{
+    cache: 'no-cache',
+  });
+  const data = await res.json();
+  return data;
+}
+
 export default async function BoardPage(props){
   const query = props.searchParams
-
-  const board = query.board
 
   const queryString = Object.entries(query)
     .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
     .join('&');
 
-  const posts = await fetch(`http://localhost:3000/api/posts/get?${queryString}`).then((res) => res.json());
+  const posts = await getPosts({queryString});
 
   return(
     <div className="ml-9">

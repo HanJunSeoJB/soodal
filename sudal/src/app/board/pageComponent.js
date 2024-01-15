@@ -1,7 +1,19 @@
 'use client'
 
 import { useSearchParams } from 'next/navigation';
-import { useState } from 'react';
+
+// async function getPosts() {
+//   const params = useSearchParams();
+//   const queryString = Array.from(params.entries())
+//     .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+//     .join('&');
+
+//   const res = await fetch(`http://localhost:3000/api/posts/get?${queryString}`,{
+//     cache: 'no-cache',
+//   });
+//   const data = await res.json();
+//   return data;
+// }
 
 function Title(){
   const params = useSearchParams();
@@ -156,7 +168,7 @@ function Post({title, author, date, recommend, scrap, view, comment}) {
         <button className="text-[18px] truncate mr-[3px]">
           {title}
         </button>
-        <Comment comment={comment} />
+        {/* <Comment comment={comment} /> */}
       </div>
       <button className="text-center w-28 text-center text-[16px] truncate">{author}</button>
       <p className="text-center w-32 text-center text-[16px] truncate">{date}</p>

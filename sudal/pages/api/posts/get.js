@@ -20,7 +20,7 @@ export default async function handler(req, res) {
     }
 
     let result = await db.collection('post').find({boardId:board._id}, {projection}).skip(skip).limit(limit).toArray();
-    let total = await db.collection('post').countDocuments({boardId:board._id})
+    // let total = await db.collection('post').countDocuments({boardId:board._id})
 
     const posts = await Promise.all(result.map(async (post) => {
       const comment = await db.collection('post').countDocuments({postId: post._id});
