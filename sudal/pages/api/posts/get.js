@@ -19,8 +19,7 @@ export default async function handler(req, res) {
         return res.status(404).json('게시판을 찾을 수 없습니다.');
     }
 
-    let result = await db.collection('post').find({boardId:board._id}, {projection}).skip(skip).limit(limit).toArray();
-    // let total = await db.collection('post').countDocuments({boardId:board._id})
+    let result = await db.collection('post').find({boardId:board._id}, {projection}).skip(skip).limit(limit).sort({createdAt : -1}).toArray();
 
     const posts = await Promise.all(result.map(async (post) => {
       const comment = await db.collection('post').countDocuments({postId: post._id});
