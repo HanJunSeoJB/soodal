@@ -1,11 +1,11 @@
-export default function DetailLayout({children}){
+export default function DetailLayout({board}){
     return(
       <div className="flex flex-row">
       <div className="flex flex-col font-['Gsans'] ml-[360px] pr-[29px] w-fit min-h-screen border-r border-gray-200">
         <div className="mt-[36px]">
-          <p className="text-[20px] text-blue">자유게시판</p>
+          <p className="text-[20px] text-blue">{board}</p>
           <div className="border-b border-black w-[171px] mt-[11.5px] mb-[17.5px]"/>
-          <button className="text-lightblue">자유게시판</button><br/>
+          <button className="text-lightblue">{board}</button><br/>
         </div>
     
         <div className="mt-[101px]">
@@ -28,7 +28,6 @@ export default function DetailLayout({children}){
           </button>
         </div>
       </div>
-      {children}
       </div>
     )
   }

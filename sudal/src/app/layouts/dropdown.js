@@ -12,8 +12,8 @@ const DropdownMenu = () => {
   const handleMouseLeave = () => setIsOpen(false);
 
   return (
-    <div className='w-auto'>
-      <li onMouseOver={handleMouseEnter} className='group mr-32 relative hover:text-[#005CA6]'>
+    <div className='w-fit'>
+      <li onMouseOver={handleMouseEnter} className='w-fit group mr-32 relative hover:text-[#005CA6]'>
         <Link href="/selectHigh">학습자료</Link>
       </li>
           <div onMouseLeave={handleMouseLeave} className={

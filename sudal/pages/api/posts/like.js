@@ -7,7 +7,12 @@ export default async function handler(req, res) {
     let data = JSON.parse(req.body)
     let user = data.author
     let parent = data.parent
-    let likes = await db.collection('like').find({parent: parent, author: user}).toArray();
+    let type = data.type
+    let likes = await db.collection('like').find({
+        parent: parent, 
+        author: user,
+        type: type
+    }).toArray();
     
     if (likes.length > 0) {
         let data = await db.collection('like').findOne({author: user})

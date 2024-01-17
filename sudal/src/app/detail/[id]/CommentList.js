@@ -19,7 +19,7 @@ export default function CommentList({isLike, comment, author, createdAt, _id}) {
             setDatas(result)
         }),
         fetch('/api/posts/getLike?id=' + _id).then(r=>r.json()).then((result)=>{
-            setLike(result.length.toString())
+            setLike(result.count.toString())
         })
     },[])
 
@@ -47,7 +47,7 @@ export default function CommentList({isLike, comment, author, createdAt, _id}) {
                         }).then((r)=>{
                             if(r.ok){
                                 fetch('/api/posts/getLike?id=' + _id).then(r=>r.json()).then((result)=>{
-                                    setLike(result.length.toString())
+                                    setLike(result.count.toString())
                                     })
                             }
                         })

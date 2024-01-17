@@ -49,14 +49,14 @@ export default function RootLayout({ children }) {
                     </a>
                   </Link>
                   {/*메뉴 바*/}
-                  <div id='nav' className='w-auto h-30px'>
+                  <div id='nav' className='w-full h-30px'>
                     {/*카테고리들 */}
-                    <ul className="w-auto flex flex-row font-['Gsans'] text-19">
+                    <ul className="w-full flex flex-row font-['Gsans'] text-xl">
                       <DropdownMenu/>
-                      <li className='w-auto mr-32 hover:text-[#005CA6]'> <Link href='/board'>자유게시판</Link> </li>
-                      <li className='w-auto mr-32 hover:text-[#005CA6]'> <Link href='/infoboard'>정보게시판</Link> </li>
-                      <li className='w-auto mr-32 hover:text-[#005CA6]'> <Link href='/qna'>Q&A</Link> </li>
-                      <li className='w-auto ml-5 hover:text-[#005CA6]'> <Link href='/mypage'>마이페이지</Link> </li>
+                      <li className='w-fit mr-32 hover:text-[#005CA6]'> <Link href='/board?board=free&page=1&pageSize=10'>자유게시판</Link> </li>
+                      <li className='w-fit mr-32 hover:text-[#005CA6]'> <Link href='/board?board=info&page=1&pageSize=10'>정보게시판</Link> </li>
+                      <li className='w-fit mr-32 hover:text-[#005CA6]'> <Link href='/board?board=qna&page=1&pageSize=10'>Q&A</Link> </li>
+                      <li className='w-fit ml-5 hover:text-[#005CA6]'> <Link href='/mypage'>마이페이지</Link> </li>
                     </ul>
                   </div>
                 </div>
