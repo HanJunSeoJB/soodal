@@ -1,8 +1,7 @@
 import { ObjectId } from "mongodb"
 import { connectDB } from "../../../../util/database"
 import Comment from "./Comment"
-import CommentList from './CommentList';
-import CardLayoutLike from "@/app/layouts/cardLayout_like"
+import CardLayoutLike from "../../layouts/cardLayout_like"
 import Link from "next/link"
 
 export default async function Detail(props) {
@@ -43,12 +42,13 @@ export default async function Detail(props) {
                 {/* 본문  */}
                 <p className="mt-10 font-['PretendardMedium'] text-base mb-24">{result.content}</p>
                 {/* 추천  및 스크랩*/}
-                <div className="flex flex-row gap-2.5">
-                    <CardLayoutLike/>
-                    <CardLayoutLike/>
+                <div className="flex flex-row gap-2.5 justify-center">
+                    <CardLayoutLike _id={ result._id.toString()}/>
+                    <CardLayoutLike _id={ result._id.toString()}
+                    author = {result.author.toString()}/>
                 </div>
                 {/* 목록 */}
-                <div className="mt-10">
+                <div className="mt-10 flex justify-center">
                     <Link href='/board' className="w-fit h-fit border-2 border-gray rounded-full px-9 mt-7">목록</Link>
                 </div>
                 {/*긴 막대 바 */}
