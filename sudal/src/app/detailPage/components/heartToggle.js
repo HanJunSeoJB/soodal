@@ -2,8 +2,8 @@
 import {useState, useEffect} from 'react';
 import Image from 'next/image'
 import styles from "./heartToggle.module.css";
-import emptyHeart from '../../../public/images/emptyHeart.png';
-import fullHeart from '../../../public/images/fullHeart.png';
+import emptyHeart from 'public/images/emptyHeart.png';
+import fullHeart from 'public/images/fullHeart.png';
 
 export default function HeartToggle() {
   // isHeartFilled변수로 DB에서 좋아요가 눌렸는지, 아닌지 확인하면 될것같습니다.

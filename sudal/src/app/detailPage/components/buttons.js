@@ -3,7 +3,7 @@ import Image from 'next/image'
 import StarRating from "./starRating";
 import HeartToggle from './heartToggle'
 
-export default function CareerEng() {
+export default function Buttons() {
   //DB에서 가져온 방문자수, 좋아요수가 각각 views와 likes에 들어가면 됩니다.
   const views = 11000;
   const likes = 10;
@@ -17,7 +17,7 @@ export default function CareerEng() {
       <div className='flex flex-col'>
         <p className="text-[20px] text-[#444444] font-['PretendardMedium']">지이다 영어교실</p>
         <div className='flex flex-row'>
-          <StarRating/>
+          <StarRating rating={2.5}/>
         </div>
       </div>
 

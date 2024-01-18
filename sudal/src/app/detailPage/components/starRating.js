@@ -1,9 +1,8 @@
 'use client'
 import {useEffect} from 'react';
 
-export default function StarRating() {
-  //rating변수에 DB에서 가져온 평점이 들어가면 됩니다.
-  const rating = 3.4;
+export default function StarRating({rating}) {
+
   const ratingMask = 5.0 - rating;
   const starSize = 16, maxStar = 5, gutter = 4;
   const maskSize = starSize * ratingMask + (Math.floor(ratingMask) * gutter);

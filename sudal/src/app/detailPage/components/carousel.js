@@ -1,14 +1,14 @@
 'use client'
 import {useState} from 'react';
 import Image from 'next/image'
-import test from '../../../public/images/imagetest1.png'
-import LeftArrow from '../../../public/images/leftArrow.png'
-import RightArrow from '../../../public/images/rightArrow.png'
+import Test from '/public/images/imagetest1.png'
+import LeftArrow from 'public/images/leftArrow.png'
+import RightArrow from 'public/images/rightArrow.png'
 
 export default function Carousel() {
   // 학습자료 이미지가 들어가면 됩니다.
   const images = [
-    test,test,test,test
+    Test, Test
   ];
 
   let [current, setCurrent] = useState(0);
@@ -38,7 +38,7 @@ export default function Carousel() {
             {
               images.map((n, i)=>{
                 return(
-                  <div className='flex justify-center flex-shrink-0 w-[242.5px] h-[378px] bg-[#E8E8E8] rounded-[12px] border border-[#707070] mr-[15px]'>
+                  <div key='card' className='flex justify-center flex-shrink-0 w-[242.5px] h-[378px] bg-[#E8E8E8] rounded-[12px] border border-[#707070] mr-[15px]'>
                     <Image src={images[i]} className='object-contain w-auto h-auto'/>
                   </div>
                 )
