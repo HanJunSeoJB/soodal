@@ -5,9 +5,10 @@ import GoodToggle from "./goodToggle"
 import KebabButton from "./kebabButton"
 import CommentStarRating from "./../components/starRating"
 
-export default function Comment() {
+//댓글 (제목, 좋아요 갯수, 작성자, 작설날짜, 별점, 내용, 태그, 좋아요 여부 관련 파라미터 필요 )
+export default function Comment({content}) {
   return (
-    <div className='flex flex-col mt-[35px] ml-[22px] mr-[22px] mb-[35px]'>
+    <div className='flex flex-col mt-[35px] ml-[22px] mr-[22px]'>
       <div className='flex flex-row justify-between'>
         {/*댓글내용*/}
         <div>
@@ -27,10 +28,10 @@ export default function Comment() {
           {/*댓글내용*/}
           <div className="flex mt-[33px] mb-[14px] text-[17px] text-[#303030] font-['PretendardMedium']">
             <p>
-              진짜 좋은 자료들만 모아놓았습니다 강추합니다!
+              {content}
             </p>
           </div>
-          {/*태그*/}
+          {/*태그 - 배열로 받아와서 map*/}
           <div className='flex flex-row mb-[35px]'>
             <div className="rounded-full border border-[#D5D5D5] w-auto px-[23px] pt-[4px] pt-[2px] mr-[6px] text-[14px] text-[#444444] font-['Gsans'] shadow-md">
                 가격이 저렴해요
