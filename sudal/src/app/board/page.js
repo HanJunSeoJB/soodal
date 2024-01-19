@@ -1,4 +1,4 @@
-import {List, SortAt} from "./pageComponent";
+import {List, SortAt, PageSize} from "./pageComponent";
 import Link from 'next/link';
 
 async function getPosts({queryString}) {
@@ -41,13 +41,7 @@ export default async function BoardPage(props){
 
       <Label board={board}/>
       <List posts={posts} board={board}/>
-      <div className="flex justify-end mt-[56.3px]">
-        <select className="border font-['PretendardMedium'] font-[15px]">
-          <option>10개씩 보기</option>
-          <option>20개씩 보기</option>
-          <option>30개씩 보기</option>
-        </select>
-      </div>
+      <PageSize/>
       <div className="flex flex-row justify-center items-center font-['Gsans'] text-[16px] text-gray gap-x-[34px]">
           <button>{'<'}</button>
           <button>{'1'}</button>

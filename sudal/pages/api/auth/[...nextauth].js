@@ -51,58 +51,68 @@ export const authOptions = {
           console.log('비밀번호가 틀림');
           return null;
         }
-      
+
         // 검증이 성공하면 사용자의 정보를 반환
         return { id: user._id, name: user.name, email: user.email };
       }
     })
 
+
   ],
+  
 
-
-  //3. jwt 써놔야 잘됩니다 + jwt 만료일설정
-  session: {
-    strategy: 'jwt',
-    maxAge: 30 * 24 * 60 * 60 //30일
+  jwt : {
+    maxAge: 60*60,
   },
-
-
-
   callbacks: {
-    //4. jwt 만들 때 실행되는 코드 
-    //user변수는 DB의 유저정보담겨있고 token.user에 뭐 저장하면 jwt에 들어갑니다.
-    //요거 각 sns마다 변수가 달라서 확인하고 다르게 설정해줘야함
-    jwt: async ({ token, user, account,profile }) => {
-      if (account && account.provider === "naver") {
-        token.id = profile.response.id; // Naver 고유 아이디
-        token.name = profile.response.name; // Naver 사용자 이름
-        token.picture = profile.response.profile_image; // Naver 사용자 프로필 사진 주소
-        token.email = profile.response.email; // Naver 사용자 이메일
+    // JWT 사용할 때마다 실행됨, return 오른쪽에 뭐 적으면 그걸 JWT로 만들어서 유저에게 보내줌
+    async jwt({ token, account, user,profile }) {
 
-      }else if (account && account.provider === "kakao") {
+      // console.log('naver profile:', profile);
 
-      } else if (account && account.provider === "google") {
+      if (account && account.provider === "naver"){
+        user.id = profile.response.id;
+        user.name = profile.response.name;   
+        user.email = profile.response.email;
 
-      } else if (user) {
-        // 자체 로그인 시스템(CredentialsProvider)에 대한 특별한 처리
-        token.user = {};
-        token.user.name = user.name
-        token.user.email = user.email
+        token.accessToken = account.access_token;
+        token.username = user.name;
+        token.userId = user.id;
       }
-      console.log(token)
+      console.log('account 토큰 :' , account.access_token)
+      console.log('refresh 토큰 :' , account.refresh_token)
+      // console.log('account', account);
+      console.log('user', user);
+      // console.log('token', token);
 
-      // 공통 처리
-      return token;
-    }, 
-    //5. 유저 세션이 조회될 때 마다 실행되는 코드
-    session: async ({ session, token }) => {
-      session.user = token.user; 
+      
+      
+      fetch('http://localhost:3000/api/auth/userInfo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          accessToken: account.access_token, // 이 값이 정의되었는지 확인
+          username: user.name, // 이 값이 정의되었는지 확인
+          userId: user.id, // 이 값이 정의되었는지 확인
+        }),
+      })
+    },
+
+    //getServerSession 실행시 토큰에 있던 어떤 정보 뽑아서 컴포넌트로 보내줄지 결정가능 
+    async session({ session, token }) {
+      session.user.accessToken = token.accessToken;
+      session.user.username = token.username;
+      session.user.userId = token.userId;
+      console.log("session : ",session)
       return session;
-    }, 
+    },
   },
-
-
-  adapter: MongoDBAdapter(connectDB),
-  secret: 'qwer1234'  
+  
+  secret : 'password1234',
 };
-export default NextAuth(authOptions); 
+export default NextAuth(authOptions);
+
+
+

@@ -1,6 +1,9 @@
 'use client'
 import Link from 'next/link'
 
+import { useRouter, useSearchParams, usePathname } from 'next/navigation';
+import { type } from 'os';
+
 function SortAt({board}){
   const sortOptions = (()=>{
     switch(board){
@@ -23,6 +26,36 @@ function SortAt({board}){
     </div>
   )
 }
+
+function PageSize(){
+  const pathname = usePathname();
+  const router = useRouter();
+  const params = useSearchParams();
+  const queryParams = {};
+  
+  params.forEach((value, key) => {
+    queryParams[key] = value;
+  });
+
+  const handleChange = (e) => {
+    queryParams.pageSize = e.target.value;
+    // queryParams의 key-value를 queryString으로 변환
+    const queryString = Object.entries(queryParams)
+      .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+      .join('&');
+    router.push(`${pathname}?${queryString}`);
+  }
+  return(
+    <div className="flex justify-end mt-[56.3px]">
+      <select className="border font-['PretendardMedium'] font-[15px]" onChange={handleChange}>
+        <option value="10">10개씩 보기</option>
+        <option value="20">20개씩 보기</option>
+        <option value="30">30개씩 보기</option>
+      </select>
+    </div>
+  )
+}
+
 
 function List({posts, board}) {
   if(board === 'qna'){
@@ -67,7 +100,7 @@ function List({posts, board}) {
 function Question({title, author, date, nado, view, comment, board}) {
   return(
     <div className="flex flex-row items-center font-['PretendardMedium'] h-10 border-b">
-      <div className="flex flex-row items-start w-1/2">
+      <div className="flex flex-row items-start w-1/2 ml-2">
         <Popular />
         <button className="text-[18px] truncate mr-[3px]">
           {title}
@@ -115,4 +148,4 @@ function Comment({ comment }) {
   );
 }
 
-export { List, SortAt }
+export { List, SortAt, PageSize }
