@@ -13,6 +13,8 @@ export default function CommentPage() {
       <div>
         {/*comment반복해서 생성*/}
         <Comment/>
+        <Comment/>
+        <Comment/>
       </div>
     </div>
   )

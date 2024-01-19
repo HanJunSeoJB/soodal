@@ -17,7 +17,7 @@ export default function Buttons() {
       <div className='flex flex-col'>
         <p className="text-[20px] text-[#444444] font-['PretendardMedium']">지이다 영어교실</p>
         <div className='flex flex-row'>
-          <StarRating rating={2.5}/>
+          <StarRating rating={2.5} starId={'material'}/>
         </div>
       </div>
 

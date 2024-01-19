@@ -3,7 +3,7 @@ import Image from 'next/image'
 import S_blueGood from '/public/images/s_blueGood.png'
 import GoodToggle from "./goodToggle"
 import KebabButton from "./kebabButton"
-import CommentStarRating from "./commentStarRating"
+import CommentStarRating from "./../components/starRating"
 
 export default function Comment() {
   return (
@@ -23,7 +23,7 @@ export default function Comment() {
             <p>|</p>&nbsp;&nbsp;
             <p>날짜</p> 
           </div>
-          <CommentStarRating rating={4}/>
+          <CommentStarRating rating={4} starId={2}/>
           {/*댓글내용*/}
           <div className="flex mt-[33px] mb-[14px] text-[17px] text-[#303030] font-['PretendardMedium']">
             <p>
@@ -50,6 +50,7 @@ export default function Comment() {
           </div>
         </div>
       </div>
+      
       <div className='flex mt-[11px] border-t-[0.5px] border-[#D5D5D5]'></div>
     </div>
   )

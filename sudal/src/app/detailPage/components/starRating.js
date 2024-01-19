@@ -1,7 +1,7 @@
 'use client'
 import {useEffect} from 'react';
 
-export default function StarRating({rating}) {
+export default function StarRating({rating, starId}) {
 
   const ratingMask = 5.0 - rating;
   const starSize = 16, maxStar = 5, gutter = 4;
@@ -9,19 +9,19 @@ export default function StarRating({rating}) {
 
   useEffect(() => {
     // useEffect를 사용하여 컴포넌트가 렌더링된 후에 코드를 실행합니다.
-    const maskElement = document.getElementById('mask');
+    const maskElement = document.getElementById(`mask-${starId}`);
     if (maskElement) {
       // 'maskSize'를 기반으로 'mask' 엘리먼트의 너비를 동적으로 설정합니다.
       maskElement.style.width = `${maskSize}px`;
     }
-  }, [maskSize]);
+  }, [maskSize, starId]);
 
   return (
     <div className='flex flex-row mt-[6px]'>
       {/*별점*/}
       <div className='flex relative items-center'>
         {/*overlay*/}
-        <div id='mask' className='absolute mix-blend-color top-0 right-0 bottom-0 bg-white opacity-100 z-10 opacity: unset'>
+        <div id={`mask-${starId}`} className='absolute mix-blend-color top-0 right-0 bottom-0 bg-white opacity-100 z-10 opacity: unset'>
         </div>
         {/*star*/}
         <div className='w-[16px] h-[15px]'>
