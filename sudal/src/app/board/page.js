@@ -1,6 +1,7 @@
-import {List, SortAt, PageSize} from "./pageComponent";
+import { List, SortAt, PageSize, Pagenation } from "./pageComponent";
 import Link from 'next/link';
 
+// db에서 posts를 가져오는 함수
 async function getPosts({queryString}) {
   const res = await fetch(`http://localhost:3000/api/posts/get?${queryString}`,{
     cache: 'no-cache',
@@ -13,10 +14,11 @@ export default async function BoardPage(props){
   const query = props.searchParams
   const board = query['board'];
 
+  // query의 key-value를 queryString으로 변환
   const queryString = Object.entries(query)
     .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
     .join('&');
-
+  // queryString을 이용해 db에서 posts를 가져옴
   const posts = await getPosts({queryString});
 
   return(
@@ -40,22 +42,15 @@ export default async function BoardPage(props){
       </div>
 
       <Label board={board}/>
-      <List posts={posts} board={board}/>
+      <List posts={posts.posts} board={board}/>
       <PageSize/>
-      <div className="flex flex-row justify-center items-center font-['Gsans'] text-[16px] text-gray gap-x-[34px]">
-          <button>{'<'}</button>
-          <button>{'1'}</button>
-          <button>{'2'}</button>
-          <button>{'3'}</button>
-          <button>{'4'}</button>
-          <button>{'5'}</button>
-          <button>{'>'}</button>
-      </div>
+      <Pagenation total={posts.total}/>
     </div>
   )
 }
 
 function Title({board}){
+  // board에 따라 title과 text가 달라짐
   const pageTitle = (() => {
     switch (board) {
       case 'qna':
@@ -88,6 +83,7 @@ function Title({board}){
 }
 
 function Label({board}){
+  // board에 따라 게시글 목록에서 보여줄 정보 Label이 달라짐
   if(board === 'qna'){
     return(
       <div className="flex flex-row items-center bg-gray-300 font-['PretendardMedium'] mt-3 text-gray-600 h-10 w-auto">
