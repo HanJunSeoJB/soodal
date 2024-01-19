@@ -8,7 +8,7 @@ import CommentStarRating from "./../components/starRating"
 //댓글 (제목, 좋아요 갯수, 작성자, 작설날짜, 별점, 내용, 태그, 좋아요 여부 관련 파라미터 필요 )
 export default function Comment({content}) {
   return (
-    <div className='flex flex-col mt-[35px] ml-[22px] mr-[22px]'>
+    <div className='flex flex-col mt-[35px] ml-[22px]'>
       <div className='flex flex-row justify-between'>
         {/*댓글내용*/}
         <div>
@@ -44,7 +44,7 @@ export default function Comment({content}) {
 
         {/*버튼들*/}
         <div className='flex items-start'>
-          <div className='flex flex-row justify-center'>
+          <div className='flex flex-row justify-center mr-[22px]'>
             <GoodToggle/>
             <div className='w-[10px]'></div>
             <KebabButton/>

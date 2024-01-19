@@ -42,7 +42,7 @@ export default function Pagenation() {
         <button className="rounded-full border border-[#444444] w-auto px-[12px] py-[6px] mr-[10px] text-15 text-[#444444] font-[PretendardMedium]">
           목록으로
         </button>
-        <button className="rounded-full border border-[#444444] w-auto px-[21px] py-[6px] text-15 text-[#444444] font-[PretendardMedium] mr-[22px]">
+        <button className="rounded-full border border-[#444444] w-auto px-[21px] py-[6px] text-15 text-[#444444] font-[PretendardMedium]">
           리뷰 작성하기
         </button>
       </div>
@@ -72,9 +72,7 @@ export default function Pagenation() {
         > &gt; 
         </button>
       </div>
-      <div className="flex mt-[70px]">
-          <WriteForm/>
-      </div>
+      <WriteForm/>
     </div>
   )
 }
