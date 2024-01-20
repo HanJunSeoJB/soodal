@@ -96,13 +96,5 @@ export default function Login() {
         </div>
     )
         
-            )
       }
-    return (
-        <div>
-            <p>로그인 되었습니다.</p>
-            <button onClick={() => signOut()}>로그아웃</button>
-        </div>
-    )
-        
 }

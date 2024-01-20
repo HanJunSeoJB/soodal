@@ -10,6 +10,7 @@ import 양쪽정렬 from '../../../public/images/all.png'
 import { FaChevronDown } from "react-icons/fa";
 import Image from 'next/image'
 import {  Dropdown,  DropdownTrigger,  DropdownMenu,  DropdownSection,  DropdownItem} from "@nextui-org/react";
+import { useRouter } from 'next/navigation'
 
 export default function Posting(board){
 
@@ -20,9 +21,13 @@ export default function Posting(board){
         '20': 'text-xl',
         '24': 'text-2xl',
     }
+    const router = useRouter()
 
-    let [title, setTitle] = useState('안녕하세요')
-    let [content, setContent] = useState('11')
+    let [title, setTitle] = useState('')
+    function handleChange(event) {
+        setTitle(event.target.value); // 입력값으로 title 상태를 업데이트
+    }
+    let [content, setContent] = useState('')
     let [boardName, setBoardName] = useState('free')
     let [currentFont, setCurrentFont] = useState('맑은고딕')
     let [currentFontSize, setCurrentFontSize] = useState('16')
@@ -59,7 +64,11 @@ export default function Posting(board){
                 {/*막대 바 */}
                 <div className="border border-gray mt-5"/>
                 {/*제목 바 */}
-                <input className="mt-5 bg-[#E9E9E9] border border-grey h-11 pl-6" placeholder="제목을 입력해주세요"></input>
+                <input
+                className="mt-5 bg-[#E9E9E9] border border-grey h-11 pl-3"
+                placeholder="제목을 입력해주세요"
+                value={title}
+                onChange={handleChange}></input>
                 {/* 내용 컨테이너 */}
                 <div className="flex flex-col h-4/5 w-full border-2 border-grey mt-4">
                     {/* 버튼 컨테이너 */}
@@ -133,9 +142,10 @@ export default function Posting(board){
                     {/*내용 입력창 */}
                     <form className="h-full">
                         <textarea 
-                            className={`w-full min-h-full font-['${currentFont}'] text-${currentTextAlign} ${fontSizeMap[currentFontSize]} border-none outline-none resize-none}`} 
+                            className={`w-full min-h-full pl-3 font-['${currentFont}'] text-${currentTextAlign} ${fontSizeMap[currentFontSize]} border-none outline-none resize-none}`} 
                             style={{textAlign: currentTextAlign}}
                             placeholder="내용을 입력해주세요"
+                            onChange={(e) => setContent(e.target.value)}
                         ></textarea>
                     </form>
                 </div>
@@ -153,13 +163,15 @@ export default function Posting(board){
                                 content: content,
                                 boardName: boardName,
                             })
-                        }).then((r)=>{
+                        }).then(async (r)=>{
                             if(!r.ok){
                                 return r.json().then((err)=>{
                                     throw new Error(err)
                                 })
                             }
-                            return alert('게시글이 등록되었습니다.')
+                            const response = await r.json();
+                            const postId = response.postId;
+                            router.push(`/detail/${postId}`)
                         }).catch((err)=>{
                             alert(err.message)
                         })
