@@ -2,7 +2,6 @@
 import Link from 'next/link'
 
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
-import { type } from 'os';
 
 function SortAt({board}){
   const sortOptions = (()=>{
@@ -26,36 +25,6 @@ function SortAt({board}){
     </div>
   )
 }
-
-function PageSize(){
-  const pathname = usePathname();
-  const router = useRouter();
-  const params = useSearchParams();
-  const queryParams = {};
-  
-  params.forEach((value, key) => {
-    queryParams[key] = value;
-  });
-
-  const handleChange = (e) => {
-    queryParams.pageSize = e.target.value;
-    // queryParams의 key-value를 queryString으로 변환
-    const queryString = Object.entries(queryParams)
-      .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
-      .join('&');
-    router.push(`${pathname}?${queryString}`);
-  }
-  return(
-    <div className="flex justify-end mt-[56.3px]">
-      <select className="border font-['PretendardMedium'] font-[15px]" onChange={handleChange}>
-        <option value="10">10개씩 보기</option>
-        <option value="20">20개씩 보기</option>
-        <option value="30">30개씩 보기</option>
-      </select>
-    </div>
-  )
-}
-
 
 function List({posts, board}) {
   if(board === 'qna'){
@@ -148,4 +117,95 @@ function Comment({ comment }) {
   );
 }
 
-export { List, SortAt, PageSize }
+function PageSize(){
+  const pathname = usePathname(); // 현재 경로를 불러오기 위한 hook
+  const router = useRouter(); // 페이지 새로고침을 위한 hook
+  const params = useSearchParams(); // url 쿼리를 가져오기 위한 hook
+
+  // url 쿼리를 dict 객체로 변환
+  const queryParams = {};
+  params.forEach((value, key) => {
+    queryParams[key] = value;
+  });
+
+  // 드롭다운 메뉴를 통해 pageSize를 변경하면, url 쿼리를 변경하고 페이지를 새로고침하는 handleChange
+  const handleChange = (e) => {
+    // pageSize 갱신
+    queryParams.pageSize = e.target.value;
+    // queryParams의 key-value를 queryString으로 변환
+    const queryString = Object.entries(queryParams)
+      .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+      .join('&');
+    // 쿼리를 변경하고 페이지를 새로고침
+    router.push(`${pathname}?${queryString}`);
+  }
+  return(
+    <div className="flex justify-end mt-[56.3px]">
+      <select className="border font-['PretendardMedium'] font-[15px]" onChange={handleChange}>
+        <option value="10">10개씩 보기</option>
+        <option value="20">20개씩 보기</option>
+        <option value="30">30개씩 보기</option>
+      </select>
+    </div>
+  )
+}
+
+function Pagenation(){
+  let total=251
+  const PAGE_GROUP_SIZE =10
+  const pathname = usePathname(); // 현재 경로를 불러오기 위한 hook
+  const router = useRouter(); // 페이지 새로고침을 위한 hook
+  const params = useSearchParams(); // url 쿼리를 가져오기 위한 hook
+
+  // url 쿼리를 dict 객체로 변환
+  const queryParams = {};
+  params.forEach((value, key) => {
+    queryParams[key] = value;
+  });
+  const currentPage = parseInt(queryParams.page) || 1; // 현재 페이지
+  const pageSize = parseInt(queryParams.pageSize) || 10; // 페이지당 게시글 수
+
+  // 버튼을 통해 페이지를 변경하면, url 쿼리를 변경하고 페이지를 새로고침하는 changePage
+  const changePage = (newPage) => {
+    // page 갱신
+    queryParams.page = newPage;
+    // queryParams의 key-value를 queryString으로 변환
+    const queryString = Object.entries(queryParams)
+    .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+    .join('&');
+    // 쿼리를 변경하고 페이지를 새로고침
+    router.push(`${pathname}?${queryString}`);
+  };
+
+  // 페이지 버튼을 10개까지만 보여주기 위한 pageNumbers
+  const pageNumbers = [];
+  for (let i = 0; i <= PAGE_GROUP_SIZE-1; i++) {
+    pageNumbers.push(i + 1 + (Math.ceil(currentPage/PAGE_GROUP_SIZE)-1)*PAGE_GROUP_SIZE);
+    if (pageNumbers[i] * pageSize >= total) {
+      break;
+    }
+  }
+  console.log(parseFloat(total)*parseFloat(pageSize));
+
+  return (
+    <div className="flex flex-row justify-center items-center font-['Gsans'] text-[16px] text-gray gap-x-[34px]">
+      {currentPage > PAGE_GROUP_SIZE && (
+        <button onClick={() => changePage(Math.ceil((currentPage-PAGE_GROUP_SIZE)/PAGE_GROUP_SIZE)*PAGE_GROUP_SIZE)}>{'<'}</button>
+      )}
+      {pageNumbers.map(number => (
+        <button
+          key={number}
+          className={currentPage === number ? 'font-bold' : ''}
+          onClick={() => changePage(number)}
+        >
+          {number}
+        </button>
+      ))}
+      {Math.ceil(currentPage/PAGE_GROUP_SIZE)<Math.ceil(total/(PAGE_GROUP_SIZE*pageSize)) && (
+        <button onClick={() => changePage(Math.floor((currentPage + PAGE_GROUP_SIZE)/PAGE_GROUP_SIZE)*PAGE_GROUP_SIZE+1)}>{'>'}</button>
+      )}
+    </div>
+  );
+}
+
+export { List, SortAt, PageSize, Pagenation }

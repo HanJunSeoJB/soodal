@@ -11,9 +11,12 @@ export default function Login() {
     const {data: session,status} = useSession();
 
 
+
     if (status === "loading") {
         return <p>로딩 중...</p>;
       }
+      
+      if(!session) {
       
       if(!session) {
         return(
@@ -84,6 +87,15 @@ export default function Login() {
                 </div>
             </div>
             </div>
+            )
+      }
+    return (
+        <div>
+            <p>로그인 되었습니다.</p>
+            <button onClick={() => signOut()}>로그아웃</button>
+        </div>
+    )
+        
             )
       }
     return (
