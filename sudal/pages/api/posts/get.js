@@ -33,7 +33,8 @@ export default async function handler(req, res) {
           ...post,
           nado: nado,
           comment: comment,
-          date: date
+          date: date,
+          _id: post._id.toString()
         }
       }
 
@@ -46,6 +47,7 @@ export default async function handler(req, res) {
             scrap: scrap,
             comment: comment,
             date: date,
+            _id: post._id.toString()
         };
       }
   }));

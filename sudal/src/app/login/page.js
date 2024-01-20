@@ -11,9 +11,12 @@ export default function Login() {
     const {data: session,status} = useSession();
 
 
+
     if (status === "loading") {
         return <p>로딩 중...</p>;
       }
+      
+      if(!session) {
       
       if(!session) {
         return(
@@ -93,4 +96,5 @@ export default function Login() {
         </div>
     )
         
+      }
 }

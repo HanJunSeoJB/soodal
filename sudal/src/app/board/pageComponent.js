@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 
@@ -38,6 +39,8 @@ function List({posts, board}) {
             nado={post.nado}
             view={post.view}
             comment={post.comment}
+            id={post._id}
+            board = {board}
           />
         ))}
       </div>
@@ -55,13 +58,15 @@ function List({posts, board}) {
           scrap={post.scrap}
           view={post.view}
           comment={post.comment}
+          id={post._id}
+          board = {board}
         />
       ))}
     </div>
   );
 }
 
-function Question({title, author, date, nado, view, comment}) {
+function Question({title, author, date, nado, view, comment, board}) {
   return(
     <div className="flex flex-row items-center font-['PretendardMedium'] h-10 border-b">
       <div className="flex flex-row items-start w-1/2 ml-2">
@@ -79,21 +84,21 @@ function Question({title, author, date, nado, view, comment}) {
   )
 }
 
-function Post({title, author, date, recommend, scrap, view, comment}) {
+function Post({title, author, date, recommend, scrap, view, comment, id, board}) {
   return (
-    <div className="flex flex-row items-center font-['PretendardMedium'] h-10 border-b">
-      <div className="flex flex-row items-start w-1/2 ml-2">
-        <Popular />
-        <button className="text-[18px] truncate mr-[3px]">
-          {title}
-        </button>
-        <Comment comment={comment} />
+    <div>
+      <div className="flex flex-row items-center font-['PretendardMedium'] h-10 border-b">
+        <div className="flex flex-row items-start w-1/2">
+          <Popular />
+          <Link className="text-[18px] truncate mr-[3px]" href={`/detail/${id}?board=${board}`}>{title}</Link>
+          <Comment comment={comment} />
+        </div>
+        <button className="text-center w-28 text-center text-[16px] truncate">{author}</button>
+        <p className="text-center w-32 text-center text-[16px] truncate">{date}</p>
+        <p className="text-center w-20 text-center text-[16px] truncate">{recommend}</p>
+        <p className="text-center w-20 text-center text-[16px] truncate">{scrap}</p>
+        <p className="text-center w-20 text-center text-[16px] truncate">{view}</p>
       </div>
-      <button className="text-center w-28 text-center text-[16px] truncate">{author}</button>
-      <p className="text-center w-32 text-center text-[16px] truncate">{date}</p>
-      <p className="text-center w-20 text-center text-[16px] truncate">{recommend}</p>
-      <p className="text-center w-20 text-center text-[16px] truncate">{scrap}</p>
-      <p className="text-center w-20 text-center text-[16px] truncate">{view}</p>
     </div>
   );
 }

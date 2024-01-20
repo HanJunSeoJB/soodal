@@ -12,7 +12,7 @@ export default function CommentList({isLike, comment, author, createdAt, _id}) {
 
     useEffect(()=>{
         fetch('/api/posts/getLike?id=' + _id).then(r=>r.json()).then((result)=>{
-            setReplyLike(result.length.toString())
+            setReplyLike(result.count.toString())
         })
     },[])
 
@@ -36,7 +36,7 @@ export default function CommentList({isLike, comment, author, createdAt, _id}) {
                         }).then((r)=>{
                             if(r.ok){
                                 fetch('/api/posts/getLike?id=' + _id).then(r=>r.json()).then((result)=>{
-                                    setReplyLike(result.length.toString())
+                                    setReplyLike(result.count.toString())
                                     })
                             }
                         })
