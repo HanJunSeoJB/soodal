@@ -4,18 +4,18 @@ import logoBlue from '../../../public/images/logoBlue.png'
 import logoGoogle from '../../../public/images/logoGoogle.png'
 import logoKakao from '../../../public/images/logoKakao.png'
 import logoNaver from '../../../public/images/logoNaver.png'
-
 import {useSession, signIn, signOut} from 'next-auth/react'
 
 export default function Login() {
 
     const {data: session,status} = useSession();
 
+
     if (status === "loading") {
         return <p>로딩 중...</p>;
       }
-
-    if (!session){
+      
+      if(!session) {
         return(
             // 전체 viewport margin 설정
             <div className='mx-6 mt-8 mb-24'>
@@ -84,13 +84,13 @@ export default function Login() {
                 </div>
             </div>
             </div>
-                    )
-    }else{
-        return(
-            <div>
-                <p>안녕하세요, {session.user.name}님!</p>
-                <button onClick={() => signOut()}>로그아웃</button>
-            </div>
-        )
-    }
+            )
+      }
+    return (
+        <div>
+            <p>로그인 되었습니다.</p>
+            <button onClick={() => signOut()}>로그아웃</button>
+        </div>
+    )
+        
 }
