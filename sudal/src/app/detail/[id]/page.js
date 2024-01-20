@@ -2,8 +2,8 @@ import { ObjectId } from "mongodb"
 import { connectDB } from "../../../../util/database"
 import Comment from "./Comment"
 import CardLayoutLike from "../../layouts/cardLayout_like"
-import Link from "next/link"
 import DetailLayout from "./DetailLayout"
+import Link from "next/link"
 
 export default async function Detail(props) {
     fetch(`http://localhost:3000/api/posts/view?id=${props.params.id}`)
@@ -62,7 +62,10 @@ export default async function Detail(props) {
                     </div>
                     {/* 목록 */}
                     <div className="mt-10 flex justify-center">
-                        <Link href='/board' className="w-fit h-fit border-2 border-gray rounded-full px-9 mt-7">목록</Link>
+                        <Link
+                        href={`/board?board=${boardName}page=1&pageSize=10`}
+                        className="w-fit h-fit border-2 border-gray rounded-full px-9 mt-7"
+                        >목록</Link>
                     </div>
                     {/*긴 막대 바 */}
                     <div className="border border-darkgrey mt-5"/>

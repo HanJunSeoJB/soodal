@@ -36,7 +36,7 @@ export default async function BoardPage(props){
 
       <div className="flex justify-between mt-[13px] w-[964px]">
         <SortAt board={board}/>
-          <Link href='/posting' className="border rounded-full
+          <Link href={`/posting?board=${board}`} className="border rounded-full
             text-gray-500 text-[17px] font-['Gsans']
             h-[23px] px-[28px]">글쓰기</Link>
       </div>
