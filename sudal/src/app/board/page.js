@@ -43,7 +43,7 @@ export default async function BoardPage(props){
 
       <Label board={board}/>
       <List posts={posts.posts} board={board}/>
-      <PageSize/>
+      <PageSize total={posts.total}/>
       <Pagenation total={posts.total}/>
     </div>
   )
