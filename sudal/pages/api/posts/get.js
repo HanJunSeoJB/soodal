@@ -1,3 +1,5 @@
+// /pages/api/posts/get.js
+
 import { connectDB } from "../../../util/database";
 
 export default async function handler(req, res) {
