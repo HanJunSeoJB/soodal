@@ -171,7 +171,7 @@ export default function Posting(board){
                             }
                             const response = await r.json();
                             const postId = response.postId;
-                            router.push(`/detail/${postId}`)
+                            router.push(`/detail/${postId}?board=${boardName}`)
                         }).catch((err)=>{
                             alert(err.message)
                         })
@@ -182,10 +182,6 @@ export default function Posting(board){
                 </button>
                 </div>
             </div>
-            
-           
-           
-            
         </div>
     )
 }
