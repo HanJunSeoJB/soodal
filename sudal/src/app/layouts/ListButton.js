@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 export default function BackButton(boardName){
     const router = useRouter()
     const goBack = () => {
-        router.push(`/board?board=${boardName}page=1&pageSize=10`);
+        router.refresh(`/board?board=${boardName}page=1&pageSize=10`);
     };
     return (
         <button

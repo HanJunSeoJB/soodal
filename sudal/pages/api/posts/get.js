@@ -14,6 +14,10 @@ export default async function handler(req, res) {
       updatedAt : 0,
     }
 
+    const sort={
+      createdAt : -1,
+    }
+
     const db = (await connectDB).db('posts')
     let board = await db.collection('board').findOne({boardName:req.query.board})
 

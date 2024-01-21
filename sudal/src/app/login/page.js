@@ -7,10 +7,7 @@ import logoNaver from '../../../public/images/logoNaver.png'
 import {useSession, signIn, signOut} from 'next-auth/react'
 
 export default function Login() {
-
-    const {data: session,status} = useSession();
-
-      
+    const { data: session, status } = useSession()
 
     return(
         // 전체 viewport margin 설정
@@ -37,6 +34,7 @@ export default function Login() {
                 text-16 text-[#A5A5A5] font-['PretendardLight'] placeholder:text-[#A5A5A5]" 
                 placeholder='비밀번호를 입력해 주세요'/>
 
+
                 {/*개인정보 찾기 버튼*/}
                 <div className='flex flex-row items-center justify-center w-[319px] h-[18px]'>
                     <div className='flex'>
@@ -48,6 +46,25 @@ export default function Login() {
                         <p className="text-[#878787] text-13 ml-auto font-['PretendardLight']">|</p>
                         <a href="#" className="text-[#878787] text-13 ml-auto font-['PretendardLight'] ">비밀번호 찾기</a>
                     </div>
+
+                {/*소셜로그인 버튼*/}
+                <div className='flex flex-col items-center justify-center w-auto h-[130px]'>
+                <button className="flex items-center justify-center w-[378px] h-[38px] rounded-md text-15 text-[#371C1D] font-['PretendardMedium'] bg-[#F9E000]" 
+                onClick={() => {signIn('kakao', { callbackUrl: '/' }); }}>
+                        <Image src={logoKakao} className='w-auto h-auto mr-[8px]'/>
+                        카카오톡으로 로그인
+                    </button>
+                    <button className="flex items-center justify-center w-[378px] h-[38px] mt-auto rounded-md text-15 text-[#FFFFFF] font-['PretendardMedium'] bg-[#03CF5D]" 
+                    onClick={() => { signIn("naver", { callbackUrl: '/' })}}>
+                        <Image src={logoNaver} className='w-auto h-auto mr-[8px]'/>
+                        네이버로 로그인
+                    </button>
+                    <button className="flex items-center justify-center w-[378px] h-[38px] mt-auto rounded-md text-15 text-[#FFFFFF] font-['PretendardMedium'] bg-[#EA4335]"
+                        onClick={() => { signIn("google", { callbackUrl: '/' })}}>
+                        <Image src={logoGoogle} className='w-auto h-auto mr-[8px]'/>
+                        구글로 로그인
+                    </button>   
+
                 </div>
             </div>
 
@@ -83,7 +100,4 @@ export default function Login() {
         </div>
         )
     }
-
-        
-      
 
