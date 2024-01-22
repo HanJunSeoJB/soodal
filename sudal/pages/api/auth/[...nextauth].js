@@ -69,12 +69,12 @@ export const authOptions = {
         user.email = profile.response.email;
 
         token.accessToken = account.access_token;
+        token.refreshToken = account.refresh_token;
         token.username = user.name;
         token.userId = user.id;
             
         }
       }
-      return token;
             
         }
       }
