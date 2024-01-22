@@ -4,13 +4,27 @@ import logoBlue from '../../../public/images/logoBlue.png'
 import logoGoogle from '../../../public/images/logoGoogle.png'
 import logoKakao from '../../../public/images/logoKakao.png'
 import logoNaver from '../../../public/images/logoNaver.png'
-
-import {useSession, signIn, signOut} from 'next-auth/react'
+import { useEffect } from 'react'
+import {useSession, signIn, signOut, getSession} from 'next-auth/react'
 
 export default function Login() {
 
     const {data: session,status} = useSession();
+    useEffect(() => {
+        console.log(`Session status: ${status}`);
+      }, [status]);
 
+      const handleSignIn = async (provider) => {
+        const result = await signIn(provider, { redirect: false });
+      
+        if (!result.error) {
+          // signIn 성공 후, 세션 정보를 갱신합니다.
+          const session = await getSession();
+          console.log(session); // 갱신된 세션 정보를 확인할 수 있습니다.
+        } else {
+          console.error('Login failed: ', result.error);
+        }
+      };
     if (status === "loading") {
         return <p>로딩 중...</p>;
       }
@@ -63,7 +77,7 @@ export default function Login() {
                         카카오톡으로 로그인
                     </button>
                     <button className="flex items-center justify-center w-[378px] h-[38px] mt-auto rounded-md text-15 text-[#FFFFFF] font-['PretendardMedium'] bg-[#03CF5D]" 
-                    onClick={() => { signIn("naver")}}>
+                    onClick={() => handleSignIn('naver')}>
                         <Image src={logoNaver} className='w-auto h-auto mr-[8px]'/>
                         네이버로 로그인
                     </button>
@@ -94,3 +108,4 @@ export default function Login() {
         )
     }
 }
+  

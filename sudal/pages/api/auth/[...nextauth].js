@@ -76,14 +76,13 @@ export const authOptions = {
         user.email = profile.response.email;
 
         token.accessToken = account.access_token;
+        token.refreshToken = account.refresh_token;
         token.username = user.name;
         token.userId = user.id;
       }
-      console.log('account 토큰 :' , account.access_token)
-      console.log('refresh 토큰 :' , account.refresh_token)
-      // console.log('account', account);
+      console.log('account 토큰 :' , token.accessToken)
+      console.log('refresh 토큰 :' , token.refreshToken)
       console.log('user', user);
-      // console.log('token', token);
 
       
       
@@ -98,6 +97,7 @@ export const authOptions = {
           userId: user.id, // 이 값이 정의되었는지 확인
         }),
       })
+      return token;
     },
 
     //getServerSession 실행시 토큰에 있던 어떤 정보 뽑아서 컴포넌트로 보내줄지 결정가능 
