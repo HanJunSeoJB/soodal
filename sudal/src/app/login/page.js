@@ -4,32 +4,12 @@ import logoBlue from '../../../public/images/logoBlue.png'
 import logoGoogle from '../../../public/images/logoGoogle.png'
 import logoKakao from '../../../public/images/logoKakao.png'
 import logoNaver from '../../../public/images/logoNaver.png'
-import { useEffect } from 'react'
-import {useSession, signIn, signOut, getSession} from 'next-auth/react'
+import {useSession, signIn, signOut} from 'next-auth/react'
 
 export default function Login() {
+    const { data: session, status } = useSession()
 
-    const {data: session,status} = useSession();
-    useEffect(() => {
-        console.log(`Session status: ${status}`);
-      }, [status]);
-
-      const handleSignIn = async (provider) => {
-        const result = await signIn(provider, { redirect: false });
-      
-        if (!result.error) {
-          // signIn 성공 후, 세션 정보를 갱신합니다.
-          const session = await getSession();
-          console.log(session); // 갱신된 세션 정보를 확인할 수 있습니다.
-        } else {
-          console.error('Login failed: ', result.error);
-        }
-      };
-    if (status === "loading") {
-        return <p>로딩 중...</p>;
-      }
-
-    if (!session){
+      if(!session) {
         return(
             // 전체 viewport margin 설정
             <div className='mx-6 mt-8 mb-24'>
@@ -72,16 +52,17 @@ export default function Login() {
                 {/*소셜로그인 버튼*/}
                 <div className='flex flex-col items-center justify-center w-auto h-[130px]'>
                 <button className="flex items-center justify-center w-[378px] h-[38px] rounded-md text-15 text-[#371C1D] font-['PretendardMedium'] bg-[#F9E000]" 
-                onClick={() => { console.log('Signing in with Kakao'); signIn('kakao'); }}>
+                onClick={() => {signIn('kakao', { callbackUrl: '/' }); }}>
                         <Image src={logoKakao} className='w-auto h-auto mr-[8px]'/>
                         카카오톡으로 로그인
                     </button>
                     <button className="flex items-center justify-center w-[378px] h-[38px] mt-auto rounded-md text-15 text-[#FFFFFF] font-['PretendardMedium'] bg-[#03CF5D]" 
-                    onClick={() => handleSignIn('naver')}>
+                    onClick={() => { signIn("naver", { callbackUrl: '/' })}}>
                         <Image src={logoNaver} className='w-auto h-auto mr-[8px]'/>
                         네이버로 로그인
                     </button>
-                    <button className="flex items-center justify-center w-[378px] h-[38px] mt-auto rounded-md text-15 text-[#FFFFFF] font-['PretendardMedium'] bg-[#EA4335]">
+                    <button className="flex items-center justify-center w-[378px] h-[38px] mt-auto rounded-md text-15 text-[#FFFFFF] font-['PretendardMedium'] bg-[#EA4335]"
+                        onClick={() => { signIn("google", { callbackUrl: '/' })}}>
                         <Image src={logoGoogle} className='w-auto h-auto mr-[8px]'/>
                         구글로 로그인
                     </button>   
@@ -98,14 +79,13 @@ export default function Login() {
                 </div>
             </div>
             </div>
-                    )
-    }else{
-        return(
-            <div>
-                <p>안녕하세요, {session.user.name}님!</p>
-                <button onClick={() => signOut()}>로그아웃</button>
-            </div>
-        )
-    }
-}
-  
+            )
+      }
+    return (
+        <div>
+            <p>로그인 되었습니다.</p>
+            <button onClick={() => signOut()}>로그아웃</button>
+        </div>
+    )
+        
+      }

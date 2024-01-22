@@ -12,6 +12,10 @@ export default async function handler(req, res) {
       updatedAt : 0,
     }
 
+    const sort={
+      createdAt : -1,
+    }
+
     const db = (await connectDB).db('posts')
     let board = await db.collection('board').findOne({boardName:req.query.board})
 
@@ -20,6 +24,7 @@ export default async function handler(req, res) {
     }
 
     let result = await db.collection('post').find({boardId:board._id}, {projection}).skip(skip).limit(limit).sort({createdAt : -1}).toArray();
+    let total = await db.collection('post').countDocuments({boardId:board._id})
 
     const posts = await Promise.all(result.map(async (post) => {
       const comment = await db.collection('post').countDocuments({postId: post._id});
@@ -50,7 +55,8 @@ export default async function handler(req, res) {
         };
       }
   }));
-  return res.status(200).json(posts);
+  
+  res.status(200).json({posts, total});
 }
 
 function formatDate(dateString) {

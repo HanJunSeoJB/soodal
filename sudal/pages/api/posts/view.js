@@ -8,9 +8,19 @@ export default async function handler(req, res) {
     
     const db = (await connectDB).db('posts');
     const postId = req.query.id;
+    let query;
+
+    // postId가 유효한 ObjectId 형식인 경우
+    if (ObjectId.isValid(postId)) {
+        // ObjectId로 변환하여 사용
+        query = { _id: new ObjectId(postId) };
+    } else {
+        // 문자열로 처리
+        query = { _id: postId };
+    }
 
     // 해당 게시글이 존재하는지 확인합니다.
-    const postExists = await db.collection('post').findOne({ _id: new ObjectId(postId) });
+    const postExists = await db.collection('post').findOne(query);
 
     if (postExists) {
         // 게시글이 존재하면 view 값을 업데이트합니다.

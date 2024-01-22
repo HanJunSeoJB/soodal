@@ -8,13 +8,18 @@ import insta from '../../public/images/footerInstagram.png'
 import Link from 'next/link'
 import DropdownMenu from './layouts/dropdown'
 import FloatingButton from './layouts/floatingbutton'
+import { authOptions } from "../../pages/api/auth/[...nextauth]"
+import { getServerSession } from "next-auth"
+import SelectIsLogin from './layouts/SelectIsLoginLayout'
 
 export const metadata = {
   title: '수집의달인',
   description: '수집의달인',
 }
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  let session = await getServerSession(authOptions)
+
   return (
     <html lang="ko">
       <body>
@@ -25,19 +30,11 @@ export default function RootLayout({ children }) {
             <div className='w-auto h-140'>
               {/*로그인 바 */}
               <div className='h-40 bg-lightgrey flex flex-row justify-center mb-5 border-2'>
-                <div className='w-4/6'>
+                <div className='w-3/6'>
                   <p className="text-blue font-['Gsans'] text-sm mt-2">NOTICE</p>
                   {/*여기에 공지사항 세부내용 입력 */}
                   </div>
-                  <div className='w-auto h-full bg-darkblue p-2 flex flex-row items-center justify-center'>
-                    <Link href='/login' className="text-white text-sm font-['GSanslight']">로그인</Link>
-                    {/* 막대 바 */}
-                    <div className="border-0.25 h-3.5 ml-3 border-white "></div>
-                    <Link href='/signup' className="text-white text-sm font-['GSanslight'] ml-3">회원가입</Link>
-                    {/* 막대 바 */}
-                    <div className="border-0.25 h-3.5 ml-3 border-white "></div>
-                    <Link href='/center' className="text-white text-sm font-['GSanslight'] ml-3">고객센터</Link>
-                  </div>
+                  <SelectIsLogin session={session}/>
               </div>
               {/*네비게이션 바 */}
               <div id='header' className='w-full h-auto flex items-center flex-col shadow-md pb-4'>
