@@ -59,7 +59,7 @@ export default function StarClick() {
         </button>
       </div>
       {/*평점*/}
-      <div className="flex w-full ml-[4px] text-[13px] text-[#B2B2B2] font-['PretendardLight']">
+      <div className="flex ml-[4px] text-[13px] text-[#B2B2B2] font-['PretendardLight']">
         <p>{rating} / 5</p>
       </div>
     </div>

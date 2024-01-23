@@ -1,7 +1,16 @@
 'use client'
+import React, {useState} from 'react';
 import StarClick from './starClick'
+import SelectTag from "./selectTag"
+import Portal from "./../../modal/modalPortal"
 
 export default function WriteForm() {
+  const [showModal, setShowModal] = useState(false);
+
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
+
   return (
     <div className="flex flex-col w-auto mt-[70px]">
       <div className='border border-[#D5D5D5] rounded-[14px] w-full p-[22px] ml-[22px]'>
@@ -19,11 +28,18 @@ export default function WriteForm() {
         text-16 text-[#303030] font-['PretendardLight'] placeholder:text-[#989898]"
         placeholder='리뷰를 남겨주세요'/>
         <div className='flex mt-[12px] justify-end'>
-          <button type='submit' className="rounded-full border border-[#D5D5D5] w-auto px-[20px] py-[5px] text-[15px] text-[#444444] font-[PretendardMedium]">
+          <button 
+          className="rounded-full border border-[#D5D5D5] w-auto px-[20px] py-[5px] text-[15px] text-[#444444] font-[PretendardMedium]"
+          onClick={toggleModal}>
             다음
           </button>
         </div>
       </div>
+      {showModal && (
+        <Portal>
+          <SelectTag clickModal={toggleModal}/>
+        </Portal>
+      )}
     </div>
   )
 }

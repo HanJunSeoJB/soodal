@@ -45,6 +45,7 @@ export default function SelectHighLayout({children}){
         </div>
       </div>
       {children}
+      <div id='modal-root'></div>
     </div>
   )
 }

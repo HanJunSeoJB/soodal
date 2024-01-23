@@ -1,5 +1,5 @@
 'use client'
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Comment from "./comment"
 import WriteForm from "./writeForm"
 
@@ -17,12 +17,12 @@ export default function Pagenation() {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const totalPages = Math.ceil(comments.length / commentsPerPage);
-
   // 현재 페이지에 표시할 댓글들 계산
   const indexOfLastComment = currentPage * commentsPerPage;
   const indexOfFirstComment = indexOfLastComment - commentsPerPage;
   const currentComments = comments.slice(indexOfFirstComment, indexOfLastComment);
+
+  const totalPages = Math.ceil(comments.length / commentsPerPage);
 
   // 페이지 변경 함수
   const handlePageChange = (pageNumber) => {
@@ -30,7 +30,7 @@ export default function Pagenation() {
   };
 
   return (
-    <div className='flex flex-col'>
+    <div className='relative flex flex-col'>
       {/*댓글부분*/}
       <div>
         {currentComments.map((comment) => (
