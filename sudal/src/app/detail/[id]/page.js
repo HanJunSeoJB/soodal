@@ -48,7 +48,7 @@ export default async function Detail(props) {
                             <div className="border-0.25 h-3.5 ml-3 border-darkgrey"></div>
                             <p className="ml-3">조회 {result.view}</p>
                         </div>
-                        <ListButton/>
+                        <ListButton _id={props.params.id} board={props.searchParams.board}/>
                     </div>
                         
                     {/*긴 막대 바 */}

@@ -7,7 +7,6 @@ export default async function handler(req, res) {
     if(req.method != 'DELETE') { return res.status(400).json('잘못된 접근입니다.') }
     console.log(req.body);
     let column = req.query.column
-    console.log(column)
 
     // 유저기능 구현 후 추가
     // let sesison = await getServerSession(req, res, authOptions)
