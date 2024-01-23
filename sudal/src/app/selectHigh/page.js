@@ -1,13 +1,13 @@
 'use client'
-import English from "./english";
-import EnglishOne from "./englishOne";
-import EnglishTwo from "./englishTwo";
-import PracticalEng from "./practicalEng";
-import ReadWriteEng from "./readWriteEng";
-import CultureEng from "./cultureEng";
-import AdvEng from "./advEng";
-import CareerEng from "./careerEng";
-import AdvReadEng from "./advReadEng";
+import English from "./subject/english";
+import EnglishOne from "./subject/englishOne";
+import EnglishTwo from "./subject/englishTwo";
+import PracticalEng from "./subject/practicalEng";
+import ReadWriteEng from "./subject/readWriteEng";
+import CultureEng from "./subject/cultureEng";
+import AdvEng from "./subject/advEng";
+import CareerEng from "./subject/careerEng";
+import AdvReadEng from "./subject/advReadEng";
 
 export default function SelectHigh() {
   return (
