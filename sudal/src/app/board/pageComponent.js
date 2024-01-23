@@ -61,6 +61,7 @@ function List({posts, board}) {
             nado={post.nado}
             view={post.view}
             comment={post.comment}
+            board = {board}
           />
         ))}
       </div>
@@ -79,18 +80,19 @@ function List({posts, board}) {
           scrap={post.scrap}
           view={post.view}
           comment={post.comment}
+          board = {board}
         />
       ))}
     </div>
   );
 }
 
-function Question({id, title, author, date, nado, view, comment}) {
+function Question({id, title, author, date, nado, view, comment, board}) {
   return(
     <div className="flex flex-row items-center font-['PretendardMedium'] h-10 border-b">
       <div className="flex flex-row items-start w-1/2 ml-2">
         <Popular />
-        <Link prefetch={false} className="text-[18px] truncate mr-[3px]" href={`/detail/${id}`}>{title}</Link>
+        <Link prefetch={false} className="text-[18px] truncate mr-[3px]" href={`/detail/${id}?board=${board}`}>{title}</Link>
         <Comment comment={comment} />
       </div>
       <button className="text-center w-28">{author}</button>
@@ -101,12 +103,12 @@ function Question({id, title, author, date, nado, view, comment}) {
   )
 }
 
-function Post({id, title, author, date, recommend, scrap, view, comment}) {
+function Post({id, title, author, date, recommend, scrap, view, comment, board}) {
   return (
     <div className="flex flex-row items-center font-['PretendardMedium'] h-10 border-b">
       <div className="flex flex-row items-start w-1/2 ml-2">
         <Popular />
-        <Link prefetch={false} className="text-[18px] truncate mr-[3px]" href={`/detail/${id}`}>{title}</Link>
+        <Link prefetch={false} className="text-[18px] truncate mr-[3px]" href={`/detail/${id}?board=${board}`}>{title}</Link>
         <Comment comment={comment} />
       </div>
       <button className="text-center w-28 text-center text-[16px] truncate">{author}</button>
