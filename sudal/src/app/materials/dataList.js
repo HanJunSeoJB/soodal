@@ -23,7 +23,7 @@ export default function DataList() {
             <p className="text-[15px]">지이다 영어교실</p>
             <div className="flex items-center">
               {/* 데이터베이스에서 가져온 제목 */}
-              <p className="text-[18px] font-bold mr-[11.9px]">[2015개정] 내신 1등급 도전 단계별 변형문제</p>
+              <a href='/detailPage' className="text-[18px] font-bold mr-[11.9px]">[2015개정] 내신 1등급 도전 단계별 변형문제</a>
               <Image src="/ratingStar.png" width={16.36} height={15.56}/>
               {/* 데이터베이스에서 가져온 평점 */}
               <p className="ml-[2.7px] text-[13px] text-gray-400">4.0 (20)</p>

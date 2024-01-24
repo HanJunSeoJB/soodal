@@ -1,3 +1,5 @@
+// /util/database.js
+
 import { MongoClient } from 'mongodb'
 const url = 'mongodb+srv://' + process.env.DB_USERNAME + ':' + process.env.DB_PASSWORD + '@cluster0.d3q0orm.mongodb.net/'
 let connectDB
