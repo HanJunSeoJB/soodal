@@ -15,14 +15,17 @@ export const authOptions = {
     KakaoProvider({
       clientId: process.env.KAKAO_CLIENT_ID,
       clientSecret: process.env.KAKAO_SECRET,
+      allowDangerousEmailAccountLinking: true,
     }),
     NaverProvider({
         clientId: process.env.NAVER_CLIENT_ID,
         clientSecret: process.env.NAVER_SECRET,
+        allowDangerousEmailAccountLinking: true,
     }),
     GoogleProvider({
         clientId: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_SECRET,
+        allowDangerousEmailAccountLinking: true,
     }),
 
     CredentialsProvider({
@@ -81,8 +84,7 @@ export const authOptions = {
       return token;
     },
   },
-
-  secret : 'password1234',
+  secret: process.env.SECRET,
   adapter : MongoDBAdapter(connectDB)
 };
 export default NextAuth(authOptions);
