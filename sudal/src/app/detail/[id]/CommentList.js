@@ -14,6 +14,7 @@ export default function CommentList({isLike, comment, author, createdAt, _id}) {
     const [reply, setReply] = useState('');
     let [replyDatas, setDatas] = useState([]);
     let [currentLike, setLike] = useState('0');
+
     useEffect(()=>{
         fetch('/api/posts/getReply?id=' + _id).then(r=>r.json()).then((result)=>{
             setDatas(result)
@@ -26,6 +27,16 @@ export default function CommentList({isLike, comment, author, createdAt, _id}) {
     const toggleReplyInput = () => {
         setShowReplyInput(!showReplyInput);
     };
+
+    function handleAction(key) {
+        if(key =='delete')
+            fetch('/api/posts/delete?column=comment', {method : 'DELETE', body : _id})
+            .then((r)=>{
+                if(r.ok){
+                    window.location.reload()
+                }
+            })
+    }
 
     return (
         <div className='flex flex-col mt-8'>
@@ -62,9 +73,10 @@ export default function CommentList({isLike, comment, author, createdAt, _id}) {
                             </button>
                             </DropdownTrigger>
                             <DropdownMenu aria-label="Static Actions" className="border border-black cursor-pointer bg-white"
-                            onAction={(key) => setCurrentFont(key)}
+                            onAction={(key) => handleAction(key)}
                             >
-                                <DropdownItem key="신고하기" className="font-['맑은 고딕'] border-b border-black">신고하기</DropdownItem>
+                                <DropdownItem key="report" className="font-['맑은 고딕'] border-b border-black">신고하기</DropdownItem>
+                                <DropdownItem key="delete" className="font-['맑은 고딕'] border-b border-black">삭제하기</DropdownItem>
                             </DropdownMenu>
                         </Dropdown>
                 </div>
@@ -82,7 +94,7 @@ export default function CommentList({isLike, comment, author, createdAt, _id}) {
                         <button className="w-1/12 h-fit border-2 border-gray py-8 mx-6" onClick={()=>{ fetch('/api/posts/reply',
                         { 
                             method : 'POST',
-                            body : JSON.stringify({comment: reply, postId: _id}) 
+                            body : JSON.stringify({comment: reply, postId: _id, author: author}) 
                         }).then((r)=>{
                             if(r.ok){
                                 setReply('')

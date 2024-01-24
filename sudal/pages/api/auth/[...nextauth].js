@@ -56,6 +56,34 @@ export const authOptions = {
       }
     })
   ],
+
+
+  callbacks: {
+  
+  
+    async jwt({ token, account, user,profile }) {
+
+      if (account){
+        if(account.provider === "naver"){
+      if (account){
+        if(account.provider === "naver"){
+        user.id = profile.response.id;
+        user.name = profile.response.name;   
+        user.email = profile.response.email;
+
+        token.accessToken = account.access_token;
+        token.refreshToken = account.refresh_token;
+        token.username = user.name;
+        token.userId = user.id;
+            
+        }
+      }
+            
+        }
+      }
+      return token;
+    },
+  },
   secret: process.env.SECRET,
   adapter : MongoDBAdapter(connectDB)
 };

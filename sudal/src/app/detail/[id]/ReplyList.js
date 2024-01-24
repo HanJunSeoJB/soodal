@@ -6,6 +6,7 @@ import { BiLike } from "react-icons/bi";
 import { RiMore2Line } from "react-icons/ri";
 import { useState, useEffect } from 'react';
 import {  Dropdown,  DropdownTrigger,  DropdownMenu,  DropdownSection,  DropdownItem} from "@nextui-org/react";
+import ListButton from "../../layouts/ListButton"
 
 export default function CommentList({isLike, comment, author, createdAt, _id}) {
     let [currentReplyLike, setReplyLike] = useState('0');
@@ -15,6 +16,16 @@ export default function CommentList({isLike, comment, author, createdAt, _id}) {
             setReplyLike(result.count.toString())
         })
     },[])
+
+    function handleAction(key) {
+        if(key =='delete')
+            fetch('/api/posts/delete?column=reply', {method : 'DELETE', body : _id})
+            .then((r)=>{
+                if(r.ok){
+                    window.location.reload()
+                }
+            })
+    }
 
     return (
         <div className='w-full flex flex-row items-center'>
@@ -51,9 +62,10 @@ export default function CommentList({isLike, comment, author, createdAt, _id}) {
                                 </button>
                                 </DropdownTrigger>
                                 <DropdownMenu aria-label="Static Actions" className="border border-black cursor-pointer bg-white"
-                                onAction={(key) => setCurrentFont(key)}
+                                onAction={(key) => handleAction(key)}
                                 >
-                                    <DropdownItem key="신고하기" className="font-['맑은 고딕'] border-b border-black">신고하기</DropdownItem>
+                                    <DropdownItem key="report" className="font-['맑은 고딕'] border-b border-black">신고하기</DropdownItem>
+                                    <DropdownItem key="delete" className="font-['맑은 고딕'] border-b border-black">삭제하기</DropdownItem>
                                 </DropdownMenu>
                             </Dropdown>
                     </div>
