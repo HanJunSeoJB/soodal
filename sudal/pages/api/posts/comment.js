@@ -14,7 +14,6 @@ export default async function handler(req, res) {
     data.createdAt = new Date()
     
     // 기본값 설정
-    data.like = 0
     data.isBest = false
     
     // 게시글 작성
