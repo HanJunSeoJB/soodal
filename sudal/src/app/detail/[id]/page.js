@@ -8,7 +8,8 @@ import ListButton from "../../layouts/ListButton"
 
 
 export default async function Detail(props) {
-    fetch(`http://localhost:3000/api/posts/view?id=${props.params.id}`)
+    fetch(`http://localhost:3000/api/posts/view?id=${props.params.id}`, 
+    {cache: 'no-cache'})
 
     const db = (await connectDB).db('posts')
     const result = await db.collection('post').findOne({_id: new ObjectId(props.params.id)})

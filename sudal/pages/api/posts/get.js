@@ -31,6 +31,10 @@ export default async function handler(req, res) {
     const posts = await Promise.all(result.map(async (post) => {
       const comment = await db.collection('post').countDocuments({postId: post._id});
       const date = formatDate(post.createdAt)
+      let like = await db.collection('like').countDocuments({ 
+        parent: post._id,
+        type: "like"
+      });
       delete post.createdAt
       
       if(req.query.board == 'qna'){
@@ -49,7 +53,7 @@ export default async function handler(req, res) {
         const scrap = await db.collection('scrabPost').countDocuments({postId: post._id, type:'scrap'});
         return {
             ...post,
-            recommend: recommend,
+            recommend: like,
             scrap: scrap,
             comment: comment,
             date: date,

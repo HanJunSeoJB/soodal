@@ -8,6 +8,7 @@ function SortAt({board}){
   const router = useRouter(); // 페이지 새로고침을 위한 hook
   const params = useSearchParams(); // url 쿼리를 가져오기 위한 hook
 
+
   const queryParams = {};
   params.forEach((value, key) => {
     queryParams[key] = value;
@@ -48,6 +49,7 @@ function SortAt({board}){
 }
 
 function List({posts, board}) {
+
   if(board === 'qna'){
     return (
       <div>
