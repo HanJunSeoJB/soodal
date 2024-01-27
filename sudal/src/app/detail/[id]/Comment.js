@@ -6,7 +6,7 @@ export default function Comment(props) {
     let [comment, setComment] = useState('')
     let [data, setData] = useState([])
     useEffect(()=>{
-        fetch('/api/posts/getComment?id=' + props._id).then(r=>r.json()).then((result)=>{
+        fetch('/api/posts/getComment?id=' + props._id,{cache: 'no-cache'}).then(r=>r.json()).then((result)=>{
         setData(result)
         })
     },[])
