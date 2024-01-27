@@ -40,3 +40,8 @@
   font-family: 'HY견명조';
   src: url('/fonts/H2MJRE.ttf') format("truetype");
 }
+
+.active button {
+  background-color: #005CA6;
+  color: white;
+}
