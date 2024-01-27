@@ -8,22 +8,23 @@ import ListButton from "../../layouts/ListButton"
 
 
 export default async function Detail(props) {
-    fetch(`http://localhost:3000/api/posts/view?id=${props.params.id}`, 
-    {cache: 'no-cache'})
-
-    const db = (await connectDB).db('posts')
-    const result = await db.collection('post').findOne({_id: new ObjectId(props.params.id)})
+    fetch('http://localhost:3000/api/posts/getDetail?id='+props.params.id)
+    .then(res => res.json().then(data => {
+        let dateObj = new Date(data.updatedAt)
+        let year = dateObj.getFullYear();
+        let month = dateObj.getMonth()+1; // 월은 0부터 시작하므로 1을 더해줍니다.
+        let day = dateObj.getDate();
+        let title = data.title;
+        let author = data.author;
+        let view = data.view;
+    })
+    )
     const boardNames = {
         free: '자유게시판',
         qna: 'Q&A',
         info: '정보게시판'
     };
     let boardName = boardNames[props.searchParams.board];
-    
-    const dateObj = new Date(result.updatedAt)
-    const year = dateObj.getFullYear();
-    const month = dateObj.getMonth()+1; // 월은 0부터 시작하므로 1을 더해줍니다.
-    const day = dateObj.getDate();
     
     return (
         <div className="flex flex-row">
@@ -37,11 +38,11 @@ export default async function Detail(props) {
                         <h1 className="font-['Gsans'] text-base">{boardName}</h1>
                         <p className="font-['Gsanslight text-xs']">Home {">"} {boardName}</p>
                     </div>
-                    <p className="mt-1 font-['GsansBold'] text-2xl">{result.title}</p>
+                    <p className="mt-1 font-['GsansBold'] text-2xl">{title}</p>
                     {/* 세부정보 */}
                     <div className="flex justify-between">
                         <div className="mt-2 flex flex-row text-grey items-center">
-                            <p>{result.author}</p>
+                            <p>{author}</p>
                             {/* 막대 바 */}
                             <div className="border-0.25 h-3.5 ml-3 border-darkgrey"></div>
                             <p className="ml-3">{year}. {month}. {day}</p>
