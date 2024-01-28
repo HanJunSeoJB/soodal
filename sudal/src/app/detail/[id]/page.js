@@ -7,8 +7,18 @@ import Link from "next/link"
 import ListButton from "../../layouts/ListButton"
 
 
+async function getPost({id}){
+  const res = await fetch(`http://localhost:3000/api/posts/view?id=${id}`,{
+      cache: 'no-cache',
+  });
+  const data = res.json()
+  return data
+}
+
 export default async function Detail(props) {
-    fetch(`http://localhost:3000/api/posts/view?id=${props.params.id}`)
+
+  const post = await getPost({id: props.params.id});
+  console.log(post)
 
     const db = (await connectDB).db('posts')
     const result = await db.collection('post').findOne({_id: new ObjectId(props.params.id)})
