@@ -3,7 +3,8 @@ import {useEffect, useState} from 'react';
 
 export default function StarClick() {
 
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(1);
+  const [prevRating, setPrevRating] = useState(0);
   const ratingMask = 5 - rating;
   const starSize = 16, maxStar = 5, gutter = 4;
   const maskSize = starSize * ratingMask + (Math.floor(ratingMask) * gutter);
@@ -18,6 +19,7 @@ export default function StarClick() {
   }, [maskSize]);
 
   const handleStarClick = (newRating) => {
+    setPrevRating(rating);
     setRating(newRating);
   };
 
@@ -32,27 +34,27 @@ export default function StarClick() {
         >
         </div>
         {/*star*/}
-        <button className='w-[16px] h-[15px]' onClick={() => handleStarClick(1)}>
+        <button className='w-[16px] h-[15px]' onClick={() => handleStarClick(1)} onMouseEnter={() => handleStarClick(1)} onMouseLeave={() => handleStarClick(prevRating)}>
           <svg xmlns="http://www.w3.org/2000/svg" width="16.359" height="15.558" viewBox="0 0 16.359 15.558">
             <path id="패스_937" data-name="패스 937" d="M8.179,0,5.651,5.122,0,5.943,4.089,9.93l-.965,5.629L8.179,12.9l5.055,2.658L12.269,9.93l4.09-3.987-5.652-.821L8.179,0Z" transform="translate(0 0)" fill="#fc0"/>
           </svg>
         </button>
-        <button className='w-[16px] h-[15px] ml-[4px]' onClick={() => handleStarClick(2)}>
+        <button className='w-[16px] h-[15px] ml-[4px]' onClick={() => handleStarClick(2)} onMouseEnter={() => handleStarClick(2)} onMouseLeave={() => handleStarClick(prevRating)}>
           <svg xmlns="http://www.w3.org/2000/svg" width="16.359" height="15.558" viewBox="0 0 16.359 15.558">
             <path id="패스_937" data-name="패스 937" d="M8.179,0,5.651,5.122,0,5.943,4.089,9.93l-.965,5.629L8.179,12.9l5.055,2.658L12.269,9.93l4.09-3.987-5.652-.821L8.179,0Z" transform="translate(0 0)" fill="#fc0"/>
           </svg>
         </button>
-        <button className='w-[16px] h-[15px] ml-[4px]' onClick={() => handleStarClick(3)}>
+        <button className='w-[16px] h-[15px] ml-[4px]' onClick={() => handleStarClick(3)} onMouseEnter={() => handleStarClick(3)} onMouseLeave={() => handleStarClick(prevRating)}>
           <svg xmlns="http://www.w3.org/2000/svg" width="16.359" height="15.558" viewBox="0 0 16.359 15.558">
             <path id="패스_937" data-name="패스 937" d="M8.179,0,5.651,5.122,0,5.943,4.089,9.93l-.965,5.629L8.179,12.9l5.055,2.658L12.269,9.93l4.09-3.987-5.652-.821L8.179,0Z" transform="translate(0 0)" fill="#fc0"/>
           </svg>
         </button>
-        <button className='w-[16px] h-[15px] ml-[4px]' onClick={() => handleStarClick(4)}>
+        <button className='w-[16px] h-[15px] ml-[4px]' onClick={() => handleStarClick(4)} onMouseEnter={() => handleStarClick(4)} onMouseLeave={() => handleStarClick(prevRating)}>
           <svg xmlns="http://www.w3.org/2000/svg" width="16.359" height="15.558" viewBox="0 0 16.359 15.558">
             <path id="패스_937" data-name="패스 937" d="M8.179,0,5.651,5.122,0,5.943,4.089,9.93l-.965,5.629L8.179,12.9l5.055,2.658L12.269,9.93l4.09-3.987-5.652-.821L8.179,0Z" transform="translate(0 0)" fill="#fc0"/>
           </svg>
         </button>
-        <button className='w-[16px] h-[15px] ml-[4px]' onClick={() => handleStarClick(5)}>
+        <button className='w-[16px] h-[15px] ml-[4px]' onClick={() => handleStarClick(5)} onMouseEnter={() => handleStarClick(5)} onMouseLeave={() => handleStarClick(prevRating)}>
           <svg xmlns="http://www.w3.org/2000/svg" width="16.359" height="15.558" viewBox="0 0 16.359 15.558">
             <path id="패스_937" data-name="패스 937" d="M8.179,0,5.651,5.122,0,5.943,4.089,9.93l-.965,5.629L8.179,12.9l5.055,2.658L12.269,9.93l4.09-3.987-5.652-.821L8.179,0Z" transform="translate(0 0)" fill="#fc0"/>
           </svg>
