@@ -7,7 +7,16 @@ import Link from "next/link"
 import ListButton from "../../layouts/ListButton"
 
 
+async function getPost({id}){
+  const res = await fetch(`http://localhost:3000/api/posts/view?id=${id}`,{
+      cache: 'no-cache',
+  });
+  const data = res.json()
+  return data
+}
+
 export default async function Detail(props) {
+
     async function getDetail(id) {
         const result = await fetch(
            ` http://localhost:3000/api/posts/getDetail?id=${id}`,
@@ -16,7 +25,7 @@ export default async function Detail(props) {
         const data = await result.json();
         return data;
     }
-        
+  
     const boardNames = {
         free: '자유게시판',
         qna: 'Q&A',
