@@ -10,8 +10,8 @@ export default async function handler(req, res) {
     const db = (await connectDB).db('posts')
     let data = await db.collection(column).findOne({_id: new ObjectId(req.body)})
 
-    if(!session) { res.status(500).json('로그인이 필요합니다.') }
-    if(session.user.email != data.author) { res.status(500).json('작성자만 삭제할 수 있습니다.') }
+    if(!session) { return res.status(401).json('로그인이 필요합니다.') }
+    if(session.user.email != data.author) { return res.status(403).json('작성자만 삭제할 수 있습니다.') }
 
     if(!data) { return res.status(404).json('게시글이 존재하지 않습니다.') }
     console.log(data);
