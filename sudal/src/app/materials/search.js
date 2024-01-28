@@ -2,7 +2,7 @@ export default function Search() {
   return (
     <div>
       <div className='flex flex-row justify-between mt-[48px] '>
-        <p className="text-[23px] text-[#303030] font-['Gsans']">
+        <p className="text-[23px] text-[#303030] font-['GsansBold']">
           2. 자료검색
         </p>
       <p className="text-[13px] text-[#303030] font-['Gsanslight']">Home &gt; 고등내신 &gt; 과목선택 &gt; 자료검색</p>
@@ -16,7 +16,7 @@ export default function Search() {
           type="text"
           id="text-input"
           name="text-input"
-          className="bg-white border border-black transition-all duration-500 ease-in-out hover:w-[593px] pl-20 absolute 
+          className="bg-white border border-[#AAAAAA] transition-all duration-500 ease-in-out hover:w-[593px] pl-20 absolute 
                                 h-[54px] w-[656px] mt-[64px] ml-[17px] rounded-full shadow-xl"
           placeholder="자료 필요하면 500원~"
         />
