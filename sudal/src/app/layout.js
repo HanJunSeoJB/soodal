@@ -8,13 +8,18 @@ import insta from '../../public/images/footerInstagram.png'
 import Link from 'next/link'
 import DropdownMenu from './layouts/dropdown'
 import FloatingButton from './layouts/floatingbutton'
+import { authOptions } from "../../pages/api/auth/[...nextauth]"
+import { getServerSession } from "next-auth"
+import SelectIsLogin from './layouts/SelectIsLoginLayout'
 
 export const metadata = {
   title: '수집의달인',
   description: '수집의달인',
 }
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  let session = await getServerSession(authOptions)
+
   return (
     <html lang="ko">
       <body>
@@ -25,19 +30,11 @@ export default function RootLayout({ children }) {
             <div className='w-auto h-140'>
               {/*로그인 바 */}
               <div className='h-40 bg-lightgrey flex flex-row justify-center mb-5 border-2'>
-                <div className='w-4/6'>
+                <div className='w-3/6'>
                   <p className="text-blue font-['Gsans'] text-sm mt-2">NOTICE</p>
                   {/*여기에 공지사항 세부내용 입력 */}
                   </div>
-                  <div className='w-auto h-full bg-darkblue p-2 flex flex-row items-center justify-center'>
-                    <Link href='/login' className="text-white text-sm font-['GSanslight']">로그인</Link>
-                    {/* 막대 바 */}
-                    <div className="border-0.25 h-3.5 ml-3 border-white "></div>
-                    <Link href='/signup' className="text-white text-sm font-['GSanslight'] ml-3">회원가입</Link>
-                    {/* 막대 바 */}
-                    <div className="border-0.25 h-3.5 ml-3 border-white "></div>
-                    <Link href='/center' className="text-white text-sm font-['GSanslight'] ml-3">고객센터</Link>
-                  </div>
+                  <SelectIsLogin session={session}/>
               </div>
               {/*네비게이션 바 */}
               <div id='header' className='w-full h-auto flex items-center flex-col shadow-md pb-4'>
@@ -49,14 +46,14 @@ export default function RootLayout({ children }) {
                     </a>
                   </Link>
                   {/*메뉴 바*/}
-                  <div id='nav' className='w-auto h-30px'>
+                  <div id='nav' className='w-full h-30px'>
                     {/*카테고리들 */}
-                    <ul className="w-auto flex flex-row font-['Gsans'] text-19">
+                    <ul className="w-full flex flex-row font-['Gsans'] text-xl">
                       <DropdownMenu/>
-                      <li className='w-auto mr-32 hover:text-[#005CA6]'> <Link href='/board'>자유게시판</Link> </li>
-                      <li className='w-auto mr-32 hover:text-[#005CA6]'> <Link href='/infoboard'>정보게시판</Link> </li>
-                      <li className='w-auto mr-32 hover:text-[#005CA6]'> <Link href='/qna'>Q&A</Link> </li>
-                      <li className='w-auto ml-5 hover:text-[#005CA6]'> <Link href='/mypage'>마이페이지</Link> </li>
+                      <li className='w-fit mr-32 hover:text-[#005CA6]'> <Link href='/board?board=free&page=1&pageSize=10'>자유게시판</Link> </li>
+                      <li className='w-fit mr-32 hover:text-[#005CA6]'> <Link href='/board?board=info&page=1&pageSize=10'>정보게시판</Link> </li>
+                      <li className='w-fit mr-32 hover:text-[#005CA6]'> <Link href='/board?board=qna&page=1&pageSize=10'>Q&A</Link> </li>
+                      <li className='w-fit ml-5 hover:text-[#005CA6]'> <Link href='/mypage'>마이페이지</Link> </li>
                     </ul>
                   </div>
                 </div>

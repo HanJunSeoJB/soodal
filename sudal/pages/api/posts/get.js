@@ -1,3 +1,5 @@
+// /pages/api/posts/get.js
+
 import { connectDB } from "../../../util/database";
 
 export default async function handler(req, res) {
@@ -12,6 +14,10 @@ export default async function handler(req, res) {
       updatedAt : 0,
     }
 
+    const sort={
+      createdAt : -1,
+    }
+
     const db = (await connectDB).db('posts')
     let board = await db.collection('board').findOne({boardName:req.query.board})
 
@@ -19,12 +25,16 @@ export default async function handler(req, res) {
         return res.status(404).json('게시판을 찾을 수 없습니다.');
     }
 
-    let result = await db.collection('post').find({boardId:board._id}, {projection}).skip(skip).limit(limit).toArray();
-    // let total = await db.collection('post').countDocuments({boardId:board._id})
+    let result = await db.collection('post').find({boardId:board._id}, {projection}).skip(skip).limit(limit).sort({createdAt : -1}).toArray();
+    let total = await db.collection('post').countDocuments({boardId:board._id})
 
     const posts = await Promise.all(result.map(async (post) => {
       const comment = await db.collection('post').countDocuments({postId: post._id});
       const date = formatDate(post.createdAt)
+      let like = await db.collection('like').countDocuments({ 
+        parent: post._id,
+        type: "like"
+      });
       delete post.createdAt
       
       if(req.query.board == 'qna'){
@@ -33,7 +43,8 @@ export default async function handler(req, res) {
           ...post,
           nado: nado,
           comment: comment,
-          date: date
+          date: date,
+          _id: post._id.toString()
         }
       }
 
@@ -42,14 +53,16 @@ export default async function handler(req, res) {
         const scrap = await db.collection('scrabPost').countDocuments({postId: post._id, type:'scrap'});
         return {
             ...post,
-            recommend: recommend,
+            recommend: like,
             scrap: scrap,
             comment: comment,
             date: date,
+            _id: post._id.toString()
         };
       }
   }));
-  return res.status(200).json(posts);
+  
+  res.status(200).json({posts, total});
 }
 
 function formatDate(dateString) {
