@@ -5,7 +5,7 @@ import Table from "./table";
 
 export default function MaterialsPage(){
   return(
-      <div className="">
+      <div className='ml-[35.5px] w-[1000px]'>
           <Search/>
           <Table/>
           <ReviewTagButtons/>

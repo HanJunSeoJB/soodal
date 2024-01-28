@@ -4,6 +4,8 @@ import Comment from "./Comment"
 import CardLayoutLike from "../../layouts/cardLayout_like"
 import DetailLayout from "./DetailLayout"
 import Link from "next/link"
+import ListButton from "../../layouts/ListButton"
+
 
 async function getPost({id}){
   const res = await fetch(`http://localhost:3000/api/posts/view?id=${id}`,{
@@ -31,7 +33,7 @@ export default async function Detail(props) {
     const year = dateObj.getFullYear();
     const month = dateObj.getMonth()+1; // 월은 0부터 시작하므로 1을 더해줍니다.
     const day = dateObj.getDate();
-
+    
     return (
         <div className="flex flex-row">
             <DetailLayout board = {boardName}>
@@ -46,15 +48,19 @@ export default async function Detail(props) {
                     </div>
                     <p className="mt-1 font-['GsansBold'] text-2xl">{result.title}</p>
                     {/* 세부정보 */}
-                    <div className="mt-2 flex flex-row text-grey items-center">
-                        <p>{result.author}</p>
-                        {/* 막대 바 */}
-                        <div className="border-0.25 h-3.5 ml-3 border-darkgrey"></div>
-                        <p className="ml-3">{year}. {month}. {day}</p>
-                        {/* 막대 바 */}
-                        <div className="border-0.25 h-3.5 ml-3 border-darkgrey"></div>
-                        <p className="ml-3">조회 {result.view}</p>
+                    <div className="flex justify-between">
+                        <div className="mt-2 flex flex-row text-grey items-center">
+                            <p>{result.author}</p>
+                            {/* 막대 바 */}
+                            <div className="border-0.25 h-3.5 ml-3 border-darkgrey"></div>
+                            <p className="ml-3">{year}. {month}. {day}</p>
+                            {/* 막대 바 */}
+                            <div className="border-0.25 h-3.5 ml-3 border-darkgrey"></div>
+                            <p className="ml-3">조회 {result.view}</p>
+                        </div>
+                        <ListButton _id={props.params.id} board={props.searchParams.board}/>
                     </div>
+                        
                     {/*긴 막대 바 */}
                     <div className="border border-darkgrey mt-5"/>
                     {/* 본문  */}
