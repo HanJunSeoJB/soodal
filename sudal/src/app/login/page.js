@@ -35,7 +35,7 @@ export default function Login() {
                 placeholder='비밀번호를 입력해 주세요'/>
 
                 {/*개인정보 찾기 버튼*/}
-                <div className='flex flex-row items-center justify-center w-[319px] h-[18px]'>
+                <div className='flex flex-row items-center justify-center w-[319px] h-[18px] mb-[41px]'>
                     <div className='flex'>
                         <input type='checkbox' id='recall' name='recall' value="recall" className='form-radio text-[#1E4F85]'/>
                         <label htmlFor='recall' className="ml-[3px] text-14 text-[#3E3E3E] font-['PretendardLight']">아이디 기억하기</label>
@@ -48,9 +48,9 @@ export default function Login() {
                 </div>
 
                 {/*소셜로그인 버튼*/}
-                <div className='flex flex-col items-center justify-center w-auto h-[130px]'>
-                <button className="flex items-center justify-center w-[378px] h-[38px] rounded-md text-15 text-[#371C1D] font-['PretendardMedium'] bg-[#F9E000]" 
-                onClick={() => {signIn('kakao', { callbackUrl: '/' }); }}>
+                <div className='flex flex-col items-center justify-center w-auto gap-y-[10px] mb-[33px]'>
+                    <button className="flex items-center justify-center w-[378px] h-[38px] rounded-md text-15 text-[#371C1D] font-['PretendardMedium'] bg-[#F9E000]" 
+                    onClick={() => {signIn('kakao', { callbackUrl: '/' }); }}>
                         <Image src={logoKakao} className='w-auto h-auto mr-[8px]'/>
                         카카오톡으로 로그인
                     </button>
@@ -67,7 +67,7 @@ export default function Login() {
                 </div>
 
                 {/*일반로그인 버튼*/}
-                <div className='flex flex-col items-center justify-center w-auto h-[84px]'>
+                <div className='flex flex-col items-center justify-center w-auto gap-y-[7px]'>
                     <button className="flex items-center justify-center w-[378px] h-[38px] rounded-md text-15 text-[#FFFFFF] font-['PretendardMedium'] bg-[#005CA6]">
                         로그인
                     </button>
