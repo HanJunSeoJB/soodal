@@ -1,12 +1,14 @@
-// import { getServerSession } from "next-auth"
+import { getServerSession } from "next-auth"
+import { authOptions } from "../auth/[...nextauth]"
 import { connectDB } from "../../../util/database"
 
 export default async function handler(req, res) {
     if(req.method != 'POST') { return res.status(400).json({message: '잘못된 접근입니다.'}) }
     
-    // 유저기능 구현 후 추가
-    // let session = await getServerSession(req, res, authOptions)
-    // if(!session) { res.status(500).json({message: '로그인이 필요합니다.'}) }
+   
+    let session = await getServerSession(req, res, authOptions)
+    if(!session) { res.status(500).json({message: '로그인이 필요합니다.'}) }
+    console.log(session)
 
     const db = (await connectDB).db('posts')
 
@@ -23,8 +25,6 @@ export default async function handler(req, res) {
     else if(data.content == '') {
         return res.status(400).json( '내용을 입력해주세요.')
     }
-    // 유저기능 구현 후 설정
-    data.author = 'SampleAuthor'
 
     // 게시판 설정
     // 각 게시판에 맞는 id값을 가져옴
@@ -34,6 +34,7 @@ export default async function handler(req, res) {
     data.boardId = board._id
     
     // 기본값 설정
+    data.author = session.user.email
     data.view = 0
     data.createdAt = new Date()
     data.updatedAt = new Date()

@@ -30,7 +30,7 @@ export default function CommentList({isLike, comment, author, createdAt, _id}) {
 
     function handleAction(key) {
         if(key =='delete')
-            fetch('/api/posts/delete?column=comment', {method : 'DELETE', body : _id})
+            fetch('/api/posts/deleteComment?column=comment', {method : 'DELETE', body : _id})
             .then((r)=>{
                 if(r.ok){
                     window.location.reload()
