@@ -4,7 +4,16 @@ import 예시 from '../../../public/images/example.png'
 import CardLayout from "./cardLayout";
 
 export default function DataTab() {
-    const images = [예시, 예시, 예시, 예시];
+
+    const datas = {
+        images : [예시, 예시, 예시, 예시],
+        titles : ["[2015 개정] 중3 영어 천재 (김사월) 02과 (2022)"],
+        ratings : [4.7],
+        peoples : [79]
+    }
+// -> 여기 db 자료 넣으면 딱 그냥 아주 그냥 완벽
+
+
     return (
         <div className="flex flex-col items-center">
             <div className="w-3/5 flex flex-col items-center">
@@ -25,12 +34,17 @@ export default function DataTab() {
                     <div className="rounded-xl w-full overflow-hidden">
                         {/*일러스트*/}
                         <div className="flex">
-                            <CardLayout img={예시}/>
-                            <CardLayout img={예시}/>
-                            <CardLayout img={예시}/>
-                            <CardLayout img={예시}/>
-                            <CardLayout img={예시}/>
-                            <CardLayout img={예시}/>
+                        {/* {[...Array(5)].map((_, index) => (
+                            <p key={index}>Paragraph {index + 1}</p>
+                        ))}
+                             */}
+                            <CardLayout img={예시} title={datas.titles[0]} rating={datas.ratings[0]} people={datas.peoples[0]}/>
+                            <CardLayout img={예시} title={datas.titles[0]} rating={datas.ratings[0]} people={datas.peoples[0]}/>
+                            <CardLayout img={예시} title={datas.titles[0]} rating={datas.ratings[0]} people={datas.peoples[0]}/>
+                            <CardLayout img={예시} title={datas.titles[0]} rating={datas.ratings[0]} people={datas.peoples[0]}/>
+                            <CardLayout img={예시} title={datas.titles[0]} rating={datas.ratings[0]} people={datas.peoples[0]}/>
+                            <CardLayout img={예시} title={datas.titles[0]} rating={datas.ratings[0]} people={datas.peoples[0]}/>
+                            <CardLayout img={예시} title={datas.titles[0]} rating={datas.ratings[0]} people={datas.peoples[0]}/>
                         </div>
                         {/*설명 칸 */}
                         <div className="flex flex-row">
