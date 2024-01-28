@@ -72,7 +72,8 @@ module.exports = {
       },
       boxShadow: {
         'little': 'inset 0 8px 4px 0 rgb(0 0 0 / 0.05)',
-        'hi': '0 0 0 -16px rgb(0 0 0 / 0.05)'
+        'hi': '0 0 0 -16px rgb(0 0 0 / 0.05)',
+        'tag': '0 3px 6px 0 rgb(0 0 0 / 0.1)'
       },
       borderWidth: {
         '0.5': '0.5px',
