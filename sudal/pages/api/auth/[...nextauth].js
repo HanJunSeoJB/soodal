@@ -83,6 +83,9 @@ export const authOptions = {
       return token;
     },
   },
+  session: {
+    maxAge: 3600,
+  },
   secret: process.env.SECRET,
   adapter : MongoDBAdapter(connectDB)
 };
