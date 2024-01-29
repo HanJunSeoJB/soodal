@@ -4,6 +4,7 @@ import { connectDB } from "../../../util/database";
 import { authOptions } from "../auth/[...nextauth]"
 
 export default async function handler(req, res) {
+
     if(req.method != 'DELETE') { return res.status(400).json('잘못된 접근입니다.') }
     let column = req.query.column
 
@@ -18,4 +19,5 @@ export default async function handler(req, res) {
     await db.collection(column).deleteOne(data)
 
     return res.status(200).json('게시글이 삭제되었습니다.')
+
 }
