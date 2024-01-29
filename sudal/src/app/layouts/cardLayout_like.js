@@ -6,6 +6,8 @@ import { useState, useEffect } from "react";
 
 export default function CardLayoutLike(props) {
     let [like, setLike] = useState('0')
+    const [showModal, setShowModal] = useState(false); // 모달 표시 상태
+    const [modalMessage, setModalMessage] = useState(''); // 모달에 표시할 메시지
     useEffect(()=>{
         fetch(`/api/posts/getLike?id=${props._id}&type=${props.type}`)
         .then(r => r.json())
@@ -29,13 +31,17 @@ export default function CardLayoutLike(props) {
                                 author: props.author,
                                 type: props.type
                             }) 
-                        }).then((r)=>{
+                        }).then(async (r)=>{
                             if(r.ok){
                                 fetch(`/api/posts/getLike?id=${props._id}&type=${props.type}`)
                                 .then(r => r.json())
                                 .then((result) => {
                                     setLike(result.count.toString());
                                 });
+                            }else if (r.status === 400) {
+                                const message = await r.text();
+                                setModalMessage(message);
+                                setShowModal(true); // 모달 표시
                             }
                         })
                     
@@ -44,6 +50,15 @@ export default function CardLayoutLike(props) {
                 {props.type === 'scrap' && <BiBookmark className="w-3/5 h-3/5 mt-2.5" color="red"/>}
             </button>
             <p className="mt-1.5 mb-4">{like}</p>
+            {/* 모달 표시 */}
+            {showModal && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+                    <div className="bg-white p-4 rounded-lg">
+                        <p>{modalMessage}</p>
+                        <button onClick={() => setShowModal(false)}>닫기</button>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

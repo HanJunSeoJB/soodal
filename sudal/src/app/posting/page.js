@@ -40,24 +40,24 @@ export default function Posting(board){
     let [currentFontSize, setCurrentFontSize] = useState('16')
     let [currentTextAlign, setCurrentTextAlign] = useState('left')
 
-    let [filename, setFilename] = useState()
-    let [file, setFile] = useState()
-    let [objectURL, setObjectURL] = useState()
-    let [result, setResult] = useState()
+    // let [filename, setFilename] = useState()
+    // let [file, setFile] = useState()
+    // let [objectURL, setObjectURL] = useState()
+    // let [result, setResult] = useState()
 
-    useEffect(() => {
-        if (file) {
-            const objectURL = URL.createObjectURL(file);
-            const filename = encodeURIComponent(file.name);
-            fetch('api/posts/image?file=' + filename)
-            .then(r => r.json())
-            .then(data => {
-                setResult(data)
-                setObjectURL(URL.createObjectURL(file))
-                setFilename(encodeURIComponent(filename))
-            });
-        }
-    }, [file])
+    // useEffect(() => {
+    //     if (file) {
+    //         const objectURL = URL.createObjectURL(file);
+    //         const filename = encodeURIComponent(file.name);
+    //         fetch('api/posts/image?file=' + filename)
+    //         .then(r => r.json())
+    //         .then(data => {
+    //             setResult(data)
+    //             setObjectURL(URL.createObjectURL(file))
+    //             setFilename(encodeURIComponent(filename))
+    //         });
+    //     }
+    // }, [file])
 
     function handleSubmit(title, content) {
         fetch('api/posts/post', {
@@ -68,6 +68,7 @@ export default function Posting(board){
                 boardName: board.searchParams.board,
                 font: currentFont,
                 fontSize: currentFontSize,
+                textAlign: currentTextAlign,
             })
         }).then(async (r)=> {
                 if(!r.ok) {
@@ -87,11 +88,11 @@ export default function Posting(board){
             {/*가운데 부분 */}
             <div className="flex flex-col w-5/6 h-full">
                 {/*상단 카테고리 */}
-                <div className="flex flex-row justify-between mt-10">
+                <div className="flex flex-row justify-between mt-7">
                     <h1 className="font-['GsansBold'] text-2xl">{boardName}</h1>
                     <p className="font-['Gsanslight text-xs']">Home {">"} {boardName}</p>
                 </div>
-                <p className="mt-1 font-['Gsans'] text-base">우리의 생각을 자유롭게 이야기하는 게시판입니다.</p>
+                <p className="mt-2 font-['Gsans'] text-base">우리의 생각을 자유롭게 이야기하는 게시판입니다.</p>
                 {/*막대 바 */}
                 <div className="border border-gray mt-5"/>
                     {/*제목 바 */}
@@ -174,7 +175,7 @@ export default function Posting(board){
                         {/*내용 입력창 */}
                         <textarea
                             name="content"
-                            className={`w-full py-5 px-5 font-['${currentFont}'] text-${currentTextAlign} ${fontSizeMap[currentFontSize]} border-none outline-none resize-none`} 
+                            className={`w-full h-full py-5 px-5 font-['${currentFont}'] text-${currentTextAlign} ${fontSizeMap[currentFontSize]} border-none outline-none resize-none`} 
                             style={{textAlign: currentTextAlign}}
                             placeholder="내용을 입력해주세요"
                             onChange={(e) => setContent(e.target.value)}
