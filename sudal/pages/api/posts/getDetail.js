@@ -8,5 +8,7 @@ export default async function handler(req, res) {
     {cache: 'no-cache'})
     const db = (await connectDB).db('posts')
     const result = await db.collection('post').findOne({_id: new ObjectId(req.query.id)})
+    const boardName = await db.collection('board').findOne({_id: result.boardId})
+    result.boardName = boardName.boardName
     res.status(200).json(result)
 }
