@@ -1,3 +1,4 @@
+
 export default function DetailLayout({board}){
     return(
       <div className="flex flex-row">

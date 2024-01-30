@@ -34,6 +34,9 @@ export default async function handler(req, res) {
     data.boardId = board._id
     
     // 기본값 설정
+    if (!data.author) {
+        data.author = Math.random().toString(36).substring(7);
+    }
     data.author = session.user.email
     data.view = 0
     data.createdAt = new Date()
