@@ -1,19 +1,8 @@
-import { ObjectId } from "mongodb"
-import { connectDB } from "../../../../util/database"
 import Comment from "./Comment"
 import CardLayoutLike from "../../layouts/cardLayout_like"
 import DetailLayout from "./DetailLayout"
 import Link from "next/link"
 import ListButton from "../../layouts/ListButton"
-
-
-async function getPost({id}){
-  const res = await fetch(`http://localhost:3000/api/posts/view?id=${id}`,{
-      cache: 'no-cache',
-  });
-  const data = res.json()
-  return data
-}
 
 export default async function Detail(props) {
 
