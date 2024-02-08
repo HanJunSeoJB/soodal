@@ -82,7 +82,7 @@ export default async function Detail(props) {
                     </div>
                     {/* 목록 */}
                     <div className="mt-10 flex justify-center">
-                        <Link
+                    <Link
                         href={`/board?board=${props.searchParams.board}&page=1&pageSize=10`}
                         className="w-fit h-fit border-2 border-gray rounded-full px-9 mt-7"
                         >목록</Link>
