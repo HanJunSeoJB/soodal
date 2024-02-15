@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import Mole from 'public/images/moleWorking.png'
+import Mole from '../../../public/images/moleWorking.png'
 
 export default function WorkingPage() {
     return(

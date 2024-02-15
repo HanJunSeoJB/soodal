@@ -49,11 +49,12 @@ export default async function RootLayout({ children }) {
                   <div id='nav' className='w-full h-30px'>
                     {/*카테고리들 */}
                     <ul className="w-full flex flex-row font-['Gsans'] text-xl">
-                      <DropdownMenu/>
+                      {/* <DropdownMenu/> */}
+                      <li className='w-fit mr-32 hover:text-[#005CA6]'> <Link href='/workingPage'>학습자료</Link> </li>
                       <li className='w-fit mr-32 hover:text-[#005CA6]'> <Link href='/board?board=free&page=1&pageSize=10'>자유게시판</Link> </li>
                       <li className='w-fit mr-32 hover:text-[#005CA6]'> <Link href='/board?board=info&page=1&pageSize=10'>정보게시판</Link> </li>
                       <li className='w-fit mr-32 hover:text-[#005CA6]'> <Link href='/board?board=qna&page=1&pageSize=10'>Q&A</Link> </li>
-                      <li className='w-fit ml-5 hover:text-[#005CA6]'> <Link href='/mypage'>마이페이지</Link> </li>
+                      <li className='w-fit ml-5 hover:text-[#005CA6]'> <Link href='/workingPage'>마이페이지</Link> </li>
                     </ul>
                   </div>
                 </div>

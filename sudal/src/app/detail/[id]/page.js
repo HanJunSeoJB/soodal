@@ -1,19 +1,8 @@
-import { ObjectId } from "mongodb"
-import { connectDB } from "../../../../util/database"
 import Comment from "./Comment"
 import CardLayoutLike from "../../layouts/cardLayout_like"
 import DetailLayout from "./DetailLayout"
 import Link from "next/link"
 import ListButton from "../../layouts/ListButton"
-
-
-async function getPost({id}){
-  const res = await fetch(`http://localhost:3000/api/posts/view?id=${id}`,{
-      cache: 'no-cache',
-  });
-  const data = res.json()
-  return data
-}
 
 export default async function Detail(props) {
 
@@ -59,7 +48,7 @@ export default async function Detail(props) {
                             <div className="border-0.25 h-3.5 ml-3 border-darkgrey"></div>
                             <p className="ml-3">{year}. {month}. {day}</p>
                             {/* 막대 바 */}
-                            <div className="border-0.25 h-3.5 ml-3 border-darkgrey"></div>
+                            <div className="brder-0.25 h-3.5 ml-3 border-darkgrey"></div>
                             <p className="ml-3">조회 {detail.view}</p>
                         </div>
                         <ListButton _id={props.params.id} board={detail.boardName}/>

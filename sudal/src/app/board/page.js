@@ -1,5 +1,6 @@
 import { List, SortAt, PageSize, Pagenation } from "./pageComponent";
 import Link from 'next/link';
+import useSWR from 'swr'
 
 // db에서 posts를 가져오는 함수
 async function getPosts({queryString}) {
