@@ -93,7 +93,6 @@ function Question({id, title, author, date, nado, view, comment, board}) {
   return(
     <div className="flex flex-row items-center font-['PretendardMedium'] h-10 border-b">
       <div className="flex flex-row items-start w-1/2 ml-2">
-        <Popular />
         <Link prefetch={false} className="text-[18px] truncate mr-[3px]" href={`/detail/${id}?board=${board}`}>{title}</Link>
         <Comment comment={comment} />
       </div>
@@ -106,10 +105,12 @@ function Question({id, title, author, date, nado, view, comment, board}) {
 }
 
 function Post({id, title, author, date, recommend, scrap, view, comment, board}) {
+  let isPopular = false;
+  if (recommend >= 10)  isPopular = true;
   return (
     <div className="flex flex-row items-center font-['PretendardMedium'] h-10 border-b">
       <div className="flex flex-row items-start w-1/2 ml-2">
-        <Popular />
+        {isPopular && <Popular/>}
         <Link prefetch={false} className="text-[18px] truncate mr-[3px]" href={`/detail/${id}?board=${board}`}>{title}</Link>
         <Comment comment={comment} />
       </div>

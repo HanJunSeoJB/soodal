@@ -53,7 +53,6 @@ export default async function handler(req, res) {
       }
 
       else{
-        const recommend = await db.collection('scrabPost').countDocuments({postId: post._id, type:'recommend'});
         return {
             ...post,
             recommend: like,
