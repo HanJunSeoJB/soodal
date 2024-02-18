@@ -10,6 +10,18 @@ export default function ListButton({_id, board}) {
     const [modalMessage, setModalMessage] = useState(''); // 모달에 표시할 메시지
     function handleAction(key) {
         if(key =='delete')
+            fetch('/api/posts/put?column=post', {method : 'DELETE', body : _id})
+            .then(async (r)=>{
+                if(r.ok){
+                    router.push(`/posting?board=${board}&`)
+                }
+                else if (r.status === 400 || r.status === 403) {
+                    const message = await r.text();
+                    setModalMessage(message);
+                    setShowModal(true); // 모달 표시
+                }
+            })
+            else if(key =='modify')
             fetch('/api/posts/delete?column=post', {method : 'DELETE', body : _id})
             .then(async (r)=>{
                 if(r.ok){
@@ -35,6 +47,7 @@ export default function ListButton({_id, board}) {
                 onAction={(key) => handleAction(key)}
                 >
                     <DropdownItem key="report" className="font-['맑은 고딕'] border-b border-black">신고하기</DropdownItem>
+                    <DropdownItem key="modify" className="font-['맑은 고딕'] border-b border-black">수정하기</DropdownItem>
                     <DropdownItem key="delete" className="font-['맑은 고딕'] border-b border-black">삭제하기</DropdownItem>
                 </DropdownMenu>
             </Dropdown>
