@@ -3,7 +3,7 @@ import LayoutText from "./layoutText";
 export default function BoardLayout({children}){
   return (
     <div className="flex flex-row">
-    <div className="flex flex-col font-['Gsans'] ml-[360px] pr-[29px] w-fit min-h-screen border-r border-gray-200">
+    <div className="flex flex-col font-['Gsans'] ml-10 pr-[29px] w-fit min-h-screen border-r border-gray-200">
       <div className="mt-[36px]">
         <LayoutText/>
       </div>

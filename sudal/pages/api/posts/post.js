@@ -8,7 +8,6 @@ export default async function handler(req, res) {
    
     let session = await getServerSession(req, res, authOptions)
     if(!session) { res.status(500).json({message: '로그인이 필요합니다.'}) }
-    console.log(session)
 
     const db = (await connectDB).db('posts')
 
@@ -37,7 +36,7 @@ export default async function handler(req, res) {
     if (!data.author) {
         data.author = Math.random().toString(36).substring(7);
     }
-    data.author = session.user.email
+    data.author? session.user.email : "알 수 없음"
     data.view = 0
     data.createdAt = new Date()
     data.updatedAt = new Date()

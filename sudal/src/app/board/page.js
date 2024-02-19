@@ -1,6 +1,6 @@
 import { List, SortAt, PageSize, Pagenation } from "./pageComponent";
 import Link from 'next/link';
-import useSWR from 'swr'
+import usePostStore from '../hook/usePostStore';
 
 // db에서 posts를 가져오는 함수
 async function getPosts({queryString}) {
@@ -8,12 +8,15 @@ async function getPosts({queryString}) {
     cache: 'no-cache',
   });
   const data = await res.json();
+  usePostStore.getState().setPosts(data.posts);
   return data;
 }
 
+
 export default async function BoardPage(props){
-  const query = props.searchParams
+  const query = props.searchParams;
   const board = query['board'];
+
 
   // query의 key-value를 queryString으로 변환
   const queryString = Object.entries(query)
