@@ -11,6 +11,8 @@ async function getPosts({queryString}) {
   return data;
 }
 
+
+
 export default async function BoardPage(props){
   const query = props.searchParams
   const board = query['board'];
