@@ -2,6 +2,7 @@
 
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import Link from 'next/link'
+import usePostStore from '../hook/usePostStore';
 
 function SortAt({board}){
   const pathname = usePathname(); // 현재 경로를 불러오기 위한 hook
@@ -13,6 +14,9 @@ function SortAt({board}){
   params.forEach((value, key) => {
     queryParams[key] = value;
   });
+
+  const post = usePostStore(state => state.posts);
+  console.log(post)
 
 
   const sortOptions = (()=>{

@@ -21,18 +21,10 @@ export default function ListButton({_id, board}) {
                     setShowModal(true); // 모달 표시
                 }
             })
-            else if(key =='modify')
-            fetch('/api/posts/delete?column=post', {method : 'DELETE', body : _id})
-            .then(async (r)=>{
-                if(r.ok){
-                    router.push(`/board?board=${board}&page=1&pageSize=10`)
-                }
-                else if (r.status === 400 || r.status === 403) {
-                    const message = await r.text();
-                    setModalMessage(message);
-                    setShowModal(true); // 모달 표시
-                }
-            })
+            else if(key =='modify') {
+                router.push(`/edit/${_id}?board=${board}`)
+            
+            }
     }
     return (
         <div>
