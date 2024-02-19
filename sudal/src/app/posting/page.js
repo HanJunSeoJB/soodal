@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import 사진아이콘 from '../../../public/images/pictureIcon.png'
 import SNS아이콘 from '../../../public/images/cloud.png'
 import 비디오아이콘 from '../../../public/images/video.png'
@@ -13,7 +13,6 @@ import {  Dropdown,  DropdownTrigger,  DropdownMenu,  DropdownSection,  Dropdown
 import { useRouter } from 'next/navigation'
 import DetailLayout from "../detail/[id]/DetailLayout"
 import { LuFunctionSquare } from "react-icons/lu"
-import { useSession, status } from 'next-auth/react'
 
 
 export default function Posting(board){
@@ -32,7 +31,6 @@ export default function Posting(board){
         '24': 'text-2xl',
     }
     const router = useRouter()
-    const { data: session, status } = useSession();
 
     let [title, setTitle] = useState('')
     function handleChange(event) {
@@ -47,13 +45,6 @@ export default function Posting(board){
     // let [file, setFile] = useState()
     // let [objectURL, setObjectURL] = useState()
     // let [result, setResult] = useState()
-
-    useEffect(() => {
-        // 로딩 상태가 아니고 세션이 없을 경우 로그인 페이지로 리다이렉션
-        if (status == "unauthenticated") {
-          router.push('/login');
-        }
-      }, [status, router]);
 
     function handleSubmit(title, content) {
         fetch('api/posts/post', {

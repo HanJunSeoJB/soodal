@@ -1,5 +1,4 @@
-// import { getServerSession } from "next-auth";
-
+import { getServerSession } from "next-auth";
 import { ObjectId } from "mongodb";
 import { connectDB } from "../../../util/database";
 
@@ -8,10 +7,9 @@ export default async function handler(req, res) {
     let data = JSON.parse(req.body)
     console.log(data);
 
-    // 유저기능 구현 후 추가
-    // let sesison = await getServerSession(req, res, authOptions)
-    // if(!session) { res.status(500).json('로그인이 필요합니다.') }
-    // if(session.user.id != data.author) { res.status(500).json('작성자만 수정할 수 있습니다.') }
+    let session = await getServerSession(req, res, authOptions)
+    if(!session) { res.status(400).json('로그인이 필요합니다.') }
+    if(session.user.id != data.author) { res.status(403).json('작성자만 삭제할 수 있습니다.') }
 
     // 제목 및 내용 빈칸확인
     if(data.title == '') { 

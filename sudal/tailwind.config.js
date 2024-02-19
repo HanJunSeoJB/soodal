@@ -1,11 +1,9 @@
 /** @type {import('tailwindcss').Config} */
-const {nextui} = require("@nextui-org/theme");
 module.exports = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -14,8 +12,6 @@ module.exports = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
-      darkMode: "class",
-      plugins: [nextui()],
       translate: {
         '360': '360px',
         '60': '60px'
@@ -76,8 +72,7 @@ module.exports = {
       },
       boxShadow: {
         'little': 'inset 0 8px 4px 0 rgb(0 0 0 / 0.05)',
-        'hi': '0 0 0 -16px rgb(0 0 0 / 0.05)',
-        'tag': '0 3px 6px 0 rgb(0 0 0 / 0.1)'
+        'hi': '0 0 0 -16px rgb(0 0 0 / 0.05)'
       },
       borderWidth: {
         '0.5': '0.5px',
