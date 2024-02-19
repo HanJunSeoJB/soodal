@@ -3,6 +3,7 @@ import {  Dropdown,  DropdownTrigger,  DropdownMenu,  DropdownSection,  Dropdown
 import { LuMoreVertical } from "react-icons/lu";
 import {useRouter} from 'next/navigation'
 import { useState } from "react";
+import { SessionProvider } from "next-auth/react"
 
 export default function ListButton({_id, board}) {
     const router = useRouter()
@@ -22,13 +23,21 @@ export default function ListButton({_id, board}) {
                 }
             })
             else if(key =='modify') {
-                router.push(`/edit/${_id}?board=${board}`)
-            
-            }
+                fetch('/api/posts/getUser', {method : 'POST', body : _id}).then(async (r)=>{
+                    if(r.ok){
+                        router.push(`/edit/${_id}?board=${board}`)
+                    }
+                    else if (r.status === 400 || r.status === 403) {
+                        const message = await r.text();
+                        setModalMessage(message);
+                        setShowModal(true); // 모달 표시
+                    }
+            })
+        }
     }
     return (
-        <div>
-
+        <SessionProvider>
+            <div>
             <Dropdown>
                 <DropdownTrigger>
                 <button>
@@ -53,5 +62,6 @@ export default function ListButton({_id, board}) {
                 </div>
             )}
         </div>
+        </SessionProvider>
     )
 }

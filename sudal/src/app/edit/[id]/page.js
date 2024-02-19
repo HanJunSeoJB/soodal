@@ -56,8 +56,8 @@ export default function Editing(props){
     // let [result, setResult] = useState()
 
     function handleSubmit(title, content) {
-        fetch('api/posts/post', {
-            method: 'POST',
+        fetch('api/posts/put', {
+            method: 'PUT',
             body: JSON.stringify({
                 title: title,
                 content: content,

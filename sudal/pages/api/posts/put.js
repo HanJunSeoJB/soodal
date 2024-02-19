@@ -1,4 +1,5 @@
 import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]"
 import { ObjectId } from "mongodb";
 import { connectDB } from "../../../util/database";
 

@@ -8,7 +8,6 @@ export default async function handler(req, res) {
    
     let session = await getServerSession(req, res, authOptions)
     if(!session) { res.status(500).json({message: '로그인이 필요합니다.'}) }
-    console.log(session)
 
     const db = (await connectDB).db('posts')
 
