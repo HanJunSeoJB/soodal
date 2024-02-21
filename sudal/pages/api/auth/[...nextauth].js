@@ -4,7 +4,6 @@ import { connectDB } from "/util/database";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import bcrypt from 'bcrypt';
 
 import KakaoProvider from "next-auth/providers/kakao";
 import NaverProvider from "next-auth/providers/naver";
@@ -83,6 +82,9 @@ export const authOptions = {
       }
       return token;
     },
+  },
+  session: {
+    maxAge: 3600,
   },
   secret: process.env.SECRET,
   adapter : MongoDBAdapter(connectDB)

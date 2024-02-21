@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     const db = (await connectDB).db('posts')
     let data = JSON.parse(req.body)
     let session = await getServerSession(req, res, authOptions)
-    if(!session) { res.status(500).json({message: '로그인이 필요합니다.'}) }
+    if(!session) { return res.status(400).json('로그인이 필요합니다.') }
     data.author = session.user.email
 
     if(data.content == '') {

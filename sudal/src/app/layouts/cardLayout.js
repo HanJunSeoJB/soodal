@@ -1,21 +1,23 @@
+'use client'
+
 import Image from "next/image"
 
-export default function CardLayout({img, title, rating}) {
+export default function CardLayout({img, title, rating, people}) {
+
+
     return (
         <div className="w-1/5 flex flex-col shrink-0 mr-5">
             {/*일러스트 */}
             <Image src={img} />
             {/*제목 */}
             <p className="mt-7">
-            [2015 개정] 중3 영어 천재 <br/>
-            (김사월) 02과 <br/>
-            (2022) <br/>
+            {title}
             </p>
             {/*별점*/}
             <div className="flex flex-row shrink-0 font-['GsansBold'] text-base mt-3.5">
                <Star/>
-               <p className="ml-2">4.6</p>
-               <p>(79)</p>
+               <p className="ml-2">{rating}</p>
+               <p className="ml-1">({people})</p>
             </div>
             {/*유,무료 구분 */}
             <div className="w-1/5 rounded-lg bg-lightgrey h-fit flex justify-center mt-3.5">

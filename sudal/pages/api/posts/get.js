@@ -32,8 +32,12 @@ export default async function handler(req, res) {
       const comment = await db.collection('post').countDocuments({postId: post._id});
       const date = formatDate(post.createdAt)
       let like = await db.collection('like').countDocuments({ 
-        parent: post._id,
+        parent: post._id.toString(),
         type: "like"
+      });
+      let scrap = await db.collection('like').countDocuments({ 
+        parent: post._id.toString(),
+        type: "scrap"
       });
       delete post.createdAt
       
@@ -49,8 +53,6 @@ export default async function handler(req, res) {
       }
 
       else{
-        const recommend = await db.collection('scrabPost').countDocuments({postId: post._id, type:'recommend'});
-        const scrap = await db.collection('scrabPost').countDocuments({postId: post._id, type:'scrap'});
         return {
             ...post,
             recommend: like,

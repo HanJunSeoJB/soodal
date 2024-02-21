@@ -1,13 +1,11 @@
-import { ObjectId } from "mongodb"
-import { connectDB } from "../../../../util/database"
 import Comment from "./Comment"
 import CardLayoutLike from "../../layouts/cardLayout_like"
 import DetailLayout from "./DetailLayout"
 import Link from "next/link"
 import ListButton from "../../layouts/ListButton"
 
-
 export default async function Detail(props) {
+
     async function getDetail(id) {
         const result = await fetch(
            ` http://localhost:3000/api/posts/getDetail?id=${id}`,
@@ -16,18 +14,18 @@ export default async function Detail(props) {
         const data = await result.json();
         return data;
     }
-        
+  
     const boardNames = {
         free: '자유게시판',
         qna: 'Q&A',
         info: '정보게시판'
     };
-    let boardName = boardNames[props.searchParams.board];
     const detail = await getDetail(props.params.id);
     const dateObj = new Date(detail.updatedAt);
     const year = dateObj.getFullYear();
     const month = dateObj.getMonth() + 1;
     const day = dateObj.getDate();
+    const boardName = boardNames[detail.boardName];
 
     return (
         <div className="flex flex-row">
@@ -50,10 +48,10 @@ export default async function Detail(props) {
                             <div className="border-0.25 h-3.5 ml-3 border-darkgrey"></div>
                             <p className="ml-3">{year}. {month}. {day}</p>
                             {/* 막대 바 */}
-                            <div className="border-0.25 h-3.5 ml-3 border-darkgrey"></div>
+                            <div className="brder-0.25 h-3.5 ml-3 border-darkgrey"></div>
                             <p className="ml-3">조회 {detail.view}</p>
                         </div>
-                        <ListButton _id={props.params.id} board={props.searchParams.board}/>
+                        <ListButton _id={props.params.id} board={detail.boardName}/>
                     </div>
                         
                     {/*긴 막대 바 */}
@@ -73,7 +71,7 @@ export default async function Detail(props) {
                     </div>
                     {/* 목록 */}
                     <div className="mt-10 flex justify-center">
-                        <Link
+                    <Link
                         href={`/board?board=${props.searchParams.board}&page=1&pageSize=10`}
                         className="w-fit h-fit border-2 border-gray rounded-full px-9 mt-7"
                         >목록</Link>
