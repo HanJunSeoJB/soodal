@@ -5,6 +5,8 @@ import CommentList from './CommentList'
 export default function Comment(props) {
     let [comment, setComment] = useState('')
     let [data, setData] = useState([])
+    const [showModal, setShowModal] = useState(false); // 모달 표시 상태
+    const [modalMessage, setModalMessage] = useState(''); // 모달에 표시할 메시지
     useEffect(()=>{
         fetch('/api/posts/getComment?id=' + props._id,{cache: 'no-cache'}).then(r=>r.json()).then((result)=>{
         setData(result)
@@ -25,13 +27,17 @@ export default function Comment(props) {
                         { 
                             method : 'POST',
                             body : JSON.stringify({comment: comment, postId: props._id}) 
-                        }).then((r)=>{
+                        }).then(async (r)=>{
                             if(r.ok){
                                 fetch('/api/posts/getComment?id=' + props._id).then(r=>r.json()).then((result)=>{
                                     setData(result)
                                     })
                                 setComment('')
                                 alert('등록되었습니다.')
+                            }else if (r.status === 400) {
+                                const message = await r.text();
+                                setModalMessage(message);
+                                setShowModal(true); // 모달 표시
                             }
                         })
                     
@@ -52,6 +58,15 @@ export default function Comment(props) {
                     _id = {commentData._id} />
                 ))}
             </div>
+            {/* 모달 표시 */}
+            {showModal && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+                    <div className="bg-white p-4 rounded-lg">
+                        <p>{modalMessage}</p>
+                        <button onClick={() => setShowModal(false)}>닫기</button>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

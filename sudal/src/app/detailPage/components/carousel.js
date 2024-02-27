@@ -24,6 +24,7 @@ export default function Carousel() {
   };
   
   return (
+    
     <div className='flex flex-col items-center mt-[63px]'>
       {/*캐러셀*/}
       <div className='flex justify-center'>

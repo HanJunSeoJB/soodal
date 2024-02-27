@@ -4,39 +4,49 @@
 
 @font-face {
   font-family: 'Gsans';
+  font-display: swap;
   src: url('/fonts/GmarketSansTTFMedium.ttf') format("truetype");
 }
 
 @font-face {
   font-family: 'Gsanslight';
+  font-display: swap;
   src: url('/fonts/GmarketSansTTFLight.ttf') format("truetype");
 }
 
 @font-face {
   font-family: 'PretendardMedium';
+  font-display: swap;
   src: url('/fonts/Pretendard-Medium.ttf') format("truetype");
 }
 
 @font-face {
   font-family: 'PretendardLight';
+  font-display: swap;
   src: url('/fonts/Pretendard-Light.ttf') format("truetype");
 }
 
 @font-face {
   font-family: 'GsansBold';
+  font-display: swap;
   src: url('/fonts/GmarketSansTTFBold.ttf') format("truetype");
 }
 
 @font-face {
   font-family: '맑은글꼴';
+  font-display: swap;
   src: url('/fonts/MALGUN.ttf') format("truetype");
 }
 
 @font-face {
   font-family: 'HY견고딕';
+  font-display: swap;
   src: url('/fonts/H2GTRE.ttf') format("truetype");
 }
+
 @font-face {
   font-family: 'HY견명조';
+  font-display: swap;
   src: url('/fonts/H2MJRE.ttf') format("truetype");
 }
+

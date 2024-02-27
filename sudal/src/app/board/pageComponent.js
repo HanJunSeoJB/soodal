@@ -2,6 +2,7 @@
 
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import Link from 'next/link'
+import usePostStore from '../hook/usePostStore';
 
 function SortAt({board}){
   const pathname = usePathname(); // 현재 경로를 불러오기 위한 hook
@@ -13,6 +14,9 @@ function SortAt({board}){
   params.forEach((value, key) => {
     queryParams[key] = value;
   });
+
+  const post = usePostStore(state => state.posts);
+  console.log(post)
 
 
   const sortOptions = (()=>{
@@ -63,6 +67,7 @@ function List({posts, board}) {
             nado={post.nado}
             view={post.view}
             comment={post.comment}
+            board = {board}
           />
         ))}
       </div>
@@ -81,19 +86,18 @@ function List({posts, board}) {
           scrap={post.scrap}
           view={post.view}
           comment={post.comment}
-          board={board}
+          board = {board}
         />
       ))}
     </div>
   );
 }
 
-function Question({id, title, author, date, nado, view, commen, board}) {
+function Question({id, title, author, date, nado, view, comment, board}) {
   return(
     <div className="flex flex-row items-center font-['PretendardMedium'] h-10 border-b">
       <div className="flex flex-row items-start w-1/2 ml-2">
-        <Popular />
-        <Link prefetch={false} className="text-[18px] truncate mr-[3px]" href={`/detail/${id}`}>{title}</Link>
+        <Link prefetch={false} className="text-[18px] truncate mr-[3px]" href={`/detail/${id}?board=${board}`}>{title}</Link>
         <Comment comment={comment} />
       </div>
       <button className="text-center w-28">{author}</button>
@@ -105,10 +109,12 @@ function Question({id, title, author, date, nado, view, commen, board}) {
 }
 
 function Post({id, title, author, date, recommend, scrap, view, comment, board}) {
+  let isPopular = false;
+  if (recommend >= 10)  isPopular = true;
   return (
     <div className="flex flex-row items-center font-['PretendardMedium'] h-10 border-b">
       <div className="flex flex-row items-start w-1/2 ml-2">
-        <Popular />
+        {isPopular && <Popular/>}
         <Link prefetch={false} className="text-[18px] truncate mr-[3px]" href={`/detail/${id}?board=${board}`}>{title}</Link>
         <Comment comment={comment} />
       </div>
