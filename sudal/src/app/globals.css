@@ -2,26 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+@font-face {
+  font-family: 'Gsans';
+  font-display: swap;
+  src: url('/fonts/GmarketSansTTFMedium.ttf') format("truetype");
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+@font-face {
+  font-family: 'Gsanslight';
+  font-display: swap;
+  src: url('/fonts/GmarketSansTTFLight.ttf') format("truetype");
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@font-face {
+  font-family: 'PretendardMedium';
+  font-display: swap;
+  src: url('/fonts/Pretendard-Medium.ttf') format("truetype");
 }
+
+@font-face {
+  font-family: 'PretendardLight';
+  font-display: swap;
+  src: url('/fonts/Pretendard-Light.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: 'GsansBold';
+  font-display: swap;
+  src: url('/fonts/GmarketSansTTFBold.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: '맑은글꼴';
+  font-display: swap;
+  src: url('/fonts/MALGUN.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: 'HY견고딕';
+  font-display: swap;
+  src: url('/fonts/H2GTRE.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: 'HY견명조';
+  font-display: swap;
+  src: url('/fonts/H2MJRE.ttf') format("truetype");
+}
+
